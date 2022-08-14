@@ -23,6 +23,8 @@
 This repository holds the codebase for nipate web application.
 Its a `react + nextjs` web application, this is where nipate customers would be able to access nipate services.
 
+Nipate provides micro-enterprises the platform where they can advert their customers locally and customers the platform where they can find services in their vicinity.
+
 ### Project Setup 👨🏿‍💻
 
 This is a node npm application, with typescript. All configurations are included so one hase to follow the steps only
