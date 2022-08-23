@@ -6,6 +6,7 @@
 }
 .text {
   @apply text-slate-700;
+  @apply hover:bg-slate-200 active:bg-slate-300 focus:ring focus:ring-slate-400;
 }
 .outline {
   @apply text-slate-700 border-2 border-slate-700;
