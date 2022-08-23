@@ -13,3 +13,11 @@
   };
 
 }
+
+.form_root {
+  @apply flex flex-col gap-2;
+}
+
+.form_input {
+  @apply w-full;
+}
