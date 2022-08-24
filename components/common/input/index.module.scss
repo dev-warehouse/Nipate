@@ -7,10 +7,11 @@
   //  Input Data States
   &[data-validity="success"] {
     @apply bg-green-50 text-green-900 placeholder-green-700 focus:ring-green-500;
-  };
+  }
+
   &[data-validity="error"] {
     @apply bg-red-50 text-red-900 placeholder-red-700 focus:ring-red-500;
-  };
+  }
 
 }
 
@@ -23,5 +24,26 @@
 }
 
 .form_label {
-  @apply text-base font-semibold text-slate-700;
+  @apply text-sm font-semibold text-slate-700;
+
+  &[data-validity="success"] {
+    @apply text-green-600;
+  }
+
+  &[data-validity="error"] {
+    @apply text-red-600;
+  }
+}
+
+.form_message {
+
+  @apply text-xs font-medium;
+
+  &[data-validity="success"] {
+    @apply text-green-700;
+  }
+
+  &[data-validity="error"] {
+    @apply text-red-700;
+  }
 }
