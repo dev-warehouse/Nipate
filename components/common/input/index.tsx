@@ -1,10 +1,11 @@
-import {InputHTMLAttributes} from "react";
+import {ForwardedRef, forwardRef, InputHTMLAttributes} from "react";
 import styles from './index.module.scss'
+import {InputUnstyled, InputUnstyledProps} from "@mui/base";
 
 /**
  * Extends `InputHtmlAttributes` and adds upon dataValidity for data feedback
  */
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps {
     /**
      * This is used to show the various feedback states of the data
      */
@@ -18,9 +19,22 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param props
  * @constructor
  */
-const Input = ({dataValidity = 'initial', className, ...props}: InputProps) => {
-    return <input className={[className,styles.input].join(' ')} data-validity={dataValidity} {...props}/>
-}
+const Input = forwardRef(function ({
+                                       dataValidity,
+                                       ...props
+                                   }: InputProps & InputUnstyledProps, ref: ForwardedRef<HTMLInputElement>) {
+    return <InputUnstyled ref={ref} data-validity={dataValidity} componentsProps={{
+        input: {
+            className: [props.className, styles.input].join(' '),
+            ...props.componentsProps
+        },
+        root: {
+            className: styles.root,
+            ...props.componentsProps
+        }
+    }} {...props}/>
+})
+
 export {Input}
 export * from './form'
 export type {InputProps}
