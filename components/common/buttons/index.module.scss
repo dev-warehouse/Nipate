@@ -3,6 +3,10 @@
   @apply w-full px-3 py-2 inline-flex items-center justify-center rounded-lg outline-none;
   // Text Styling
   @apply text-base font-semibold tracking-wide leading-normal;
+
+  &:disabled {
+    @apply opacity-60 cursor-not-allowed;
+  }
 }
 .text {
   @apply text-slate-700;
