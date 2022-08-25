@@ -1,0 +1,49 @@
+.input {
+  // Layout styles
+  @apply bg-input_bg rounded-lg p-2.5;
+  @apply text-gray-900 text-sm outline-none;
+  @apply hover:bg-input_bg/[0.5] focus:bg-input_bg/[0.48] focus:ring-2 focus:ring-brand_yellow;
+
+  //  Input Data States
+  &[data-validity="success"] {
+    @apply bg-green-50 text-green-900 placeholder-green-700 focus:ring-green-500;
+  }
+
+  &[data-validity="error"] {
+    @apply bg-red-50 text-red-900 placeholder-red-700 focus:ring-red-500;
+  }
+
+}
+
+.form_root {
+  @apply flex flex-col gap-2;
+}
+
+.form_input {
+  @apply w-full;
+}
+
+.form_label {
+  @apply text-sm font-semibold text-slate-700;
+
+  &[data-validity="success"] {
+    @apply text-green-600;
+  }
+
+  &[data-validity="error"] {
+    @apply text-red-600;
+  }
+}
+
+.form_message {
+
+  @apply text-xs font-medium;
+
+  &[data-validity="success"] {
+    @apply text-green-700;
+  }
+
+  &[data-validity="error"] {
+    @apply text-red-700;
+  }
+}
