@@ -8,6 +8,7 @@
     "test:dev": "jest --watch --coverage"
   },
   "dependencies": {
+    "@mui/base": "^5.0.0-alpha.94",
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0"
