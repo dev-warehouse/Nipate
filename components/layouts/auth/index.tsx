@@ -1,8 +1,9 @@
 import {HTMLAttributes} from "react";
+import {Header} from "@components/pages";
 
 export function AuthLayout(props: HTMLAttributes<HTMLDivElement>) {
     return <div>
-        <div>Header</div>
+        <Header/>
         <main>{props.children}</main>
     </div>
 }
