@@ -7,4 +7,10 @@ const Index: NextPageWithLayout = () => {
     </div>
 }
 
+Index.getLayout = (page) => {
+    return <AuthLayout>
+        {page}
+    </AuthLayout>
+}
+
 export default Index
