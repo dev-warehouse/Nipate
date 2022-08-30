@@ -13,10 +13,14 @@ class Header extends Component<HeaderProps> {
         return <div style={{height: "1.8rem", width: "8rem", position: "relative"}}>
             <Image src={Logo} alt={"App Logo"} layout={'fill'}/>
         </div>
-        <div className={"flex flex-row gap-1"}>
-            <Button variant={'outline'}>Login</Button>
-            <Button>SignUp</Button>
+    }
+
+    Auth = (): JSX.Element => {
+        // TODO: Implement Auto Render of appropriate component based on auth state
+        return <div className={"flex flex-row gap-1"}>
+            <this.SignOut/>
         </div>
     </div>
 }
+
 export {Header}
