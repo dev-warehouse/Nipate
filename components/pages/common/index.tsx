@@ -20,7 +20,26 @@ class Header extends Component<HeaderProps> {
         return <div className={"flex flex-row gap-1"}>
             <this.SignOut/>
         </div>
-    </div>
+    }
+
+    SignOut = (): JSX.Element => {
+        // TODO: Implement User SignIn Logic from Provider
+        return <> <Button variant={'outline'}>Login</Button>
+            <Button>SignUp</Button></>
+    }
+    SignIn = (): JSX.Element => {
+        // TODO: Implement data fetch from user provider
+        return <>
+            Avatar
+        </>
+    }
+
+    render() {
+        return <div className={"flex flex-row items-center justify-between"}>
+            <this.Logo/>
+            {this.props.variant === "auth" ? <></> : <this.Auth/>}
+        </div>
+    }
 }
 
 export {Header}
