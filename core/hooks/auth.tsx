@@ -1,4 +1,4 @@
-import {Component, createContext, ProviderProps, useContext} from "react";
+import {Component, createContext, useContext} from "react";
 
 /**
  * This is a private context used to create the auth hooks and provider
@@ -15,12 +15,8 @@ const _context = createContext<AuthLifecycleData & AuthLifecycleActions>({} as A
  * It has inbuilt checks for whether the hook is used under the provider to prevent
  * undefined / unresolved data. It barrels the hook limit access to the context variable
  */
-function useAuth() {
-    const context = useContext(_context)
-    if (context === undefined) {
-        throw Error("⚠️ Hook must be used within the AuthProvider, Check your tree to resolve this error")
-    }
-    return context
+function useAuth(): AuthLifecycleData & AuthLifecycleActions {
+    return useContext(_context)
 }
 
 /**
@@ -70,7 +66,7 @@ interface AuthLifecycleData {
  * by inheriting from `AuthLifecycleActions` and handles the state of all lifecycle data by
  * taking `AuthLifecycleData` as a state argument.
  */
-class AuthProvider extends Component<JSX.IntrinsicAttributes & ProviderProps<AuthLifecycleData & AuthLifecycleActions>, AuthLifecycleData> implements AuthLifecycleActions {
+class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLifecycleActions {
 
     // TODO : Auth Provider Implementation
     state: AuthLifecycleData = {
@@ -131,7 +127,6 @@ class AuthProvider extends Component<JSX.IntrinsicAttributes & ProviderProps<Aut
      * This is where the provider is baked
      */
     render() {
-        const {value, ...props} = this.props
         return <_context.Provider value={{
             currentUser: this.state.currentUser,
             authToken: this.state.authToken,
@@ -139,7 +134,7 @@ class AuthProvider extends Component<JSX.IntrinsicAttributes & ProviderProps<Aut
             logout: this.logout,
             register: this.register,
             update: this.update
-        }} {...props}/>
+        }} {...this.props}/>
     }
 }
 
