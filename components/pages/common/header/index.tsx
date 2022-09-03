@@ -24,6 +24,15 @@ function Avatar({avatar}: { avatar: string }): JSX.Element {
             <Image src={avatar} layout={"fill"}/>
         </div>
         <PopperUnstyled open={open} anchorEl={avatarRef.current}>
+            <div className={styles.menu}>
+                <div className={styles.menuOption}>
+                    <Link href={'#'}>Provider Dashboard</Link>
+                </div>
+                <div className={styles.menuOption}>
+                    <Link href={'#'}>Profile</Link>
+                </div>
+                <Button onClick={signOut}>SignOut</Button>
+            </div>
         </PopperUnstyled>
     </div>
 
@@ -51,7 +60,7 @@ function Auth(): JSX.Element {
             <Button onClick={register}>Register</Button>
         </div>
         {/*    TODO Implement Automatic Avatars API*/}
-    </> : <Avatar avatar={"https://avatars.dicebear.com/api/adventurer/sdjka01dflsds.svg"}/>
+    </> : <Avatar avatar={"https://avatars.dicebear.com/api/adventurer/sdjka01dflsds.svg"} logout={logout}/>
 }
 
 function Header(props: HeaderProps): JSX.Element {
