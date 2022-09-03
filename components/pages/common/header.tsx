@@ -13,9 +13,20 @@ interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
  */
 function Auth(): JSX.Element {
     const {currentUser} = useAuth()
+
+    // Navigate to Login Page
+    // TODO Navigate to Login url
+    const login = (): void => {
+    }
+    // Navigate to user registration page
+    // TODO Navigate to Register url
+    const register = (): void => {
+    }
+
     return currentUser === undefined ? <>
         <div className={"flex flex-row gap-1"}>
-            <Button>Login</Button>
+            <Button variant={"outline"} onClick={login}>Login</Button>
+            <Button onClick={register}>Register</Button>
         </div>
     </> : <></>
 }
