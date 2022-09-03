@@ -11,7 +11,8 @@
     "@mui/base": "^5.0.0-alpha.95",
     "next": "latest",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "usehooks-ts": "^2.6.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
