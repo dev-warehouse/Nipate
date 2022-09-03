@@ -1,18 +1,26 @@
-import {HTMLAttributes} from "react";
+import {createRef, HTMLAttributes, useRef, useState} from "react";
 import Image from "next/image";
 import Logo from '/public/assets/logo_full.svg'
 import {Button} from "@components/common";
-import { useAuth } from "@core/hooks";
+import {useAuth} from "@core/hooks";
 import {useRouter} from "next/router";
 import styles from './index.module.scss'
+import {PopperUnstyled} from "@mui/base";
+import Link from "next/link";
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     variant?: 'auth' | 'page'
 }
 
 function Avatar({avatar}: { avatar: string }): JSX.Element {
+    // This state opens the detail menu for avatar element
+    const [open, setOpen] = useState<boolean>(false)
+
+    // Ref for avatar component to enable popper to anchor to it
+    const avatarRef = useRef(null)
+
     return <>
-        <div className={styles.avatar}>
+        <div className={styles.avatar} ref={avatarRef} onClick={() => setOpen(!open)}>
             <Image src={avatar} layout={"fill"}/>
         </div>
     </>
@@ -40,7 +48,7 @@ function Auth(): JSX.Element {
             <Button variant={"outline"} onClick={login}>Login</Button>
             <Button onClick={register}>Register</Button>
         </div>
-    {/*    TODO Implement Automatic Avatars API*/}
+        {/*    TODO Implement Automatic Avatars API*/}
     </> : <Avatar avatar={"https://avatars.dicebear.com/api/adventurer/sdjka01dflsds.svg"}/>
 }
 
