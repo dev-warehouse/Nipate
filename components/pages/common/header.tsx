@@ -33,7 +33,7 @@ function Auth(): JSX.Element {
 
 function Header(props: HeaderProps): JSX.Element {
     return <nav className={"flex flex-row items-center justify-between"}>
-        <div style={{height: "1.8rem", width: "8rem", position: "relative"}}>
+        <div style={{height: "2rem", width: "8rem", position: "relative"}}>
             <Image src={Logo} alt={"App Logo"} layout={'fill'}/>
         </div>
         {props.variant !== "auth" ? <Auth/> : <></>}
