@@ -10,10 +10,25 @@ import Link from "next/link";
 import {UserModel, UserRole} from "@core/models";
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
-    variant?: 'auth' | 'page'
+    page?: 'auth' | 'normal' | 'provider'
 }
 
-function Avatar({avatar, logout}: { avatar: string, logout: () => boolean }): JSX.Element {
+/**
+ * Deals with components respective to provider dashboard
+ * @param user
+ * @constructor
+ */
+function ProviderDashboardDetails({user}:{user:UserModel}) {
+   return<></>
+}
+
+/**
+ * This shows the avatar and the navigation menu when the user is signed in
+ * @param user
+ * @param page
+ * @constructor
+ */
+function Avatar({user,page}: { user: UserModel,page:HeaderProps['page'] }): JSX.Element {
     // This state opens the detail menu for avatar element
     const [open, setOpen] = useState<boolean>(false)
 
@@ -26,6 +41,9 @@ function Avatar({avatar, logout}: { avatar: string, logout: () => boolean }): JS
 
     return <ClickAwayListener onClickAway={() => setOpen(false)}>
         <div>
+            {page === 'provider' ? <>
+                <ProviderDashboardDetails user={user}/>
+            </> : <></>}
             <div className={styles.avatar} ref={avatarRef} onClick={() => setOpen(!open)}>
                 <Image src={user.avatar ?? "https://avatars.dicebear.com/api/adventurer/sdjka01dflsds.svg"}
                        layout={"fill"}/>
@@ -79,7 +97,7 @@ function Header(props: HeaderProps): JSX.Element {
         <div className={styles.logo}>
             <Image src={Logo} alt={"App Logo"} layout={'fill'}/>
         </div>
-        {props.variant !== "auth" ? <Auth/> : <></>}
+        {props.page !== "auth" ? <Auth page={props.page}/> : <></>}
     </nav>
 }
 
