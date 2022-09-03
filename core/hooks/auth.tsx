@@ -1,6 +1,5 @@
 import {Component, createContext, useContext} from "react";
-import {UserModel} from "@core/models";
-import {LoginDetails} from "@core/models/auth";
+import {LoginDetails, UserModel} from "..";
 
 /**
  * This is a private context used to create the auth hooks and provider
