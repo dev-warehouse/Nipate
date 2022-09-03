@@ -11,7 +11,7 @@ class Validator {
      * @param id
      */
     static validateIdentification(id: UserModel["idNumber"]): boolean {
-        return false;
+        return RegExp(/^\d{10}$/g).test(id.toString());
     }
 
     /**
@@ -19,6 +19,7 @@ class Validator {
      * @param mobile
      */
     static validateMobileNumber(mobile: UserModel["mobileNumber"]): boolean {
+        //TODO Get validation for the various country codes
         return false;
     }
 
@@ -28,7 +29,7 @@ class Validator {
      * @param password
      */
     static validatePassword(password: LoginFormData["password"]): boolean {
-        return false;
+        return RegExp(/^\w{8,}$/g).test(password);
     }
 
     /**
