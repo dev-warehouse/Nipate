@@ -1,8 +1,10 @@
 .base {
   // Layout Styling
-  @apply w-full px-3 py-2 inline-flex items-center justify-center rounded-lg outline-none;
+  @apply w-full  inline-flex items-center justify-center rounded-lg outline-none;
   // Text Styling
-  @apply text-base font-semibold tracking-wide leading-normal;
+  @apply font-semibold tracking-wide leading-normal;
+
+  @apply px-2 py-1.5 text-sm md:px-3 md:py-2 md:text-base;
 
   &:disabled {
     @apply opacity-60 cursor-not-allowed;
