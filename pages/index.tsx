@@ -1,15 +1,19 @@
-import type { NextPage } from "next";
+import type {NextPage} from "next";
 import Head from "next/head";
+import {Header} from "../components";
 
 const Home: NextPage = () => {
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Landing</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-    </div>
-  );
+    return (
+        <div className="px-3 py-2">
+            <Head>
+                <title>Landing</title>
+                <link rel="icon" href="/favicon.ico"/>
+            </Head>
+            <main>
+                <Header/>
+            </main>
+        </div>
+    );
 };
 
 export default Home;
