@@ -1,12 +1,21 @@
-import {Component, HTMLAttributes} from "react";
+import {HTMLAttributes} from "react";
 import Image from "next/image";
 import Logo from '/public/assets/logo_full.svg'
 import {Button} from "@components/common";
-import {useAuth} from "@core/hooks/auth";
+import { useAuth } from "@core/hooks";
 import {useRouter} from "next/router";
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     variant?: 'auth' | 'page'
+}
+
+function Avatar({avatar}: { avatar: string }): JSX.Element {
+    return <>
+        <div style={{height: "2rem", width: "2rem", position: "relative"}} className={"w-10 h-10 bg-gray-300 rounded-full"}>
+            <Image src={avatar} layout={"fill"}/>
+        </div>
+    </>
+
 }
 
 /**
@@ -30,7 +39,8 @@ function Auth(): JSX.Element {
             <Button variant={"outline"} onClick={login}>Login</Button>
             <Button onClick={register}>Register</Button>
         </div>
-    </> : <></>
+    {/*    TODO Implement Automatic Avatars API*/}
+    </> : <Avatar avatar={"https://avatars.dicebear.com/api/adventurer/sdjka01dflsds.svg"}/>
 }
 
 function Header(props: HeaderProps): JSX.Element {
