@@ -19,13 +19,13 @@ function Avatar({avatar}: { avatar: string }): JSX.Element {
     // Ref for avatar component to enable popper to anchor to it
     const avatarRef = useRef(null)
 
-    return <>
+    return <div>
         <div className={styles.avatar} ref={avatarRef} onClick={() => setOpen(!open)}>
             <Image src={avatar} layout={"fill"}/>
         </div>
         <PopperUnstyled open={open} anchorEl={avatarRef.current}>
         </PopperUnstyled>
-    </>
+    </div>
 
 }
 
