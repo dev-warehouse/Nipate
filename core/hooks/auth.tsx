@@ -1,4 +1,6 @@
 import {Component, createContext, useContext} from "react";
+import {UserModel} from "@core/models";
+import {LoginDetails} from "@core/models/auth";
 
 /**
  * This is a private context used to create the auth hooks and provider
@@ -30,24 +32,24 @@ interface AuthLifecycleActions {
      * @param model
      * @param saveAuth
      */
-    login: (model: string, saveAuth: boolean) => boolean
+    login: (model: LoginDetails, saveAuth: boolean) => boolean
     /**
      * This handles user logout lifecycle
      * @param model
      * @param saveAuth
      */
-    logout: (model: string, saveAuth: boolean) => boolean
+    logout: () => boolean
     /**
      * This handles user registration
      * @param model
      * @param saveAuth
      */
-    register: (model: string, saveAuth: boolean) => boolean
+    register: (model: UserModel, saveAuth: boolean) => boolean
     /**
      * This enables the user to update his/her details
      * @param model
      */
-    update: (model: string) => boolean
+    update: (model: UserModel) => boolean
 }
 
 /**
@@ -55,8 +57,8 @@ interface AuthLifecycleActions {
  * auth lifecycle state data.
  */
 interface AuthLifecycleData {
-    currentUser: string
-    authToken: string
+    currentUser?: UserModel
+    authToken?: string
 }
 
 /**
@@ -69,10 +71,7 @@ interface AuthLifecycleData {
 class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLifecycleActions {
 
     // TODO : Auth Provider Implementation
-    state: AuthLifecycleData = {
-        currentUser: "",
-        authToken: ""
-    }
+    state: AuthLifecycleData = {}
 
     /**
      * This is responsible to auto authenticating user when one has saved their login details
@@ -93,7 +92,7 @@ class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLife
      * @param model
      * @param saveAuth
      */
-    login = (model: string, saveAuth: boolean): boolean => {
+    login = (model: LoginDetails, saveAuth: boolean): boolean => {
         return false;
     };
 
@@ -102,7 +101,7 @@ class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLife
      * @param model
      * @param saveAuth
      */
-    logout = (model: string, saveAuth: boolean): boolean => {
+    logout = (): boolean => {
         return false;
     };
 
@@ -111,7 +110,7 @@ class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLife
      * @param model
      * @param saveAuth
      */
-    register = (model: string, saveAuth: boolean): boolean => {
+    register = (model: UserModel, saveAuth: boolean): boolean => {
         return false;
     };
 
@@ -119,7 +118,7 @@ class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLife
      * Implementation of `update` lifecycle
      * @param model
      */
-    update = (model: string): boolean => {
+    update = (model: UserModel): boolean => {
         return false;
     };
 
