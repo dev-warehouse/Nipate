@@ -2,6 +2,11 @@ enum UserRole {user, provider, admin}
 
 enum Gender {male, female}
 
+type Mobile = {
+    countryCode: number
+    phoneNumber: number
+}
+
 interface Location {
     name: string,
     longitude: number
@@ -12,7 +17,7 @@ interface UserModel {
     userId: string
     firstName: string
     lastName: string
-    mobileNumber: number
+    mobileNumber: Mobile
     idNumber: number
     avatar: string
     roles: UserRole[]
@@ -20,4 +25,4 @@ interface UserModel {
     location: Location
 }
 
-export type {UserModel, Location, Gender, UserRole}
+export type {UserModel, Location, Mobile, Gender, UserRole}
