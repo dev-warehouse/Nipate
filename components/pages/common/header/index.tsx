@@ -23,6 +23,8 @@ function Avatar({avatar}: { avatar: string }): JSX.Element {
         <div className={styles.avatar} ref={avatarRef} onClick={() => setOpen(!open)}>
             <Image src={avatar} layout={"fill"}/>
         </div>
+        <PopperUnstyled open={open} anchorEl={avatarRef.current}>
+        </PopperUnstyled>
     </>
 
 }
