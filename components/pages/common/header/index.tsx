@@ -1,4 +1,4 @@
-import {createRef, HTMLAttributes, useEffect, useRef, useState} from "react";
+import {HTMLAttributes, useRef, useState} from "react";
 import Image from "next/image";
 import Logo from '/public/assets/logo_full.svg'
 import {Button} from "@components/common";
@@ -7,6 +7,7 @@ import {useRouter} from "next/router";
 import styles from './index.module.scss'
 import {ClickAwayListener, PopperUnstyled} from "@mui/base";
 import Link from "next/link";
+import {UserModel, UserRole} from "@core/models";
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     variant?: 'auth' | 'page'
@@ -23,16 +24,19 @@ function Avatar({avatar, logout}: { avatar: string, logout: () => boolean }): JS
     const signOut = () => {
     }
 
-
     return <ClickAwayListener onClickAway={() => setOpen(false)}>
         <div>
             <div className={styles.avatar} ref={avatarRef} onClick={() => setOpen(!open)}>
-                <Image src={avatar} layout={"fill"}/>
+                <Image src={user.avatar ?? "https://avatars.dicebear.com/api/adventurer/sdjka01dflsds.svg"}
+                       layout={"fill"}/>
             </div>
             <PopperUnstyled open={open} anchorEl={avatarRef.current}>
                 <div className={styles.menu}>
                     <div className={styles.menuOption}>
-                        <Link href={'/provider'}>Provider Dashboard</Link>
+                        {user.roles.includes(UserRole.provider) ?
+                            <Link href={'/provider/dashboard'}>Provider Dashboard</Link> :
+                            <Link href={'/provider/register'}> Register as Provider</Link>
+                        }
                     </div>
                     <div className={styles.menuOption}>
                         <Link href={'#'}>Profile</Link>
@@ -48,8 +52,8 @@ function Avatar({avatar, logout}: { avatar: string, logout: () => boolean }): JS
 /**
  * This is responsible toggle between signed in state and signed out state
  */
-function Auth(): JSX.Element {
-    const {currentUser, logout} = useAuth()
+function Auth({page}:{page:HeaderProps['page']}): JSX.Element {
+    const {currentUser} = useAuth()
     const router = useRouter()
 
     // Navigate to Login Page
@@ -67,7 +71,7 @@ function Auth(): JSX.Element {
             <Button onClick={register}>Register</Button>
         </div>
         {/*    TODO Implement Automatic Avatars API*/}
-    </> : <Avatar avatar={"https://avatars.dicebear.com/api/adventurer/sdjka01dflsds.svg"} logout={logout}/>
+    </> : <Avatar user={currentUser}/>
 }
 
 function Header(props: HeaderProps): JSX.Element {
