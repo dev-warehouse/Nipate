@@ -37,7 +37,7 @@ class Validator {
      * @param model
      */
     static validateLoginDetails(model: LoginFormData): boolean {
-        return false;
+        return this.validateMobileNumber(model.mobileNumber) && this.validatePassword(model.password)
     }
 
     /**
@@ -45,7 +45,7 @@ class Validator {
      * @param model
      */
     static validateRegisterDetails(model: RegisterFormData): boolean {
-        return false
+        return (model.firstName && model.lastName && model.location && model.gender) !== undefined && this.validatePassword(model.password) && this.validateIdentification(model.idNumber)
     }
 }
 
