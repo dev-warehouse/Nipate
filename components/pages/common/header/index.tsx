@@ -12,12 +12,16 @@ interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     variant?: 'auth' | 'page'
 }
 
-function Avatar({avatar}: { avatar: string }): JSX.Element {
+function Avatar({avatar, logout}: { avatar: string, logout: () => boolean }): JSX.Element {
     // This state opens the detail menu for avatar element
     const [open, setOpen] = useState<boolean>(false)
 
     // Ref for avatar component to enable popper to anchor to it
     const avatarRef = useRef(null)
+
+    // This handles User feedback on signOut
+    const signOut = () => {
+    }
 
     return <div>
         <div className={styles.avatar} ref={avatarRef} onClick={() => setOpen(!open)}>
@@ -42,7 +46,7 @@ function Avatar({avatar}: { avatar: string }): JSX.Element {
  * This is responsible toggle between signed in state and signed out state
  */
 function Auth(): JSX.Element {
-    const {currentUser} = useAuth()
+    const {currentUser, logout} = useAuth()
     const router = useRouter()
 
     // Navigate to Login Page
