@@ -1,11 +1,11 @@
-import {createRef, HTMLAttributes, useRef, useState} from "react";
+import {createRef, HTMLAttributes, useEffect, useRef, useState} from "react";
 import Image from "next/image";
 import Logo from '/public/assets/logo_full.svg'
 import {Button} from "@components/common";
 import {useAuth} from "@core/hooks";
 import {useRouter} from "next/router";
 import styles from './index.module.scss'
-import {PopperUnstyled} from "@mui/base";
+import {ClickAwayListener, PopperUnstyled} from "@mui/base";
 import Link from "next/link";
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
@@ -23,22 +23,25 @@ function Avatar({avatar, logout}: { avatar: string, logout: () => boolean }): JS
     const signOut = () => {
     }
 
-    return <div>
-        <div className={styles.avatar} ref={avatarRef} onClick={() => setOpen(!open)}>
-            <Image src={avatar} layout={"fill"}/>
-        </div>
-        <PopperUnstyled open={open} anchorEl={avatarRef.current}>
-            <div className={styles.menu}>
-                <div className={styles.menuOption}>
-                    <Link href={'#'}>Provider Dashboard</Link>
-                </div>
-                <div className={styles.menuOption}>
-                    <Link href={'#'}>Profile</Link>
-                </div>
-                <Button onClick={signOut}>SignOut</Button>
+
+    return <ClickAwayListener onClickAway={() => setOpen(false)}>
+        <div>
+            <div className={styles.avatar} ref={avatarRef} onClick={() => setOpen(!open)}>
+                <Image src={avatar} layout={"fill"}/>
             </div>
-        </PopperUnstyled>
-    </div>
+            <PopperUnstyled open={open} anchorEl={avatarRef.current}>
+                <div className={styles.menu}>
+                    <div className={styles.menuOption}>
+                        <Link href={'/provider'}>Provider Dashboard</Link>
+                    </div>
+                    <div className={styles.menuOption}>
+                        <Link href={'#'}>Profile</Link>
+                    </div>
+                    <Button onClick={signOut}>SignOut</Button>
+                </div>
+            </PopperUnstyled>
+        </div>
+    </ClickAwayListener>
 
 }
 
