@@ -1,10 +1,10 @@
-import {ButtonHTMLAttributes} from "react";
 import styles from './index.module.scss'
+import {ButtonUnstyled, ButtonUnstyledProps} from '@mui/base'
 
 /**
  * Adds on Html Button Attributes with variant to create custom button element
  */
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonUnstyledProps {
     /**
      * ## Variant of Button, has three variants,
      *
@@ -25,7 +25,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * @constructor
  */
 const Button = ({variant = 'solid', className, ...props}: ButtonProps) => {
-    return <button
+    return <ButtonUnstyled
         className={[className, styles.base, variant === 'text' ? styles.text : variant == 'outline' ? styles.outline : styles.solid].join(' ')} {...props}/>
 }
 

@@ -1,0 +1,8 @@
+.logo {
+  @apply relative h-[2rem] w-[8rem];
+}
+
+.avatar {
+  @apply relative w-[3rem] h-[3rem] mt-1;
+  @apply bg-input_bg rounded-full;
+}

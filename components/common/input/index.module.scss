@@ -1,8 +1,9 @@
-.input {
+.root {
   // Layout styles
   @apply bg-input_bg rounded-lg p-2.5;
-  @apply text-gray-900 text-sm outline-none;
+  @apply text-slate-700 text-sm outline-none;
   @apply hover:bg-input_bg/[0.5] focus:bg-input_bg/[0.48] focus:ring-2 focus:ring-brand_yellow;
+  @apply flex flex-row gap-2;
 
   //  Input Data States
   &[data-validity="success"] {
@@ -13,6 +14,12 @@
     @apply bg-red-50 text-red-900 placeholder-red-700 focus:ring-red-500;
   }
 
+}
+
+.input {
+  all: unset;
+  width: 100%;
+  @apply caret-inherit;
 }
 
 .form_root {
