@@ -18,8 +18,8 @@ interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
  * @param user
  * @constructor
  */
-function ProviderDashboardDetails({user}:{user:UserModel}) {
-   return<></>
+function ProviderDashboardDetails({user}: { user: UserModel }) {
+    return <></>
 }
 
 /**
@@ -28,7 +28,7 @@ function ProviderDashboardDetails({user}:{user:UserModel}) {
  * @param page
  * @constructor
  */
-function Avatar({user,page}: { user: UserModel,page:HeaderProps['page'] }): JSX.Element {
+function Avatar({user, page}: { user: UserModel, page: HeaderProps['page'] }): JSX.Element {
     // This state opens the detail menu for avatar element
     const [open, setOpen] = useState<boolean>(false)
 
@@ -70,7 +70,7 @@ function Avatar({user,page}: { user: UserModel,page:HeaderProps['page'] }): JSX.
 /**
  * This is responsible toggle between signed in state and signed out state
  */
-function Auth({page}:{page:HeaderProps['page']}): JSX.Element {
+function Auth({page}: { page: HeaderProps['page'] }): JSX.Element {
     const {currentUser} = useAuth()
     const router = useRouter()
 
@@ -89,7 +89,7 @@ function Auth({page}:{page:HeaderProps['page']}): JSX.Element {
             <Button onClick={register}>Register</Button>
         </div>
         {/*    TODO Implement Automatic Avatars API*/}
-    </> : <Avatar user={currentUser}/>
+    </> : <Avatar user={currentUser} page={page}/>
 }
 
 function Header(props: HeaderProps): JSX.Element {
