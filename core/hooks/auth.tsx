@@ -1,5 +1,5 @@
+import {LoginFormData, RegisterFormData, UpdateDetailsFormData, UserModel} from "@core/models";
 import {Component, createContext, useContext} from "react";
-import {LoginDetails, UserModel} from "..";
 
 /**
  * This is a private context used to create the auth hooks and provider
@@ -31,7 +31,7 @@ interface AuthLifecycleActions {
      * @param model
      * @param saveAuth
      */
-    login: (model: LoginDetails, saveAuth: boolean) => boolean
+    login: (model: LoginFormData, saveAuth: boolean) => boolean
     /**
      * This handles user logout lifecycle
      * @param model
@@ -43,12 +43,12 @@ interface AuthLifecycleActions {
      * @param model
      * @param saveAuth
      */
-    register: (model: UserModel, saveAuth: boolean) => boolean
+    register: (model: RegisterFormData, saveAuth: boolean) => boolean
     /**
      * This enables the user to update his/her details
      * @param model
      */
-    update: (model: UserModel) => boolean
+    update: (model: UpdateDetailsFormData) => boolean
 }
 
 /**
@@ -91,7 +91,7 @@ class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLife
      * @param model
      * @param saveAuth
      */
-    login = (model: LoginDetails, saveAuth: boolean): boolean => {
+    login = (model: LoginFormData, saveAuth: boolean): boolean => {
         return false;
     };
 
@@ -109,7 +109,7 @@ class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLife
      * @param model
      * @param saveAuth
      */
-    register = (model: UserModel, saveAuth: boolean): boolean => {
+    register = (model: RegisterFormData, saveAuth: boolean): boolean => {
         return false;
     };
 
@@ -117,7 +117,7 @@ class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLife
      * Implementation of `update` lifecycle
      * @param model
      */
-    update = (model: UserModel): boolean => {
+    update = (model: UpdateDetailsFormData): boolean => {
         return false;
     };
 
