@@ -25,4 +25,5 @@ interface UserModel {
     location: Location
 }
 
-export type {UserModel, Location, Mobile, Gender, UserRole}
+export {UserRole, Gender}
+export type {UserModel, Location, Mobile}
