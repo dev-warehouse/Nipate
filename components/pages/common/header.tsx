@@ -3,6 +3,7 @@ import Image from "next/image";
 import Logo from '/public/assets/logo_full.svg'
 import {Button} from "@components/common";
 import {useAuth} from "@core/hooks/auth";
+import {useRouter} from "next/router";
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     variant?: 'auth' | 'page'
@@ -13,14 +14,15 @@ interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
  */
 function Auth(): JSX.Element {
     const {currentUser} = useAuth()
+    const router = useRouter()
 
     // Navigate to Login Page
-    // TODO Navigate to Login url
     const login = (): void => {
+        router.push('/auth/login')
     }
     // Navigate to user registration page
-    // TODO Navigate to Register url
     const register = (): void => {
+        router.push('/auth/register')
     }
 
     return currentUser === undefined ? <>
