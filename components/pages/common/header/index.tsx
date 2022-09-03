@@ -4,6 +4,7 @@ import Logo from '/public/assets/logo_full.svg'
 import {Button} from "@components/common";
 import { useAuth } from "@core/hooks";
 import {useRouter} from "next/router";
+import styles from './index.module.scss'
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     variant?: 'auth' | 'page'
@@ -11,7 +12,7 @@ interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 
 function Avatar({avatar}: { avatar: string }): JSX.Element {
     return <>
-        <div style={{height: "2rem", width: "2rem", position: "relative"}} className={"w-10 h-10 bg-gray-300 rounded-full"}>
+        <div className={styles.avatar}>
             <Image src={avatar} layout={"fill"}/>
         </div>
     </>
@@ -45,7 +46,7 @@ function Auth(): JSX.Element {
 
 function Header(props: HeaderProps): JSX.Element {
     return <nav className={"flex flex-row items-center justify-between"}>
-        <div style={{height: "2rem", width: "8rem", position: "relative"}}>
+        <div className={styles.logo}>
             <Image src={Logo} alt={"App Logo"} layout={'fill'}/>
         </div>
         {props.variant !== "auth" ? <Auth/> : <></>}
