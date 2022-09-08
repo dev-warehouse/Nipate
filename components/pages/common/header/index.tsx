@@ -92,12 +92,12 @@ function Auth({page}: { page: HeaderProps['page'] }): JSX.Element {
     </> : <Avatar user={currentUser} page={page}/>
 }
 
-function Header(props: HeaderProps): JSX.Element {
-    return <nav className={"flex flex-row items-center justify-between"}>
+function Header({page, className, ...props}: HeaderProps): JSX.Element {
+    return <nav className={[className, styles.header_root].join(' ')} {...props}>
         <div className={styles.logo}>
             <Image src={Logo} alt={"App Logo"} layout={'fill'}/>
         </div>
-        {props.page !== "auth" ? <Auth page={props.page}/> : <></>}
+        {page !== "auth" ? <Auth page={page}/> : <></>}
     </nav>
 }
 
