@@ -17,3 +17,7 @@
 .menuOption {
   @apply p-3 rounded-md text-sm cursor-pointer hover:bg-slate-100;
 }
+
+.header_root {
+  @apply w-full flex flex-row justify-between items-center;
+}
