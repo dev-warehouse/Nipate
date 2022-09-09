@@ -9,7 +9,7 @@ export default function Document() {
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <body className="px-[1rem] py-[0.8rem]">
+            <body className="">
             <Main/>
             <NextScript/>
             </body>

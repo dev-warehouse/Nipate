@@ -5,3 +5,11 @@
 html {
   @apply text-slate-700 font-sans font-[Inter] ;
 }
+
+body {
+  @apply px-[1rem] py-[0.8rem] h-screen;
+
+  #__next {
+    height: 100%;
+  }
+}
