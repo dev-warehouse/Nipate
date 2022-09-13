@@ -1,6 +1,6 @@
-import {Input, InputProps} from ".";
-import styles from './index.module.scss'
-import {ReactNode} from "react";
+import { Input, InputProps } from ".";
+import styles from "./index.module.scss";
+import { ReactNode } from "react";
 
 /**
  * Form Input props, extends Input Props
@@ -8,18 +8,18 @@ import {ReactNode} from "react";
  * adds upon inputLabel for form label
  */
 interface FormInputProps extends InputProps {
-    /**
-     * Form Input Label
-     */
-    inputLabel: string
-    /**
-     * Feedback message
-     */
-    feedback?: string
-    /**
-     * Specifying children overrides default Input Component
-     */
-    children?: ReactNode
+  /**
+   * Form Input Label
+   */
+  inputLabel: string;
+  /**
+   * Feedback message
+   */
+  feedback?: string;
+  /**
+   * Specifying children overrides default Input Component
+   */
+  children?: ReactNode;
 }
 
 /**
@@ -28,17 +28,29 @@ interface FormInputProps extends InputProps {
  * @param props
  * @constructor
  */
-const FormInput = ({inputLabel, ...props}: FormInputProps) => {
-    const label = inputLabel.toLowerCase().split(' ').join('-').toString()
-    return <div className={styles.form_root}>
-        <label htmlFor={label} className={styles.form_label}
-               data-validity={props.dataValidity}>{inputLabel}</label>
-        {props.children ??
-            <Input id={label}
-                   className={styles.form_input} {...props}/>}
-        {props.feedback !== undefined ?
-            <p className={styles.form_message} data-validity={props.dataValidity}>{props.feedback}</p> : <></>}
+function FormInput({ inputLabel, ...props }: FormInputProps) {
+  const label = inputLabel.toLowerCase().split(" ").join("-").toString();
+  return (
+    <div className={styles.form_root}>
+      <label
+        htmlFor={label}
+        className={styles.form_label}
+        data-validity={props.dataValidity}
+      >
+        {inputLabel}
+      </label>
+      {props.children ?? (
+        <Input id={label} className={styles.form_input} {...props} />
+      )}
+      {props.feedback !== undefined ? (
+        <p className={styles.form_message} data-validity={props.dataValidity}>
+          {props.feedback}
+        </p>
+      ) : (
+        <></>
+      )}
     </div>
+  );
 }
 
-export {FormInput}
+export { FormInput };
