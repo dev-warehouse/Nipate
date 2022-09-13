@@ -1,10 +1,11 @@
 import styles from './index.module.scss'
 import {InputUnstyled, inputUnstyledClasses, InputUnstyledProps} from "@mui/base";
+import {InputHTMLAttributes} from "react";
 
 /**
  * Extends `InputHtmlAttributes` and adds upon dataValidity for data feedback
  */
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     /**
      * This is used to show the various feedback states of the data
      */
