@@ -25,3 +25,23 @@
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='3'/%3E%3C/svg%3E");
   }
 }
+
+.select_root {
+  @apply p-3 rounded-xl;
+  @apply bg-input_bg;
+  @apply focus:ring-brand_yellow focus:ring-2 ring-offset-2;
+}
+
+.select_listbox {
+  @apply p-[0.5rem] rounded-[1rem] my-3 min-w-[12rem] outline-none;
+  @apply bg-white border-[1px] border-gray-200;
+  @apply flex flex-col gap-2;
+}
+
+.select_popper {
+  z-index: 10;
+}
+
+.option {
+  @apply p-2 rounded-[0.5rem];
+}
