@@ -17,6 +17,7 @@ interface ButtonProps extends ButtonUnstyledProps {
     variant?: 'text' | 'outline' | 'solid'
 }
 
+
 /**
  * Themed button, extends html button and adds on variants.
  * @param variant
@@ -24,7 +25,7 @@ interface ButtonProps extends ButtonUnstyledProps {
  * @param props
  * @constructor
  */
-const Button = ({variant = 'solid', className, ...props}: ButtonProps) => {
+function Button({variant = 'solid', className, ...props}: ButtonProps) {
     return <ButtonUnstyled
         className={[className, styles.base, variant === 'text' ? styles.text : variant == 'outline' ? styles.outline : styles.solid].join(' ')} {...props}/>
 }

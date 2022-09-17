@@ -6,3 +6,18 @@
   @apply relative w-[3rem] h-[3rem] mt-1;
   @apply bg-input_bg rounded-full;
 }
+
+.menu {
+  @apply z-10 p-1.5 m-3 rounded-md shadow;
+  @apply min-w-fit md:min-w-[15vw];
+
+  @apply flex flex-col gap-1.5;
+}
+
+.menuOption {
+  @apply p-3 rounded-md text-sm cursor-pointer hover:bg-slate-100;
+}
+
+.header_root {
+  @apply w-full flex flex-row justify-between items-center;
+}
