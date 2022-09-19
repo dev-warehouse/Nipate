@@ -53,7 +53,13 @@ function FormInput({label, name, register, errors, children, dataValidity, ...pr
     );
 }
 
+/**
+ * Renders The Select section of the input
+ * @param props
+ * @constructor
+ */
 function SelectCountries(props: SelectProps) {
+    // Specify for now but it will be fetched
     const countries: { flag: string, name: string, callingCodes: string }[] = [
         {
             flag: "https://flagcdn.com/ke.svg",
@@ -75,6 +81,10 @@ function SelectCountries(props: SelectProps) {
         }
     ]
 
+    /**
+     * Renders the Select Value
+     * @param option
+     */
     const renderValue = (option: any) => {
         if (option !== null) {
             return <div className={styles.phone_option}>
@@ -116,13 +126,16 @@ interface PhoneInputProps extends Omit<FormInputProps, 'register'> {
 }
 
 function PhoneInput({label, name, control, errors}: PhoneInputProps) {
+
     const {field: {value, onChange}} = useController({control, name, defaultValue: {code: null, number: undefined}})
+
     const handleCodeChange = (data: string) => {
         onChange({code: data, number: value.number})
     }
     const handleNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
         onChange({code: value.code, number: event.target.value})
     }
+
     return <div className={styles.form_root}>
         <label htmlFor={name} className={styles.form_label} data-validity={errors[name] ? 'error' : 'initial'}>
             {label}
