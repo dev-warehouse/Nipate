@@ -1,6 +1,6 @@
 import {NextPage} from "next";
 import Head from "next/head";
-import {Button, FormInput, Input, Option, Select} from "@components/common";
+import {Button, Input, Option, Select} from "@components/common";
 
 const Components: NextPage = () => {
     const planet = new Map<string, string>();
@@ -27,17 +27,6 @@ const Components: NextPage = () => {
                 <div>
                     <span>Label</span> <Input placeholder={"Span Input"}/>
                 </div>
-                <FormInput inputLabel={"Form Input"}/>
-                <FormInput
-                    inputLabel={"Form Input Success"}
-                    dataValidity={"success"}
-                    feedback={"Success"}
-                />
-                <FormInput
-                    inputLabel={"Form Input Error"}
-                    dataValidity={"error"}
-                    feedback={"Error"}
-                />
                 <Select>
                     <Option value={0}>H</Option>
                     <Option value={0}>H</Option>

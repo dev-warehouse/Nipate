@@ -1,5 +1,6 @@
 import {Input, InputProps} from ".";
 import styles from "./index.module.scss";
+import {UseFormRegister} from "react-hook-form";
 
 /**
  * Form Input props, extends Input Props
@@ -10,11 +11,20 @@ interface FormInputProps extends InputProps {
     /**
      * Form Input Label
      */
-    inputLabel: string;
+    label: string;
+    /**
+     *Identifier for input in form hook
+     */
+    name: string
+    /**
+     * Attaches component to form hook
+     */
+    register: UseFormRegister<any>
     /**
      * Feedback message
      */
-    feedback?: string;
+    errors?: any;
+
 }
 
 /**
@@ -24,16 +34,17 @@ interface FormInputProps extends InputProps {
  * @param props
  * @constructor
  */
-function FormInput({inputLabel, children, ...props}: FormInputProps) {
-    const label = inputLabel.toLowerCase().split(" ").join("-").toString();
+function FormInput({label, name, register, errors, children, dataValidity, ...props}: FormInputProps) {
     return (
         <div className={styles.form_root}>
-            <label htmlFor={label} className={styles.form_label} data-validity={props.dataValidity}>
-                {inputLabel}
+            <label htmlFor={name} className={styles.form_label} data-validity={errors[name] ? 'error' : 'initial'}>
+                {label}
             </label>
-            {children ?? (<Input id={label} className={styles.form_input} {...props} />)}
-            {props.feedback !== undefined ? (
-                <p className={styles.form_message} data-validity={props.dataValidity}>{props.feedback}</p>
+            {children ?? (<Input id={name} className={styles.form_input}
+                                 dataValidity={errors[name] ? 'error' : 'initial'} {...props} />)}
+            {errors[name] ? (
+                <p className={styles.form_message}
+                   data-validity={errors[name] ? 'error' : 'initial'}>{errors[name].message}</p>
             ) : (<></>)}
         </div>
     );
