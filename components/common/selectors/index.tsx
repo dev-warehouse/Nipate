@@ -20,7 +20,7 @@ function Radio(props: InputHTMLAttributes<HTMLInputElement>) {
     return <input type="radio" className={styles.radio} {...props} />;
 }
 
-interface SelectProps extends SelectUnstyledProps<any> {
+export interface SelectProps extends SelectUnstyledProps<any> {
     listStyles?: string
 }
 
@@ -31,16 +31,16 @@ interface SelectProps extends SelectUnstyledProps<any> {
  * @param listStyles Customizes select listbox
  * @constructor
  */
-function Select({className = '',listStyles = '',...props}: SelectProps) {
+function Select({className = '', listStyles = '', ...props}: SelectProps) {
     return (
         <SelectUnstyled
             {...props}
             componentsProps={{
                 root: {
-                    className: [className,styles.select_root].join(' '),
+                    className: [className, styles.select_root].join(' '),
                 },
                 listbox: {
-                    className: [listStyles,styles.select_listbox].join(' '),
+                    className: [listStyles, styles.select_listbox].join(' '),
                 },
                 popper: {
                     className: styles.select_popper,
