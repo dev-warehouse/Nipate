@@ -71,3 +71,26 @@
     @apply text-red-700;
   }
 }
+
+.phone_root {
+  @apply inline-flex flex-row gap-2.5;
+}
+
+.phone_option_img {
+  @apply w-6 h-5 bg-[#E5E5E5] rounded relative;
+}
+
+.phone_option {
+  @apply flex flex-row gap-2 items-center;
+
+  & > p {
+    all: unset;
+    white-space: nowrap;
+    @apply max-w-md overflow-hidden overflow-ellipsis;
+    @apply text-base font-medium text-gray-400;
+  }
+
+  & > span {
+    all: unset;
+  }
+}
