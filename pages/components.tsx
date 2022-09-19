@@ -1,6 +1,20 @@
 import {NextPage} from "next";
 import Head from "next/head";
-import {Button, Input, Option, Select} from "@components/common";
+import {Button, FormInput, Input, Option, PhoneInput, Select} from "@components/common";
+import {useForm} from "react-hook-form";
+
+function FormTest() {
+    const {register, control, formState: {errors}} = useForm()
+    return <>
+        <FormInput label={"Form Input"} name={"form"} register={register} errors={errors}
+        />
+        <FormInput label={"Form Input Success"} name={"success"} register={register} errors={errors}
+        />
+        <FormInput label={"Form Input Error"} errors={errors} name={"err"} register={register}
+        />
+        <PhoneInput label="Mobile Number" name="phone" control={control} errors={errors}/>
+    </>
+}
 
 const Components: NextPage = () => {
     const planet = new Map<string, string>();
@@ -32,6 +46,7 @@ const Components: NextPage = () => {
                     <Option value={0}>H</Option>
                     <Option value={0}>H</Option>
                 </Select>
+                <FormTest/>
             </main>
         </div>
     );
