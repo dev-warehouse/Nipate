@@ -26,6 +26,12 @@
   }
 }
 
+.icon {
+  & > svg {
+    @apply w-5 h-5;
+  }
+}
+
 // For focused state
 .root_focused {
   @apply bg-input_bg/[0.7] ring ring-brand_yellow;
@@ -60,7 +66,6 @@
 }
 
 .form_message {
-
   @apply text-xs font-medium;
 
   &[data-validity="success"] {
