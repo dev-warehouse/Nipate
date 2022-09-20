@@ -4,28 +4,23 @@ import {Button, FormInput, Input, Option, PhoneInput, Select} from "@components/
 import {useForm} from "react-hook-form";
 
 function FormTest() {
-    const {register, control, formState: {errors}} = useForm()
-    return <>
+    const {register, control, handleSubmit, formState: {errors}} = useForm()
+    const submit = (data: any) => console.log(data)
+    return <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-2.5">
         <FormInput label={"Form Input"} name={"form"} register={register} errors={errors}
         />
-        <FormInput label={"Form Input Success"} name={"success"} register={register} errors={errors}
+        <FormInput label={"Form Input Success"} dataValidity={'success'} name={"success"} register={register}
+                   errors={errors}
         />
-        <FormInput label={"Form Input Error"} errors={errors} name={"err"} register={register}
+        <FormInput label={"Form Input Error"} dataValidity={'error'} errors={errors} name={"err"} register={register}
         />
-        <PhoneInput label="Mobile Number" name="phone" control={control} errors={errors}/>
-    </>
+        <PhoneInput label="Mobile Number" name="phone" placeholder="eg 712345678"
+                    control={control} errors={errors}/>
+        <Button type="submit">Submit</Button>
+    </form>
 }
 
 const Components: NextPage = () => {
-    const planet = new Map<string, string>();
-    const countries: Map<string, string> = new Map([
-        ["france", "🇫🇷"],
-        ["united-kingdom", "🇬🇧"],
-        ["spain", "🇪🇸"],
-    ]);
-    planet.set("name", "earth");
-    planet.set("position", "1");
-
     return (
         <div className={"flex flex-col items-center justify-center"}>
             <Head>
