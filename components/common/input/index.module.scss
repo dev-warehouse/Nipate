@@ -71,3 +71,49 @@
     @apply text-red-700;
   }
 }
+
+.phone_root {
+  @apply inline-flex flex-row gap-2.5;
+}
+
+.phone_option_img {
+  @apply w-6 h-5 bg-[#E5E5E5] rounded relative;
+  :nth-child(1) {
+    @apply rounded;
+  }
+}
+
+.phone_option {
+  @apply flex flex-row gap-2 items-center;
+
+  & > p {
+    all: unset;
+    white-space: nowrap;
+    @apply max-w-md overflow-hidden overflow-ellipsis;
+    @apply text-base font-medium text-gray-400;
+  }
+
+  & > span {
+    all: unset;
+  }
+
+  &[data-validity="success"] {
+    :nth-child(1) {
+      @apply bg-green-200;
+    }
+
+    & > p {
+      @apply text-green-500;
+    }
+  }
+
+  &[data-validity="error"] {
+    :nth-child(1) {
+      @apply bg-red-200;
+    }
+
+    & > p {
+      @apply text-red-500;
+    }
+  }
+}

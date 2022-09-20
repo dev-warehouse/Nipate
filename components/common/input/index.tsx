@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import {InputUnstyled, inputUnstyledClasses, InputUnstyledProps} from "@mui/base";
-import {InputHTMLAttributes} from "react";
+import {ForwardedRef, forwardRef, InputHTMLAttributes} from "react";
 
 /**
  * Extends `InputHtmlAttributes` and adds upon dataValidity for data feedback
@@ -20,10 +20,15 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param props
  * @constructor
  */
-function Input({dataValidity, className, ...props}: InputProps & InputUnstyledProps) {
+const Input = forwardRef(({
+                              dataValidity,
+                              className,
+                              ...props
+                          }: InputProps & InputUnstyledProps, ref: ForwardedRef<any>) => {
     inputUnstyledClasses.focused = styles.root_focused;
-    return <InputUnstyled data-validity={dataValidity} className={[className, styles.root].join(' ')} {...props}/>
-}
+    return <InputUnstyled data-validity={dataValidity} className={[className, styles.root].join(' ')}
+                          ref={ref} {...props}/>
+});
 
 export {Input}
 export * from './form'
