@@ -10,14 +10,17 @@
     @apply opacity-60 cursor-not-allowed;
   }
 }
+
 .text {
-  @apply text-slate-700;
+  @apply text-inherit;
   @apply hover:bg-slate-200 active:bg-slate-300 focus:ring focus:ring-slate-400;
 }
+
 .outline {
   @apply text-slate-700 border-2 border-slate-700;
   @apply hover:text-white hover:bg-slate-700 active:bg-slate-600 active:border-slate-600 focus:ring focus:ring-slate-400;
 }
+
 .solid {
   // Default Styling
   @apply text-white bg-brand;

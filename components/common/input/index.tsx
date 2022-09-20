@@ -1,15 +1,20 @@
-import styles from './index.module.scss'
-import {InputUnstyled, inputUnstyledClasses, InputUnstyledProps} from "@mui/base";
-import {ForwardedRef, forwardRef, InputHTMLAttributes} from "react";
+import styles from "./index.module.scss";
+import {
+  InputUnstyled,
+  inputUnstyledClasses,
+  InputUnstyledProps,
+} from "@mui/base";
+import { ForwardedRef, forwardRef, InputHTMLAttributes, useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 /**
  * Extends `InputHtmlAttributes` and adds upon dataValidity for data feedback
  */
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-    /**
-     * This is used to show the various feedback states of the data
-     */
-    dataValidity?: 'initial' | 'success' | 'error'
+interface InputProps {
+  /**
+   * This is used to show the various feedback states of the data
+   */
+  dataValidity?: "initial" | "success" | "error";
 }
 
 

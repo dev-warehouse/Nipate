@@ -6,6 +6,6 @@ export function AuthLayout(props: HTMLAttributes<HTMLDivElement>) {
     return <div className={styles.auth_root}>
         <Header page={'auth'}/>
         <main>{props.children}</main>
-        <Footer className={styles.auth_footer}/>
+        <Footer/>
     </div>
 }

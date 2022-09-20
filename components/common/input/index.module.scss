@@ -48,7 +48,7 @@
 }
 
 .form_label {
-  @apply text-sm font-semibold text-slate-700;
+  @apply text-sm font-semibold;
 
   &[data-validity="success"] {
     @apply text-green-600;
