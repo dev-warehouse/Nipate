@@ -21,19 +21,22 @@ function Radio(props: InputHTMLAttributes<HTMLInputElement>) {
 }
 
 export interface SelectProps extends SelectUnstyledProps<any> {
+    dataValidity?: 'initial' | 'success' | 'error'
     listStyles?: string
 }
 
 /**
  * Select Input but with styles
+ * @param dataValidity
  * @param props
  * @param className Customizes select button
  * @param listStyles Customizes select listbox
  * @constructor
  */
-function Select({className = '', listStyles = '', ...props}: SelectProps) {
+function Select({className = '', listStyles = '', dataValidity, ...props}: SelectProps) {
     return (
         <SelectUnstyled
+            data-validity={dataValidity}
             {...props}
             componentsProps={{
                 root: {
