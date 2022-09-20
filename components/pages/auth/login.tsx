@@ -3,6 +3,7 @@ import {useForm} from "react-hook-form";
 import * as yup from 'yup'
 import styles from "./styles/login.module.scss";
 import {yupResolver} from "@hookform/resolvers/yup";
+import {Validator} from "@core/services";
 
 interface LoginData {
     mobile: PhoneNumber;
@@ -10,11 +11,8 @@ interface LoginData {
 }
 
 const schema = yup.object().shape({
-    mobile: yup.object().shape({
-        code: yup.string().required("Country Code is required").matches(/^\+\d{3}$/, "Please enter a valid country code"),
-        number: yup.string().required("Phone number is required").matches(/^[71]\d{8}$/, "Phone number should start with 7 or 1 not 07 or 01 and should be of length 9")
-    }),
-    password: yup.string().required('Password is required').matches(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%? "]?).*$/, "Password should contain least a number, capital letter or a symbol ")
+    mobile: Validator.mobileSchema,
+    password: Validator.passwordSchema
 })
 
 
