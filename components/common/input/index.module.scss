@@ -78,6 +78,9 @@
 
 .phone_option_img {
   @apply w-6 h-5 bg-[#E5E5E5] rounded relative;
+  :nth-child(1) {
+    @apply rounded;
+  }
 }
 
 .phone_option {
@@ -92,5 +95,25 @@
 
   & > span {
     all: unset;
+  }
+
+  &[data-validity="success"] {
+    :nth-child(1) {
+      @apply bg-green-200;
+    }
+
+    & > p {
+      @apply text-green-500;
+    }
+  }
+
+  &[data-validity="error"] {
+    :nth-child(1) {
+      @apply bg-red-200;
+    }
+
+    & > p {
+      @apply text-red-500;
+    }
   }
 }

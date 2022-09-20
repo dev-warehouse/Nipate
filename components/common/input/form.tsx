@@ -30,6 +30,7 @@ interface FormInputProps extends InputProps {
 
 }
 
+
 /**
  * Input for Forms with label and validation
  * @param inputLabel
@@ -38,19 +39,18 @@ interface FormInputProps extends InputProps {
  * @constructor
  */
 function FormInput({label, name, register, errors, children, dataValidity, ...props}: FormInputProps) {
-    return (
-        <div className={styles.form_root}>
-            <label htmlFor={name} className={styles.form_label} data-validity={errors[name] ? 'error' : 'initial'}>
-                {label}
-            </label>
-            {children ?? (<Input id={name} className={styles.form_input} {...register(name)}
-                                 dataValidity={errors[name] ? 'error' : 'initial'} {...props} />)}
-            {errors[name] ? (
-                <p className={styles.form_message}
-                   data-validity={errors[name] ? 'error' : 'initial'}>{errors[name].message}</p>
-            ) : (<></>)}
-        </div>
-    );
+    return <div className={styles.form_root}>
+        <label htmlFor={name} className={styles.form_label}
+               data-validity={dataValidity ? dataValidity : errors[name] ? 'error' : 'initial'}>
+            {label}
+        </label>
+        {children ?? (<Input id={name} className={styles.form_input} {...register(name)}
+                             dataValidity={dataValidity ? dataValidity : errors[name] ? 'error' : 'initial'} {...props} />)}
+        {errors[name] ? (
+            <p className={styles.form_message}
+               data-validity={dataValidity ? dataValidity : errors[name] ? 'error' : 'initial'}>{errors[name].message}</p>
+        ) : (<></>)}
+    </div>;
 }
 
 /**
@@ -94,7 +94,7 @@ function SelectCountries(props: SelectProps) {
                 <span>{option.value}</span>
             </div>
         }
-        return <div className={styles.phone_option}>
+        return <div className={styles.phone_option} data-validity={props.dataValidity}>
             <div className={styles.phone_option_img}/>
             <p>+123</p>
         </div>
@@ -125,7 +125,7 @@ interface PhoneInputProps extends Omit<FormInputProps, 'register'> {
     control: Control<PhoneNumber | any>
 }
 
-function PhoneInput({label, name, control, errors}: PhoneInputProps) {
+function PhoneInput({label, name, control, errors, dataValidity, placeholder}: PhoneInputProps) {
 
     const {field: {value, onChange}} = useController({control, name, defaultValue: {code: null, number: undefined}})
 
@@ -137,16 +137,19 @@ function PhoneInput({label, name, control, errors}: PhoneInputProps) {
     }
 
     return <div className={styles.form_root}>
-        <label htmlFor={name} className={styles.form_label} data-validity={errors[name] ? 'error' : 'initial'}>
+        <label htmlFor={name} className={styles.form_label}
+               data-validity={dataValidity ? dataValidity : errors[name] ? 'error' : 'initial'}>
             {label}
         </label>
         <div className={styles.phone_root}>
-            <SelectCountries onChange={handleCodeChange}/>
-            <Input placeholder="eg 712345678" onChange={handleNumberChange}/>
+            <SelectCountries onChange={handleCodeChange}
+                             dataValidity={dataValidity ? dataValidity : errors[name] ? 'error' : 'initial'}/>
+            <Input placeholder={placeholder} onChange={handleNumberChange}
+                   dataValidity={dataValidity ? dataValidity : errors[name] ? 'error' : 'initial'}/>
         </div>
         {errors[name] ? (
             <p className={styles.form_message}
-               data-validity={errors[name] ? 'error' : 'initial'}>{errors[name].message}</p>
+               data-validity={dataValidity ? dataValidity : errors[name] ? 'error' : 'initial'}>{errors[name].message}</p>
         ) : (<></>)}
     </div>
 }
