@@ -4,6 +4,7 @@ import * as yup from 'yup'
 import styles from "./styles/login.module.scss";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Validator} from "@core/services";
+import {useRouter} from "next/router";
 
 interface LoginData {
     mobile: PhoneNumber;
@@ -27,6 +28,8 @@ export function LoginForm() {
 
     const submit = (data: LoginData) => console.log(data)
 
+    const router = useRouter()
+
     return (
         <form className={styles.login_root} onSubmit={handleSubmit(submit)}>
             <p className={styles.login_header}>Login to your Account</p>
@@ -47,7 +50,7 @@ export function LoginForm() {
                 errors={errors}
             />
             <Button type="submit" className={styles.btn_submit}>Login</Button>
-            <Button variant="text" className={styles.btn_create}>
+            <Button variant="text" className={styles.btn_create} onClick={() => router.push('auth/register')}>
                 <span>Don't have an account?</span>
                 <span className="ml-4 text-red-700">Create Now</span>
             </Button>

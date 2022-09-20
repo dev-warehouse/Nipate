@@ -76,7 +76,7 @@ function Auth({page}: { page: HeaderProps['page'] }): JSX.Element {
 
     // Navigate to Login Page
     const login = (): void => {
-        router.push('/auth/login')
+        router.push('/auth')
     }
     // Navigate to user registration page
     const register = (): void => {
