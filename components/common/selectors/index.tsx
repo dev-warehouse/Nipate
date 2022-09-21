@@ -1,4 +1,4 @@
-import {InputHTMLAttributes} from "react";
+import {ForwardedRef, forwardRef, InputHTMLAttributes} from "react";
 import styles from "./index.module.scss";
 import {OptionUnstyled, OptionUnstyledProps, SelectUnstyled, SelectUnstyledProps,} from "@mui/base";
 
@@ -7,9 +7,9 @@ import {OptionUnstyled, OptionUnstyledProps, SelectUnstyled, SelectUnstyledProps
  * @param props
  * @constructor
  */
-function CheckBox(props: InputHTMLAttributes<HTMLInputElement>) {
-    return <input type="checkbox" className={styles.checkbox} {...props} />;
-}
+const CheckBox = forwardRef((props: InputHTMLAttributes<HTMLInputElement>, ref: ForwardedRef<any>) => <input
+    type="checkbox"
+    className={styles.checkbox} ref={ref} {...props} />);
 
 /**
  * Custom styled radio input

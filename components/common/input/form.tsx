@@ -1,7 +1,7 @@
 import {Input, InputProps} from ".";
 import styles from "./index.module.scss";
 import {Control, useController, UseFormRegister} from "react-hook-form";
-import {Option, Select, SelectProps} from "@components/common";
+import {CheckBox, Option, Select, SelectProps} from "@components/common";
 import Image from "next/image";
 import {ChangeEvent} from "react";
 import {MobileNumber} from "@core/models";
@@ -32,6 +32,35 @@ interface FormInputProps extends InputProps {
      * Feedback message
      */
     errors: any;
+}
+
+function FormCheckBox({label, name, dataValidity, register, errors}: FormInputProps) {
+    return <div className="self-start">
+        <div className="inline-flex gap-2 flex-row-reverse">
+            <label
+                htmlFor={name}
+                className="text-sm font-medium"
+                data-validity={
+                    dataValidity ? dataValidity : errors[name] ? "error" : "initial"
+                }
+            >
+                {label}
+            </label>
+            <CheckBox {...register(name)}/>
+        </div>
+        {errors[name] ? (
+            <p
+                className={styles.form_message}
+                data-validity={
+                    dataValidity ? dataValidity : errors[name] ? "error" : "initial"
+                }
+            >
+                {errors[name].message}
+            </p>
+        ) : (
+            <></>
+        )}
+    </div>
 }
 
 /**
@@ -243,4 +272,4 @@ function PhoneInput({
     );
 }
 
-export {FormInput, PhoneInput};
+export {FormInput, PhoneInput, FormCheckBox};
