@@ -1,21 +1,10 @@
-import {Button, FormInput, PhoneInput, PhoneNumber} from "@components/common";
+import {Button, FormInput, PhoneInput} from "@components/common";
 import {useForm} from "react-hook-form";
-import * as yup from 'yup'
 import styles from "./styles/login.module.scss";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Validator} from "@core/services";
 import {useRouter} from "next/router";
-
-interface LoginData {
-    mobile: PhoneNumber;
-    password: string;
-}
-
-const schema = yup.object().shape({
-    mobile: Validator.mobileSchema,
-    password: Validator.passwordSchema
-})
-
+import {LoginFormData} from "@core/models";
 
 export function LoginForm() {
     const {
@@ -25,9 +14,9 @@ export function LoginForm() {
         trigger,
         reset,
         formState: {errors},
-    } = useForm<LoginData>({resolver: yupResolver(schema)});
+    } = useForm<LoginFormData>({resolver: yupResolver(Validator.loginDetailsSchema)});
 
-    const submit = (data: LoginData) => console.log(data)
+    const submit = (data: LoginFormData) => console.log(data)
 
     const router = useRouter()
 

@@ -4,6 +4,7 @@ import {Control, useController, UseFormRegister} from "react-hook-form";
 import {Option, Select, SelectProps} from "@components/common";
 import Image from "next/image";
 import {ChangeEvent} from "react";
+import {MobileNumber} from "@core/models";
 
 /**
  * Form Input props, extends Input Props
@@ -169,13 +170,8 @@ function SelectCountries(props: SelectProps) {
     );
 }
 
-export type PhoneNumber = {
-    code?: string;
-    number?: string;
-};
-
 interface PhoneInputProps extends Omit<FormInputProps, "register"> {
-    control: Control<PhoneNumber | any>;
+    control: Control<MobileNumber | any>;
 }
 
 // TODO Document the forms
