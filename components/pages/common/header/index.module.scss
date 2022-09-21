@@ -20,6 +20,7 @@
 
 .header_root {
   @apply w-full flex flex-row justify-between items-center;
-  // Prevent layout shift of Header
-  @apply min-h-[2.25rem] md:min-h-[2.75rem];
+
+  // Sticky header
+  @apply fixed z-30 top-0 shrink-0 p-4 backdrop-blur-md;
 }

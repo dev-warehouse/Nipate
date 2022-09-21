@@ -23,7 +23,7 @@ function FormTest() {
 
 const Components: NextPageWithLayout = () => {
     return (
-        <div className={"flex flex-col items-center justify-center"}>
+        <div className={"mt-[4.3rem] md:mt-[4.6rem] flex flex-col items-center justify-center"}>
             <Head>
                 <title>Components</title>
             </Head>
