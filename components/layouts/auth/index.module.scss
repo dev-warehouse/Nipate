@@ -1,3 +1,7 @@
 .auth_root {
   @apply h-full flex flex-col items-center;
 }
+
+.auth_body {
+  @apply h-[100%] flex flex-col items-center justify-center;
+}
