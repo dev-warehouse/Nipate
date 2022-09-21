@@ -1,5 +1,4 @@
 import {Footer, Header, HeaderProps} from "@components/pages";
-import styles from '../auth/index.module.scss'
 import Head from "next/head";
 
 export interface GlobalLayoutProps extends HeaderProps {
@@ -11,7 +10,7 @@ export function GlobalLayout({page, title, children}: GlobalLayoutProps) {
         <Head>
             <title>{title}</title>
         </Head>
-        <main className={styles.auth_root}>
+        <main className="h-full flex flex-col items-center">
             <Header page={page}/>
             {children}
             <Footer/>
