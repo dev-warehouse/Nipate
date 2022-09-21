@@ -1,19 +1,17 @@
-import type {NextPage} from "next";
-import Head from "next/head";
-import {Header} from "../components";
+import {NextPageWithLayout} from "@pages/_app";
+import {GlobalLayout} from "@components/layouts/page";
 
-const Home: NextPage = () => {
+const Home: NextPageWithLayout = () => {
     return (
-        <>
-            <Head>
-                <title>Landing</title>
-                <link rel="icon" href="/favicon.ico"/>
-            </Head>
-            <main>
-                <Header/>
-            </main>
-        </>
+        <main className="h-full">
+        </main>
     );
 };
+
+Home.getLayout = (page) => {
+    return <GlobalLayout title="Landing">
+        {page}
+    </GlobalLayout>
+}
 
 export default Home;

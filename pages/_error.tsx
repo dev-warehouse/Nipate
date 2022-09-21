@@ -1,5 +1,5 @@
 import {NextPageWithLayout} from "@pages/_app";
-import {GlobalLayout} from "@components/layouts/page/layout";
+import {GlobalLayout} from "@components/layouts";
 
 
 const ErrorPage: NextPageWithLayout = (props: any): JSX.Element => {
@@ -13,7 +13,7 @@ const ErrorPage: NextPageWithLayout = (props: any): JSX.Element => {
 };
 
 ErrorPage.getLayout = (page) => {
-    return <GlobalLayout>{page}</GlobalLayout>;
+    return <GlobalLayout title="Unable to load Page">{page}</GlobalLayout>;
 };
 
 ErrorPage.getInitialProps = ({res, err}) => {
