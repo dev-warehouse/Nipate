@@ -19,8 +19,8 @@ export interface UserModel {
     lastName: string
     mobile: MobileNumber
     idNumber: number
-    avatar: string
+    avatar?: string
     roles: UserRole[]
     gender: Gender
-    location: Location
+    location?: Location
 }
