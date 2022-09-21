@@ -20,4 +20,6 @@
 
 .header_root {
   @apply w-full flex flex-row justify-between items-center;
+  // Prevent layout shift of Header
+  @apply min-h-[2.25rem] md:min-h-[2.75rem];
 }

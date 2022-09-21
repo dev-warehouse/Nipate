@@ -4,7 +4,7 @@ import {Header} from "../components";
 
 const Home: NextPage = () => {
     return (
-        <div className="px-3 py-2">
+        <>
             <Head>
                 <title>Landing</title>
                 <link rel="icon" href="/favicon.ico"/>
@@ -12,7 +12,7 @@ const Home: NextPage = () => {
             <main>
                 <Header/>
             </main>
-        </div>
+        </>
     );
 };
 
