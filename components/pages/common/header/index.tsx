@@ -9,7 +9,7 @@ import {ClickAwayListener, PopperUnstyled} from "@mui/base";
 import Link from "next/link";
 import {UserModel, UserRole} from "@core/models";
 
-interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
+export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     page?: 'auth' | 'normal' | 'provider'
 }
 
@@ -94,9 +94,11 @@ function Auth({page}: { page: HeaderProps['page'] }): JSX.Element {
 
 function Header({page, className, ...props}: HeaderProps): JSX.Element {
     return <nav className={[className, styles.header_root].join(' ')} {...props}>
-        <div className={styles.logo}>
-            <Image src={Logo} alt={"App Logo"} layout={'fill'}/>
-        </div>
+        <Link href="/">
+            <div className={styles.logo}>
+                <Image src={Logo} alt={"App Logo"} layout={'fill'}/>
+            </div>
+        </Link>
         {page !== "auth" ? <Auth page={page}/> : <></>}
     </nav>
 }
