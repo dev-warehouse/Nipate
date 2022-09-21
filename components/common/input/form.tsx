@@ -24,6 +24,10 @@ interface FormInputProps extends InputProps {
      */
     register: UseFormRegister<any>;
     /**
+     * Triggers the form validation
+     */
+    trigger?: any
+    /**
      * Feedback message
      */
     errors: any;
@@ -41,11 +45,15 @@ function FormInput({
                        className = "",
                        name,
                        register,
+                       trigger,
                        errors,
                        children,
                        dataValidity,
                        ...props
                    }: FormInputProps) {
+
+    const {onChange, onBlur, name: inputName, ref} = register(name)
+
     return (
         <div className={[className, styles.form_root].join(" ")}>
             <label
@@ -61,7 +69,13 @@ function FormInput({
                 <Input
                     id={name}
                     className={styles.form_input}
-                    {...register(name)}
+                    name={inputName}
+                    onBlur={onBlur}
+                    onChange={(event) => {
+                        onChange(event)
+                        if (trigger) trigger(name)
+                    }}
+                    ref={ref}
                     dataValidity={
                         dataValidity ? dataValidity : errors[name] ? "error" : "initial"
                     }
@@ -164,10 +178,13 @@ interface PhoneInputProps extends Omit<FormInputProps, "register"> {
     control: Control<PhoneNumber | any>;
 }
 
+// TODO Document the forms
+
 function PhoneInput({
                         label,
                         name,
                         control,
+                        trigger,
                         errors,
                         dataValidity,
                         placeholder,
@@ -185,6 +202,7 @@ function PhoneInput({
     };
     const handleNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
         onChange({code: value.code, number: event.target.value});
+        if (trigger) trigger(`${name}.number`)
     };
 
     return (

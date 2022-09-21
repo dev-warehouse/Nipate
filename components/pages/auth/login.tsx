@@ -22,6 +22,7 @@ export function LoginForm() {
         register,
         control,
         handleSubmit,
+        trigger,
         reset,
         formState: {errors},
     } = useForm<LoginData>({resolver: yupResolver(schema)});
@@ -38,6 +39,7 @@ export function LoginForm() {
                 name="mobile"
                 placeholder="eg 712345678"
                 control={control}
+                trigger={trigger}
                 errors={errors}
             />
             <FormInput
@@ -46,6 +48,7 @@ export function LoginForm() {
                 type="password"
                 placeholder="••••••••••"
                 className={styles.login_password}
+                trigger={trigger}
                 register={register}
                 errors={errors}
             />
