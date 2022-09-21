@@ -1,5 +1,5 @@
-import {LoginFormData, RegisterFormData, UserModel} from "@core/models";
-import * as yup from "yup";
+import {Gender, LoginFormData, RegisterFormData, UserModel, UserRole,} from "@core/models";
+import {array, mixed, number, object, string} from "yup";
 
 /**
  * This class deals with all containing validation
@@ -12,7 +12,9 @@ class Validator {
      * @param id
      */
     static validateIdentification(id: UserModel["idNumber"]): boolean {
-        return RegExp(/^\d{10}$/).test(id.toString());
+        let isValid: boolean = false;
+        this.idNumberSchema.isValid(id).then((res) => (isValid = res));
+        return isValid;
     }
 
     /**
@@ -20,9 +22,9 @@ class Validator {
      * @param mobile
      */
     static validateMobileNumber(mobile: UserModel["mobile"]): boolean {
-        let isValid: boolean = false
-        this.mobileSchema.isValid(mobile).then(res => isValid = res)
-        return isValid
+        let isValid: boolean = false;
+        this.mobileSchema.isValid(mobile).then((res) => (isValid = res));
+        return isValid;
     }
 
     /**
@@ -31,7 +33,9 @@ class Validator {
      * @param password
      */
     static validatePassword(password: LoginFormData["password"]): boolean {
-        return RegExp(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%? "]?).*$/).test(password);
+        return RegExp(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%? "]?).*$/).test(
+            password
+        );
     }
 
     /**
@@ -39,9 +43,9 @@ class Validator {
      * @param model
      */
     static validateLoginDetails(model: LoginFormData): boolean {
-        let isValid: boolean = false
-        this.loginDetailsSchema.isValid(model).then(res => isValid = res)
-        return isValid
+        let isValid: boolean = false;
+        this.loginDetailsSchema.isValid(model).then((res) => (isValid = res));
+        return isValid;
     }
 
     /**
@@ -49,29 +53,102 @@ class Validator {
      * @param model
      */
     static validateRegisterDetails(model: RegisterFormData): boolean {
-        return (model.firstName && model.lastName && model.location && model.gender) !== undefined && this.validatePassword(model.password) && this.validateIdentification(model.idNumber)
+        let isValid: boolean = false;
+        this.registerDetailsSchema.isValid(model).then((res) => (isValid = res));
+        return isValid;
     }
 
     /**
      * Yup schema for mobile number validation
      */
-    static mobileSchema = yup.object().shape({
-        code: yup.string().required("Country Code is required").matches(/^\+\d{3}$/, "Please enter a valid country code"),
-        number: yup.string().required("Phone number is required").matches(/^[71]\d{8}$/, "Phone number should start with 7 or 1 not 07 or 01 and should be of length 9")
-    })
+    static mobileSchema = object().shape({
+        code: string()
+            .required("Country Code is required")
+            .matches(/^\+\d{3}$/, "Please enter a valid country code"),
+        number: string()
+            .required("Phone number is required")
+            .matches(
+                /^[71]\d{8}$/,
+                "Phone number should start with 7 or 1 not 07 or 01 and should be of length 9"
+            ),
+    });
 
     /**
      * Yup schema for password validation
      */
-    static passwordSchema = yup.string().required('Password is required').matches(/^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%? "]?).*$/, "Password should contain least a number, capital letter or a symbol ")
+    static passwordSchema = string()
+        .required("Password is required")
+        .matches(
+            /^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%? "]?).*$/,
+            "Password should contain least a number, capital letter or a symbol "
+        );
+
+    /**
+     * Yup Schema for id number validation
+     */
+    static idNumberSchema = number()
+        .typeError("Invalid Id number")
+        .required("Identification number is required")
+        .min(10, "Identification has a minimum length of 10")
+        .max(10, "Identification has a maximum length of 10");
+
+    /**
+     * Yup Schema for gender validation
+     */
+    static genderSchema = mixed<Gender>()
+        .oneOf(Object.values(Gender) as number[], "Serialization of gender failed")
+        .required("Your gender is required");
+
+    static roleSchema = mixed<UserRole>()
+        .oneOf(Object.values(UserRole) as number[], "Serialization of role failed")
+        .required("Your role is required");
+
+    static rolesSchema = array().of(this.roleSchema).typeError("Serialization of roles failed");
+
+    /**
+     * Yup Schema for location validation
+     */
+    static locationSchema = object()
+        .optional()
+        .shape({
+            label: string().required("Please provide label for identification"),
+            longitude: number().required("Longitude is required"),
+            latitude: number().required("Latitude is required"),
+        })
+        .typeError("Invalid Location");
+
+    /**
+     * Yup Schema for first name validation
+     */
+    static firstNameSchema = string()
+        .required("Please provide your first name");
+
+    /**
+     * Yup Schema for last name validation
+     */
+    static lastNameSchema = string()
+        .required("Please provide your last name");
 
     /**
      * Yup schema for login details validation
      */
-    static loginDetailsSchema = yup.object().shape({
+    static loginDetailsSchema = object().shape({
         mobile: this.mobileSchema,
-        password: this.passwordSchema
-    })
+        password: this.passwordSchema,
+    });
+
+    /**
+     * Yup schema for register details validation
+     */
+    static registerDetailsSchema = object().shape({
+        mobile: this.mobileSchema,
+        password: this.passwordSchema,
+        firstName: this.firstNameSchema,
+        lastName: this.lastNameSchema,
+        idNumber: this.idNumberSchema,
+        gender: this.genderSchema,
+        location: this.locationSchema,
+    });
 }
 
-export {Validator}
+export {Validator};
