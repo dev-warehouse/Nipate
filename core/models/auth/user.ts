@@ -1,29 +1,26 @@
-enum UserRole {user, provider, admin}
+export enum UserRole {user, provider, admin}
 
-enum Gender {male, female}
+export enum Gender {male, female}
 
-type Mobile = {
-    countryCode: number
-    phoneNumber: number
+export type MobileNumber = {
+    code?: string;
+    number?: string;
 }
 
-interface Location {
-    name: string,
+export interface Location {
+    label: string,
     longitude: number
     latitude: number
 }
 
-interface UserModel {
+export interface UserModel {
     userId: string
     firstName: string
     lastName: string
-    mobileNumber: Mobile
+    mobile: MobileNumber
     idNumber: number
     avatar: string
     roles: UserRole[]
     gender: Gender
     location: Location
 }
-
-export {UserRole, Gender}
-export type {UserModel, Location, Mobile}
