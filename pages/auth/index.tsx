@@ -1,16 +1,17 @@
 import {NextPageWithLayout} from "@pages/_app";
 import {AuthLayout} from "@components/layouts";
+import {LoginForm} from "@components/pages";
 
 const Index: NextPageWithLayout = () => {
-    return <div>
-        Auth Page
-    </div>
-}
+    return (
+        <>
+            <LoginForm/>
+        </>
+    );
+};
 
 Index.getLayout = (page) => {
-    return <AuthLayout>
-        {page}
-    </AuthLayout>
-}
+    return <AuthLayout title="Login">{page}</AuthLayout>;
+};
 
-export default Index
+export default Index;

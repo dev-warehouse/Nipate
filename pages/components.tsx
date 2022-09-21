@@ -1,7 +1,8 @@
-import {NextPage} from "next";
 import Head from "next/head";
 import {Button, FormInput, Input, Option, PhoneInput, Select} from "@components/common";
 import {useForm} from "react-hook-form";
+import {NextPageWithLayout} from "@pages/_app";
+import {GlobalLayout} from "@components/layouts";
 
 function FormTest() {
     const {register, control, handleSubmit, formState: {errors}} = useForm()
@@ -20,9 +21,9 @@ function FormTest() {
     </form>
 }
 
-const Components: NextPage = () => {
+const Components: NextPageWithLayout = () => {
     return (
-        <div className={"flex flex-col items-center justify-center"}>
+        <div className={"mt-[4.3rem] md:mt-[4.6rem] flex flex-col items-center justify-center"}>
             <Head>
                 <title>Components</title>
             </Head>
@@ -47,4 +48,7 @@ const Components: NextPage = () => {
     );
 };
 
+Components.getLayout = (page) => {
+    return <GlobalLayout title="Components">{page}</GlobalLayout>
+}
 export default Components;

@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 html {
-  @apply text-slate-700 font-sans font-[Inter] ;
+  @apply text-[#346974] font-sans font-[Inter] ;
 }
 
 body {
-  @apply px-[1rem] py-[0.8rem] h-screen;
+  @apply px-4 h-screen;
 
   #__next {
     height: 100%;

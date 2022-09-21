@@ -1,5 +1,5 @@
 .logo {
-  @apply relative h-[2rem] w-[8rem];
+  @apply relative h-[2rem] w-[8rem] cursor-pointer;
 }
 
 .avatar {
@@ -20,4 +20,7 @@
 
 .header_root {
   @apply w-full flex flex-row justify-between items-center;
+
+  // Sticky header
+  @apply fixed z-30 top-0 shrink-0 p-4 backdrop-blur-md;
 }
