@@ -1,5 +1,5 @@
 // Login urls
-import {BASE_API_URL} from "../urls"
+import {BASE_API_URL} from ".."
 
 export const LOGIN_URL = `${BASE_API_URL}/auth/login`
 export const LOGOUT_URL = `${BASE_API_URL}/auth/logout`

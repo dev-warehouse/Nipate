@@ -32,6 +32,6 @@ switch (hostname) {
 
     default:
         BASE_URL = `${DEV_BASE_URL}:${location.port}`
-        BASE_API_URL = `${PRODUCTION_BASE_API_URL}`
+        BASE_API_URL = LOCAL_BASE_API_URL || DEV_BASE_API_URL
         break
 }
