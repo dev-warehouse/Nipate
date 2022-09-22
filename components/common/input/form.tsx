@@ -4,7 +4,7 @@ import {Control, useController, UseFormRegister} from "react-hook-form";
 import {CheckBox, Option, Select, SelectProps} from "@components/common";
 import Image from "next/image";
 import {ChangeEvent} from "react";
-import {MobileNumber} from "@core/models";
+import {Country, MobileNumber} from "@core/models";
 
 /**
  * Form Input props, extends Input Props
@@ -135,21 +135,21 @@ function FormInput({
  */
 function SelectCountries(props: SelectProps) {
     // Specify for now but it will be fetched
-    const countries: { flag: string; name: string; callingCodes: string }[] = [
+    const countries: Country[] = [
         {
             flag: "https://flagcdn.com/ke.svg",
             name: "Kenya",
-            callingCodes: "+254",
+            callingCodes: 254,
         },
         {
             flag: "https://flagcdn.com/tz.svg",
             name: "Tanzania",
-            callingCodes: "+255",
+            callingCodes: 255,
         },
         {
             flag: "https://flagcdn.com/ug.svg",
             name: "Uganda",
-            callingCodes: "+256",
+            callingCodes: 256,
         },
     ];
 
@@ -164,7 +164,7 @@ function SelectCountries(props: SelectProps) {
                     <div className={styles.phone_option_img}>
                         <Image src={option.label} layout="fill"/>
                     </div>
-                    <span>{option.value}</span>
+                    <span>+{option.value}</span>
                 </div>
             );
         }
