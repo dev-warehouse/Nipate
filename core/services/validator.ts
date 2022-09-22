@@ -64,7 +64,7 @@ class Validator {
     static mobileSchema = object().shape({
         code: string()
             .required("Country Code is required")
-            .matches(/^\+\d{3}$/, "Please enter a valid country code"),
+            .matches(/^\d{3}$/, "Please enter a valid country code"),
         number: string()
             .required("Phone number is required")
             .matches(

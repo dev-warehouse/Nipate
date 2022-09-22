@@ -46,7 +46,7 @@ function FormCheckBox({label, name, dataValidity, register, errors}: FormInputPr
             >
                 {label}
             </label>
-            <CheckBox {...register(name)}/>
+            <CheckBox id={name} {...register(name)}/>
         </div>
         {errors[name] ? (
             <p
