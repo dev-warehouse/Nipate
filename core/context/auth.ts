@@ -1,5 +1,6 @@
 import {createContext} from "react";
 import {LoginFormData, RegisterFormData, UpdateDetailsFormData, UserModel} from "@core/models";
+import {UseFormClearErrors, UseFormReset, UseFormSetError} from "react-hook-form";
 
 
 /**
@@ -13,7 +14,7 @@ interface AuthLifecycleActions {
      * @param model
      * @param saveAuth
      */
-    login: (model: LoginFormData, saveAuth: boolean) => boolean
+    login: (model: LoginFormData, saveAuth: boolean, setError: UseFormSetError<any>, clearErrors: UseFormClearErrors<any>, reset: UseFormReset<any>) => void
     /**
      * This handles user logout lifecycle
      * @param model

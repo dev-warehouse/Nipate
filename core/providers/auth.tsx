@@ -1,6 +1,7 @@
 import {Component} from "react";
 import {LoginFormData, RegisterFormData, UpdateDetailsFormData} from "@core/models";
 import {authContext, AuthLifecycleActions, AuthLifecycleData} from "@core/context";
+import {UseFormClearErrors, UseFormReset, UseFormSetError} from "react-hook-form";
 
 /**
  * This provider is responsible to all things to do with user authentication
@@ -32,9 +33,11 @@ class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLife
      * Implementation of `login` lifecycle
      * @param model
      * @param saveAuth
+     * @param setError
+     * @param clearErrors
+     * @param reset
      */
-    login = (model: LoginFormData, saveAuth: boolean): boolean => {
-        return false;
+    login = (model: LoginFormData, saveAuth: boolean, setError: UseFormSetError<any>, clearErrors: UseFormClearErrors<any>, reset: UseFormReset<any>) => {
     };
 
     /**
