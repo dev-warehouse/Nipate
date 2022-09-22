@@ -6,6 +6,9 @@ import {Validator} from "@core/services";
 import {useRouter} from "next/router";
 import {LoginFormData} from "@core/models";
 import {useAuth} from "@core/hooks";
+import {LOGIN_URL} from "@core/api";
+import axios from "axios";
+import {useMutation} from "@tanstack/react-query";
 
 export function LoginForm() {
 
@@ -22,12 +25,30 @@ export function LoginForm() {
         formState: {errors},
     } = useForm<LoginFormData>({resolver: yupResolver(Validator.loginDetailsSchema)});
 
-    const submit = ({remember, ...data}: LoginFormData | any) => {
-        login(data, remember, setError, clearErrors, reset)
-        console.log(data)
-    }
 
     const router = useRouter()
+
+    const handlePostData = async (data: LoginFormData) => {
+        return axios.post(LOGIN_URL, data)
+    }
+
+    const {mutate, isLoading, isSuccess, isError} = useMutation(handlePostData, {
+        onSuccess: (data) => {
+            console.log(data)
+        },
+        onError: (error) => {
+            console.log(error)
+        },
+    })
+
+    const submit = ({remember, ...data}: LoginFormData | any) => {
+        mutate(data)
+        if (isSuccess) {
+            clearErrors()
+            reset(undefined)
+            router.push('/', 'Welcome', {scroll: true})
+        }
+    }
 
     return (
         <form className={styles.login_root} onSubmit={handleSubmit(submit)}>
