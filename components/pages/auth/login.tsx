@@ -1,4 +1,4 @@
-import {Button, FormInput, PhoneInput} from "@components/common";
+import {Button, FormCheckBox, FormInput, PhoneInput} from "@components/common";
 import {useForm} from "react-hook-form";
 import styles from "./styles/login.module.scss";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -41,6 +41,7 @@ export function LoginForm() {
                 register={register}
                 errors={errors}
             />
+            <FormCheckBox label="Remember me" name="remember" register={register} errors={errors}/>
             <Button type="submit" className={styles.btn_submit}>Login</Button>
             <Button variant="text" className={styles.btn_create} onClick={() => router.push('auth/register')}>
                 <span>Don't have an account?</span>
