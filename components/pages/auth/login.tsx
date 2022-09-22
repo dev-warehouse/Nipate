@@ -5,18 +5,27 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {Validator} from "@core/services";
 import {useRouter} from "next/router";
 import {LoginFormData} from "@core/models";
+import {useAuth} from "@core/hooks";
 
 export function LoginForm() {
+
+    const {login} = useAuth()
+
     const {
         register,
         control,
         handleSubmit,
         trigger,
+        setError,
+        clearErrors,
         reset,
         formState: {errors},
     } = useForm<LoginFormData>({resolver: yupResolver(Validator.loginDetailsSchema)});
 
-    const submit = (data: LoginFormData) => console.log(data)
+    const submit = ({remember, ...data}: LoginFormData | any) => {
+        login(data, remember, setError, clearErrors, reset)
+        console.log(data)
+    }
 
     const router = useRouter()
 
