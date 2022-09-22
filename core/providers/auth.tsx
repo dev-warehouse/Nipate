@@ -38,7 +38,7 @@ class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLife
      * @param reset
      */
     login = (model: LoginFormData, saveAuth: boolean, setError: UseFormSetError<any>, clearErrors: UseFormClearErrors<any>, reset: UseFormReset<any>) => {
-    };
+    }
 
     /**
      * Implementation of `logout` lifecycle
