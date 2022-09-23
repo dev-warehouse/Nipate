@@ -26,12 +26,13 @@ export interface Snackbar {
 }
 
 export interface Notification {
+    id: string
     type: "toast" | "snackbar";
     props: Toast | Snackbar;
 }
 
 export interface NotificationState {
-    alert: Notification[];
+    alerts: Notification[];
 }
 
 export interface NotificationAction {
