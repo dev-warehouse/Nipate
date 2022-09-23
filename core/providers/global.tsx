@@ -1,8 +1,7 @@
 import {DOMAttributes} from "react";
 import {AuthProvider} from "./auth";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-
-const queryClient = new QueryClient()
+import {QueryClientProvider} from "@tanstack/react-query";
+import {queryClient} from "@core/context";
 
 
 function GlobalProviders(props: DOMAttributes<any>) {
