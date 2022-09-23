@@ -4,8 +4,8 @@ import {Snackbar} from "./snackbar";
 import {Toast} from "./toast";
 import {useNotification} from "@core/hooks";
 
-function NotificationItem({type, props}: Notification) {
-    return type === 'toast' ? <Toast {...props}/> : type === 'snackbar' ? <Snackbar {...props}/> : <></>
+function NotificationItem({id, type, props}: Notification) {
+    return type === 'toast' ? <Toast id={id} {...props}/> : type === 'snackbar' ? <Snackbar {...props}/> : <></>
 }
 
 function NotificationList() {
