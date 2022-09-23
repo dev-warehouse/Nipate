@@ -5,6 +5,12 @@ export interface LoginRequestData {
     password: string
 }
 
+export interface LoginResponseData {
+    MobileNumber: string,
+    FirstName: string,
+    Auth_token: string
+}
+
 export class AuthSerializer {
     static login = ({mobile: {code, number}, password}: LoginFormData): LoginRequestData => {
         return {

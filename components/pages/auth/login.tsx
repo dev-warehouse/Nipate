@@ -6,7 +6,7 @@ import {Validator} from "@core/services";
 import {useRouter} from "next/router";
 import {LoginFormData} from "@core/models";
 import {useAuth} from "@core/hooks";
-import {LOGIN_URL} from "@core/api";
+import {AuthSerializer, LOGIN_URL, LoginRequestData} from "@core/api";
 import axios from "axios";
 import {useMutation} from "@tanstack/react-query";
 
@@ -28,7 +28,7 @@ export function LoginForm() {
 
     const router = useRouter()
 
-    const handlePostData = async (data: LoginFormData) => {
+    const handlePostData = (data: LoginRequestData) => {
         return axios.post(LOGIN_URL, data)
     }
 
@@ -42,7 +42,7 @@ export function LoginForm() {
     })
 
     const submit = ({remember, ...data}: LoginFormData | any) => {
-        mutate(data)
+        mutate(AuthSerializer.login(data))
         if (isSuccess) {
             clearErrors()
             reset(undefined)
