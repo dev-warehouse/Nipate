@@ -9,28 +9,32 @@ export const LOCAL_BASE_API_URL = 'http://localhost:8000'
 export const DEV_BASE_API_URL = 'https://nipate-jdwrp.ondigitalocean.app'
 export const PRODUCTION_BASE_API_URL = 'https://api.nipate.me'
 
-const proxy = (): string => {
-    let hostname: string = ''
+
+const getHostname = (): string => {
     if (process.browser) {
-        hostname = `${window.location.protocol}//${window.location.hostname}`
+        return `${window.location.protocol}//${window.location.hostname}`
     }
-
-    switch (hostname) {
-        case LOCAL_BASE_URL:
-            BASE_URL = LOCAL_BASE_URL
-            return LOCAL_BASE_API_URL
-        case DEV_BASE_URL:
-            BASE_URL = DEV_BASE_URL
-            return DEV_BASE_API_URL
-
-        case PRODUCTION_BASE_URL:
-            BASE_URL = PRODUCTION_BASE_URL
-            return PRODUCTION_BASE_API_URL
-
-        default:
-            return DEV_BASE_API_URL
-    }
+    return ''
 }
 
+export const hostname: string = getHostname()
 export let BASE_URL = ''
-export let BASE_API_URL = proxy()
+export let BASE_API_URL = ''
+
+switch (hostname) {
+    case LOCAL_BASE_URL:
+        BASE_URL = LOCAL_BASE_URL
+        BASE_API_URL = LOCAL_BASE_API_URL
+        break
+    case DEV_BASE_URL:
+        BASE_URL = DEV_BASE_URL
+        BASE_API_URL = DEV_BASE_API_URL
+        break
+    case PRODUCTION_BASE_URL:
+        BASE_URL = PRODUCTION_BASE_URL
+        BASE_API_URL = PRODUCTION_BASE_API_URL
+        break
+    default:
+        BASE_API_URL = DEV_BASE_API_URL
+        break
+}
