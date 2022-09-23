@@ -40,7 +40,7 @@ export interface NotificationAction {
      * Used to add a notification to notification system
      * @param notification
      */
-    alert: (alerts: Notification | Notification[]) => void;
+    alert: (alerts: Notification[]) => void;
     /**
      * Dismisses a given notification
      * @param id

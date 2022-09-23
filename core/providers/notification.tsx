@@ -1,7 +1,7 @@
 import {DOMAttributes, Reducer, useReducer} from "react";
 import {Notification, notificationContext} from "@core/context";
 
-type Action = { type: 'alert', data: Notification | Notification[] } | { type: 'dismiss', data: string }
+type Action = { type: 'alert', data: Notification[] } | { type: 'dismiss', data: string }
 
 interface DispatchReducer extends Reducer<Notification[], Action> {
 
@@ -10,9 +10,10 @@ interface DispatchReducer extends Reducer<Notification[], Action> {
 function reducer(prevState: Notification[], action: Action) {
     switch (action.type) {
         case "alert":
-            return []
+            return [...prevState, ...action.data]
         case "dismiss":
-            return []
+            const index = prevState.findIndex((val) => val.id === action.data)
+            return prevState.splice(index, 1)
     }
 }
 
@@ -20,7 +21,7 @@ export function NotificationProvider({children, ...props}: DOMAttributes<any>) {
 
     const [state, dispatch] = useReducer<DispatchReducer>(reducer, [])
 
-    const alert = (alerts: Notification | Notification[]) => {
+    const alert = (alerts: Notification[]) => {
         dispatch({type: 'alert', data: alerts})
     }
     const dismissAlert = (id: string) => {
