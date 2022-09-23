@@ -3,12 +3,10 @@ import {useForm} from "react-hook-form";
 import styles from "./styles/login.module.scss";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Validator} from "@core/services";
-import {useRouter} from "next/router";
 import {LoginFormData} from "@core/models";
 import {useAuth} from "@core/hooks";
-import {AuthSerializer, LOGIN_URL, LoginRequestData} from "@core/api";
-import axios from "axios";
-import {useMutation} from "@tanstack/react-query";
+import {useLogin} from "@core/data";
+import Link from "next/link";
 
 export function LoginForm() {
 
@@ -25,29 +23,10 @@ export function LoginForm() {
         formState: {errors},
     } = useForm<LoginFormData>({resolver: yupResolver(Validator.loginDetailsSchema)});
 
+    const {mutate, isPaused, isLoading, isError, isSuccess} = useLogin({clearErrors, reset, setError})
 
-    const router = useRouter()
-
-    const handlePostData = (data: LoginRequestData) => {
-        return axios.post(LOGIN_URL, data)
-    }
-
-    const {mutate, isLoading, isSuccess, isError} = useMutation(handlePostData, {
-        onSuccess: (data) => {
-            console.log(data)
-        },
-        onError: (error) => {
-            console.log(error)
-        },
-    })
-
-    const submit = ({remember, ...data}: LoginFormData | any) => {
-        mutate(AuthSerializer.login(data))
-        if (isSuccess) {
-            clearErrors()
-            reset(undefined)
-            router.push('/', 'Welcome', {scroll: true})
-        }
+    const submit = (data: LoginFormData) => {
+        mutate(data)
     }
 
     return (
@@ -73,10 +52,12 @@ export function LoginForm() {
             />
             <FormCheckBox label="Remember me" name="remember" register={register} errors={errors}/>
             <Button type="submit" className={styles.btn_submit}>Login</Button>
-            <Button variant="text" className={styles.btn_create} onClick={() => router.push('auth/register')}>
-                <span>Don't have an account?</span>
-                <span className="ml-4 text-red-700">Create Now</span>
-            </Button>
+            <Link href={'auth/register'}>
+                <Button variant="text" className={styles.btn_create}>
+                    <span>Don't have an account?</span>
+                    <span className="ml-4 text-red-700">Create Now</span>
+                </Button>
+            </Link>
         </form>
     );
 }
