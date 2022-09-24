@@ -10,7 +10,7 @@
 }
 
 .btn_submit {
-  @apply w-fit;
+  @apply w-fit inline-flex items-center justify-center gap-2;
 }
 
 .login_password {

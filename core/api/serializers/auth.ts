@@ -12,7 +12,7 @@ export interface LoginResponseData {
 }
 
 export class AuthSerializer {
-    static login = ({mobile: {code, number}, password}: LoginFormData): LoginRequestData => {
+    static login = ({mobile: {code, number}, password}: Omit<LoginFormData, 'remember'>): LoginRequestData => {
         return {
             MobileNumber: `${code}${number}`,
             password: password
