@@ -5,6 +5,7 @@ import {LoginFormData} from "@core/models";
 import {UseFormReturn} from "react-hook-form";
 import {useAuth, useNotification} from "@core/hooks";
 import {useRouter} from "next/router";
+import {RiSignalWifiErrorLine} from "react-icons/ri";
 
 interface UseLoginProps extends Pick<UseFormReturn<LoginFormData>, 'clearErrors' | 'reset' | 'setError'> {
 }
@@ -43,9 +44,9 @@ export function useLogin({clearErrors, reset, setError}: UseLoginProps) {
                     id: 'network_error',
                     type: 'toast',
                     props: {
-                        message: 'Unable to Login in',
+                        message: 'Connection to server failed, please check your network for any proxies ',
                         status: 'error',
-                        icon: ''
+                        icon: <RiSignalWifiErrorLine/>,
                     }
                 }])
             }
