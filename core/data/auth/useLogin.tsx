@@ -25,7 +25,6 @@ export function useLogin({clearErrors, reset, setError}: UseLoginProps) {
         },
         onSuccess: ({data: {Auth_token, FirstName}}) => {
             setToken(Auth_token)
-            if (saveTokenS) saveToken(Auth_token);
             alert([{
                 id: `welcome_${FirstName}`,
                 type: 'toast',
@@ -36,7 +35,7 @@ export function useLogin({clearErrors, reset, setError}: UseLoginProps) {
             }])
             reset(undefined)
             clearErrors()
-            router.push('/', 'Welcome')
+            router.push('/')
         },
         onError: ({code, response}) => {
             if (code === AxiosError.ERR_NETWORK) {
