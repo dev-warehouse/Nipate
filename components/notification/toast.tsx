@@ -1,9 +1,10 @@
 import {ReactNode} from "react";
 import {Status} from "@core/context";
 import styles from "./styles/toast.module.scss";
-import {IoMdClose} from "react-icons/io";
-import {RiBellLine} from "react-icons/ri";
+import {IoMdCheckmark, IoMdClose, IoMdWarning} from "react-icons/io";
+import {CgBell} from 'react-icons/cg'
 import {useNotification} from "@core/hooks";
+import {AiOutlineInfo} from "react-icons/ai";
 
 export interface ToastProps {
     id: string,
@@ -23,6 +24,25 @@ export interface ToastProps {
         | "bottom"
         | "bottom-right"
         | "bottom-left";
+}
+
+
+// Get the various icons for the toast
+function GetIcon({status}: { status: Status }): JSX.Element {
+    switch (status) {
+        case "notification":
+            return <CgBell/>
+        case "success":
+            return <IoMdCheckmark/>
+        case "info":
+            return <AiOutlineInfo/>
+        case "warning":
+            return <IoMdWarning/>
+        case "error":
+            return <IoMdWarning/>
+        default:
+            return <CgBell/>
+    }
 }
 
 export function Toast({
@@ -50,7 +70,7 @@ export function Toast({
             data-status={status}
         >
             <div className={styles.icon} data-status={status}>
-                <main>{icon ? icon : <RiBellLine/>}</main>
+                <main>{icon ? icon : <GetIcon status={status}/>}</main>
             </div>
             <span>{message}</span>
             {dismissible ? (
