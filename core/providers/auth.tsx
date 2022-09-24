@@ -1,7 +1,49 @@
-import {DOMAttributes, useState} from "react";
+import {DOMAttributes, useCallback, useEffect, useState} from "react";
 import {UserModel} from "@core/models";
 import {authContext, AuthLifecycleData} from "@core/context";
+import {useCrypto, useLocalStorage} from "@core/hooks/utils";
+import {useNotification} from "@core/hooks";
 
+
+const encryptToken = (token: string): string => {
+    const {encrypt, hash} = useCrypto()
+    const {alert} = useNotification()
+    return useCallback(() => {
+        let res = ''
+        encrypt(token, hash('NipateAuthToken_')).then(res => res).catch(() =>
+            alert([{
+                id: 'encrypt_error',
+                type: 'toast',
+                props: {
+                    message: 'Unable to save details : 0x184',
+                    status: 'error'
+                }
+            }])
+        )
+        return res
+    }, [token])()
+
+}
+
+
+const decryptToken = (token: string): string => {
+    const {decrypt, hash} = useCrypto()
+    return useCallback(() => {
+        let res = ''
+        decrypt(token, hash('NipateAuthToken_')).then(res => res).catch(() =>
+            alert([{
+                id: 'decrypt_error',
+                type: 'toast',
+                props: {
+                    message: 'Unable to save details : 0x284',
+                    status: 'error'
+                }
+            }])
+        )
+        return res
+    }, [token])()
+
+}
 
 /**
  * This provider is responsible to all things to do with user authentication
@@ -14,13 +56,19 @@ export function AuthProvider(props: DOMAttributes<any>) {
 
     const [state, setState] = useState<AuthLifecycleData>()
 
+    const [token, saveTokenStorage] = useLocalStorage('token', '')
 
-    /**
-     * This is responsible to auto authenticating user when one has saved their login details
-     */
-    const autoLogin = () => {
-        console.log("Auto Login")
-    }
+
+    useEffect(() => {
+
+        /**
+         * This is responsible to auto authenticating user when one has saved their login details
+         */
+        if (token !== '') {
+            const tkn = decryptToken(token)
+            setState({authToken: tkn})
+        }
+    })
 
     /**
      * Implementation of `login` lifecycle
