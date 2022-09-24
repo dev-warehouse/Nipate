@@ -53,7 +53,7 @@ export function Toast({
                           dismissible = true,
                           shouldTimeout = true,
                           timeout = 2000,
-                          position = "bottom",
+                          position = "bottom-right",
                       }: ToastProps) {
 
     const {dismissAlert} = useNotification()

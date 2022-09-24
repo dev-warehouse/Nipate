@@ -13,8 +13,8 @@ function NotificationList() {
 
     return <div>
         {
-            alerts.map(({id, type, props}) => {
-                return <NotificationItem id={id} type={type} props={props}/>
+            alerts.map(({id, type, props}, index) => {
+                return <NotificationItem key={index} id={id} type={type} props={props}/>
             })
         }
     </div>

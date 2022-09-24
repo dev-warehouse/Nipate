@@ -2,7 +2,7 @@
   @apply absolute z-50 w-fit shadow-[0_3px_8px];
   @apply rounded-2xl border inline-flex gap-2.5 items-center justify-center;
   @apply text-sm md:text-base text-[#28313d];
-  @apply p-1.5 md:p-2;
+  @apply p-1.5 md:p-2 mx-1.5;
   &[data-position='bottom'] {
     @apply bottom-1.5 left-[3rem];
     @apply md:bottom-[4rem] right-auto md:left-[40%];
