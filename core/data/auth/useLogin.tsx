@@ -50,7 +50,15 @@ export function useLogin({clearErrors, reset, setError}: UseLoginProps) {
                     }
                 }])
             }
-            console.log(response)
+
+            if (response?.data.error[0] === "Invalid user creditentials") {
+                setError('password', {message: `Incorrect password, check your password`})
+            }
+
+            if (response?.data.error[0] === 'User not found') {
+                setError('mobile.number', {message: `${response?.data.error[0]} : please check your number or create a new account`})
+            }
+
         },
     })
 }
