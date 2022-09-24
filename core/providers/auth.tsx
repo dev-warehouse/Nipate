@@ -1,7 +1,7 @@
-import {Component} from "react";
-import {LoginFormData, RegisterFormData, UpdateDetailsFormData} from "@core/models";
-import {authContext, AuthLifecycleActions, AuthLifecycleData} from "@core/context";
-import {UseFormClearErrors, UseFormReset, UseFormSetError} from "react-hook-form";
+import {DOMAttributes, useState} from "react";
+import {UserModel} from "@core/models";
+import {authContext, AuthLifecycleData} from "@core/context";
+
 
 /**
  * This provider is responsible to all things to do with user authentication
@@ -10,73 +10,44 @@ import {UseFormClearErrors, UseFormReset, UseFormSetError} from "react-hook-form
  * by inheriting from `AuthLifecycleActions` and handles the state of all lifecycle data by
  * taking `AuthLifecycleData` as a state argument.
  */
-class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLifecycleActions {
+export function AuthProvider(props: DOMAttributes<any>) {
 
-    // TODO : Auth Provider Implementation
-    state: AuthLifecycleData = {}
+    const [state, setState] = useState<AuthLifecycleData>()
+
 
     /**
      * This is responsible to auto authenticating user when one has saved their login details
      */
-    autoLogin() {
+    const autoLogin = () => {
         console.log("Auto Login")
-    }
-
-    /**
-     * This is where automatic lifecycle methods are done
-     */
-    componentDidMount() {
-        this.autoLogin()
     }
 
     /**
      * Implementation of `login` lifecycle
      * @param model
-     * @param saveAuth
-     * @param setError
-     * @param clearErrors
-     * @param reset
      */
-    login = (model: LoginFormData, saveAuth: boolean, setError: UseFormSetError<any>, clearErrors: UseFormClearErrors<any>, reset: UseFormReset<any>) => {
-    }
+    const setUser = (model: UserModel) => setState({currentUser: model})
+
+    const setToken = (token: string) => setState({authToken: token})
 
     /**
      * Implementation of `logout` lifecycle
      */
-    logout = (): boolean => {
-        return false;
-    };
-
-    /**
-     * Implementation of `register` lifecycle
-     * @param model
-     * @param saveAuth
-     */
-    register = (model: RegisterFormData, saveAuth: boolean): boolean => {
-        return false;
-    };
+    const removeUser = () => setState({currentUser: undefined, authToken: undefined});
 
     /**
      * Implementation of `update` lifecycle
      * @param model
      */
-    update = (model: UpdateDetailsFormData): boolean => {
-        return false;
-    };
+    const updateUser = (model: UserModel) => setState({currentUser: {...model}});
 
-    /**
-     * This is where the provider is baked
-     */
-    render() {
-        return <authContext.Provider value={{
-            currentUser: this.state.currentUser,
-            authToken: this.state.authToken,
-            login: this.login,
-            logout: this.logout,
-            register: this.register,
-            update: this.update
-        }} {...this.props}/>
-    }
+
+    return <authContext.Provider value={{
+        currentUser: state?.currentUser,
+        authToken: state?.authToken,
+        setUser: setUser,
+        setToken: setToken,
+        removeUser: removeUser,
+        updateUser: updateUser
+    }} {...props}/>
 }
-
-export {AuthProvider}
