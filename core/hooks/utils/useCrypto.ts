@@ -6,7 +6,15 @@ import {useMemo} from "react";
 export function useCrypto() {
     const encrypt = (plainText: string, password: string) => useMemo(() => aesGcmEncrypt(plainText, password), [plainText, password])
     const decrypt = (cipher: string, password: string) => useMemo(() => aesGcmDecrypt(cipher, password), [cipher, password])
-    return {encrypt, decrypt}
+    const hash = (hashStr: string): string => useMemo(() => hashFn(hashStr), [hashStr])
+    return {encrypt, decrypt, hash}
+}
+
+function hashFn(s: string) {
+    return s.split("").reduce(function (a, b) {
+        a = ((a << 5) - a) + b.charCodeAt(0);
+        return a & a
+    }, 0).toString();
 }
 
 /**
