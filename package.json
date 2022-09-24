@@ -17,7 +17,6 @@
     "react-dom": "18.1.0",
     "react-hook-form": "^7.35.0",
     "react-icons": "^4.4.0",
-    "usehooks-ts": "^2.6.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
