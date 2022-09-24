@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export function LoginForm() {
 
-    const {login} = useAuth()
+    const {setUser} = useAuth()
 
     const {
         register,
