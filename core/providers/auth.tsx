@@ -28,12 +28,19 @@ export function AuthProvider(props: DOMAttributes<any>) {
      */
     const setUser = (model: UserModel) => setState({currentUser: model})
 
-    const setToken = (token: string) => setState({authToken: token})
+    const setToken = (token: string) => {
+        setState({authToken: token})
+    }
+
+    const saveToken = (token: string) => {
+        const tkn = encryptToken(token)
+        saveTokenStorage(tkn)
+    }
 
     /**
      * Implementation of `logout` lifecycle
      */
-    const removeUser = () => setState({currentUser: undefined, authToken: undefined});
+    const removeUser = () => setState({currentUser: undefined});
 
     /**
      * Implementation of `update` lifecycle
@@ -47,6 +54,7 @@ export function AuthProvider(props: DOMAttributes<any>) {
         authToken: state?.authToken,
         setUser: setUser,
         setToken: setToken,
+        saveToken: saveToken,
         removeUser: removeUser,
         updateUser: updateUser
     }} {...props}/>
