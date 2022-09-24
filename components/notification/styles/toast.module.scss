@@ -1,21 +1,57 @@
 .root {
   @apply absolute z-50 w-fit shadow-[0_3px_8px];
   @apply rounded-2xl border inline-flex gap-2.5 items-center justify-center;
-  @apply text-sm md:text-base;
+  @apply text-sm md:text-base text-[#28313d];
   @apply p-1.5 md:p-2;
   &[data-position='bottom'] {
     @apply bottom-1.5 left-[3rem];
     @apply md:bottom-[4rem] right-auto md:left-[40%];
   }
 
+  &[data-position='bottom-right'] {
+    @apply bottom-1.5 right-1.5 md:bottom-[4rem];
+  }
+
+  &[data-position='bottom-left'] {
+    @apply bottom-1.5 left-1.5 md:bottom-[4rem];
+  }
+
+  &[data-position='top'] {
+    @apply top-1.5 right-auto left-[3rem] md:left-[40%] md:top-[4rem];
+  }
+
+  &[data-position='top-right'] {
+    @apply top-1.5 right-1.5 md:top-[4rem];
+  }
+
+  &[data-position='top-left'] {
+    @apply top-1.5 left-1.5 md:top-[4rem];
+  }
+
   &[data-status='notification'] {
     @apply text-inherit bg-gray-50 border-gray-300 shadow-inherit;
+  }
+
+  &[data-status='info'] {
+    @apply text-[#006be1] bg-[#e4eef9] border-[#a3c8ef] shadow-inherit;
+  }
+
+  &[data-status='success'] {
+    @apply text-[#3dbb5f] bg-[#ebf7ee] border-[#bee5c8] shadow-inherit;
+  }
+
+  &[data-status='warning'] {
+    @apply text-[#ef9400] bg-[#fef7ea] border-[#fadeaf] shadow-inherit;
+  }
+
+  &[data-status='error'] {
+    @apply text-[#ec4e2c] bg-[#fcedea] border-[#f5c5bb] shadow-inherit;
   }
 }
 
 .icon {
   @apply p-1 md:p-1.5 rounded-xl md:rounded-2xl;
-  @apply inline-flex items-center justify-center bg-slate-400;
+  @apply inline-flex items-center justify-center;
 
   main {
     @apply inline-flex items-center justify-center bg-white rounded-full;
@@ -25,12 +61,32 @@
       @apply w-[1rem] h-[1rem];
     }
   }
+
+  &[data-status='notification'] {
+    @apply bg-slate-400;
+  }
+
+  &[data-status='info'] {
+    @apply bg-[#006be1];
+  }
+
+  &[data-status='success'] {
+    @apply bg-[#3dbb5f];
+  }
+
+  &[data-status='warning'] {
+    @apply bg-[#ef9400];
+  }
+
+  &[data-status='error'] {
+    @apply bg-[#ec4e2c];
+  }
 }
 
 .close {
-  @apply p-2 rounded-xl text-[#69727d] hover:text-[#333c48];
+  @apply p-2 rounded-xl text-inherit hover:text-[#333c48];
   @apply hover:bg-white active:bg-gray-100 focus:ring focus:ring-brand_yellow;
-  @apply inline-flex items-center justify-center border border-white hover:border-brand_yellow;
+  @apply inline-flex items-center justify-center border border-transparent;
   svg {
     @apply w-[1rem] h-[1rem];
   }
