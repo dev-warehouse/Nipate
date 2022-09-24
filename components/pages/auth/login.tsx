@@ -4,13 +4,17 @@ import styles from "./styles/login.module.scss";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Validator} from "@core/services";
 import {LoginFormData} from "@core/models";
-import {useAuth} from "@core/hooks";
+import {useAuth, useNotification} from "@core/hooks";
 import {useLogin} from "@core/data";
+import {RiSignalWifiErrorLine} from 'react-icons/ri'
+import {MdErrorOutline, MdOutlineCheckCircle} from "react-icons/md";
+import {CgSpinner} from 'react-icons/cg'
 import Link from "next/link";
 
 export function LoginForm() {
 
     const {setUser} = useAuth()
+    const {alert} = useNotification()
 
     const {
         register,
@@ -27,6 +31,17 @@ export function LoginForm() {
 
     const submit = (data: LoginFormData) => {
         mutate(data)
+        if (isPaused) {
+            alert([{
+                id: 'no_internet',
+                type: 'toast',
+                props: {
+                    message: 'Please Check your Network Connection',
+                    status: 'warning',
+                    icon: <RiSignalWifiErrorLine/>
+                }
+            }])
+        }
     }
 
     return (
@@ -51,7 +66,20 @@ export function LoginForm() {
                 errors={errors}
             />
             <FormCheckBox label="Remember me" name="remember" register={register} errors={errors}/>
-            <Button type="submit" className={styles.btn_submit}>Login</Button>
+            <Button type="submit" className={styles.btn_submit}>
+                Login
+                {
+                    isPaused ? <RiSignalWifiErrorLine/> : isLoading ? <CgSpinner className="animate-spin"/> : isError ?
+                        <MdErrorOutline/> : isSuccess ?
+                            <MdOutlineCheckCircle/> : <></>
+                }
+            </Button>
+            {
+                isPaused ?
+                    <p className="mt-1 text-xs font-medium text-[#ef9400]">Unable to Login: Check your Network
+                        connection
+                        Connection</p> : <></>
+            }
             <Link href={'auth/register'}>
                 <Button variant="text" className={styles.btn_create}>
                     <span>Don't have an account?</span>
