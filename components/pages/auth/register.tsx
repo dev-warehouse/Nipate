@@ -2,7 +2,7 @@ import {useForm} from "react-hook-form";
 import {CreateUserFormData, RegisterUserFormData} from "@core/models";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Validator} from "@core/services";
-import {Button, FormInput, PhoneInput} from "@components/common";
+import {Button, FormInput, GenderInput, PhoneInput} from "@components/common";
 import {Dispatch, SetStateAction, useState} from "react";
 import styles from "./styles/register.module.scss";
 
@@ -83,6 +83,7 @@ function RegisterUserForm({stage, setStage}: StageProps) {
 
     return <form onSubmit={handleSubmit(submit)} className={styles.form_root}>
         <p className={styles.form_header}>😊 Let's Register</p>
+        <GenderInput control={control} label="Gender" name="gender" errors={errors} trigger={trigger}/>
         <FormInput
             label="Password"
             name="password"
