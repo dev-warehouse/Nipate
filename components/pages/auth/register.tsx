@@ -82,7 +82,25 @@ function RegisterUserForm({stage, setStage}: StageProps) {
     }
 
     return <form onSubmit={handleSubmit(submit)} className={styles.form_root}>
-        <p className={styles.form_header}>😊 Let's add some little details</p>
+        <p className={styles.form_header}>😊 Let's Register</p>
+        <FormInput
+            label="Password"
+            name="password"
+            type="password"
+            placeholder="••••••••••"
+            className={styles.form_input}
+            register={register}
+            errors={errors}
+        />
+        <FormInput
+            label="Confirm  Password"
+            name="confirmPassword"
+            type="password"
+            placeholder="••••••••••"
+            className={styles.form_input}
+            register={register}
+            errors={errors}
+        />
         <FormSubmit label="Register" stage={stage}/>
     </form>
 }
