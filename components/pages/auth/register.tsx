@@ -9,6 +9,7 @@ import styles from "./styles/register.module.scss";
 type RegisterStage = 0 | 1
 
 interface StageProps {
+    stage: RegisterStage
     setStage: Dispatch<SetStateAction<RegisterStage>>
 }
 
@@ -18,12 +19,23 @@ export function RegisterForm() {
     //TODO Add Swipe animation on state change
     return <div className={styles.root}>
         {
-            stage === 0 ? <CreateUserForm setStage={setStage}/> : <RegisterUserForm setStage={setStage}/>
+            stage === 0 ? <CreateUserForm stage={0} setStage={setStage}/> :
+                <RegisterUserForm stage={1} setStage={setStage}/>
         }
     </div>
 }
 
-function CreateUserForm({setStage}: StageProps) {
+function FormSubmit({label, stage}: { label: string, stage: RegisterStage }) {
+    return <div className={styles.form_submit}>
+        <div className="px-1.5 py-2.5 flex flex-row items-center gap-2.5 justify-center">
+            <div className={`w-2.5 h-2.5 rounded-full ${stage === 0 ? "bg-brand" : "bg-gray-300"}`}/>
+            <div className={`w-2.5 h-2.5 rounded-full ${stage === 1 ? "bg-brand" : "bg-gray-300"}`}/>
+        </div>
+        <Button type="submit" className={styles.btn_submit}>{label}</Button>
+    </div>
+}
+
+function CreateUserForm({stage, setStage}: StageProps) {
 
     const {
         register,
@@ -42,11 +54,11 @@ function CreateUserForm({setStage}: StageProps) {
     return <form onSubmit={handleSubmit(submit)} className={styles.form_root}>
         <p className={styles.form_header}>Create your account</p>
         <PhoneInput control={control} trigger={trigger} label="Mobile Number" name={'mobile'} errors={errors}/>
-        <Button type="submit" className={styles.form_submit}>Continue</Button>
+        <FormSubmit label="Continue" stage={stage}/>
     </form>
 }
 
-function RegisterUserForm({setStage}: StageProps) {
+function RegisterUserForm({stage, setStage}: StageProps) {
 
     const {
         register,
@@ -64,6 +76,6 @@ function RegisterUserForm({setStage}: StageProps) {
 
     return <form onSubmit={handleSubmit(submit)} className={styles.form_root}>
         <p className={styles.form_header}>😊 Let's add some little details</p>
-        <Button type="submit" className={styles.form_submit}>Register</Button>
+        <FormSubmit label="Register" stage={stage}/>
     </form>
 }
