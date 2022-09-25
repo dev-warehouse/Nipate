@@ -1,4 +1,4 @@
-export enum UserRole {user, provider, admin}
+export type UserRole = 'user' | 'provider' | 'admin'
 
 export type Gender = 'male' | 'female'
 

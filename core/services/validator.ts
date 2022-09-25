@@ -1,5 +1,5 @@
-import {LoginFormData, UserModel, UserRole,} from "@core/models";
-import {array, mixed, number, object, ref, string} from "yup";
+import {LoginFormData, UserModel,} from "@core/models";
+import {array, number, object, ref, string} from "yup";
 
 /**
  * This class deals with all containing validation
@@ -89,8 +89,8 @@ class Validator {
         .oneOf(['male', 'female'], "Runtime error: Serialization of gender failed")
         .required("Your gender is required");
 
-    static roleSchema = mixed<UserRole>()
-        .oneOf(Object.values(UserRole) as number[], "Serialization of role failed")
+    static roleSchema = string()
+        .oneOf(['provider', 'user', 'admin'], "Serialization of role failed")
         .required("Your role is required");
 
     static rolesSchema = array().of(this.roleSchema).typeError("Serialization of roles failed");

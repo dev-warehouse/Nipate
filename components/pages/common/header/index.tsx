@@ -7,7 +7,7 @@ import {useRouter} from "next/router";
 import styles from './index.module.scss'
 import {ClickAwayListener, PopperUnstyled} from "@mui/base";
 import Link from "next/link";
-import {UserModel, UserRole} from "@core/models";
+import {UserModel} from "@core/models";
 
 export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     page?: 'auth' | 'normal' | 'provider'
@@ -51,7 +51,7 @@ function Avatar({user, page}: { user: UserModel, page: HeaderProps['page'] }): J
             <PopperUnstyled open={open} anchorEl={avatarRef.current}>
                 <div className={styles.menu}>
                     <div className={styles.menuOption}>
-                        {user.roles.includes(UserRole.provider) ?
+                        {user.roles.includes('provider') ?
                             <Link href={'/provider/dashboard'}>Provider Dashboard</Link> :
                             <Link href={'/provider/register'}> Register as Provider</Link>
                         }
