@@ -9,6 +9,10 @@
   @apply text-lg md:text-xl font-semibold;
 }
 
+.form_input {
+  @apply w-full;
+}
+
 .form_submit {
   @apply w-full inline-flex items-center justify-between;
 }

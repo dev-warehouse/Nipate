@@ -2,7 +2,7 @@ import {useForm} from "react-hook-form";
 import {CreateUserFormData, RegisterUserFormData} from "@core/models";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Validator} from "@core/services";
-import {Button, PhoneInput} from "@components/common";
+import {Button, FormInput, PhoneInput} from "@components/common";
 import {Dispatch, SetStateAction, useState} from "react";
 import styles from "./styles/register.module.scss";
 
@@ -53,7 +53,14 @@ function CreateUserForm({stage, setStage}: StageProps) {
 
     return <form onSubmit={handleSubmit(submit)} className={styles.form_root}>
         <p className={styles.form_header}>Create your account</p>
-        <PhoneInput control={control} trigger={trigger} label="Mobile Number" name={'mobile'} errors={errors}/>
+        <PhoneInput control={control} trigger={trigger} label="Mobile Number" placeholder="eg 712345678" name={'mobile'}
+                    errors={errors}/>
+        <FormInput label="ID Number" placeholder="eg 31234567" name="idNumber" className={styles.form_input}
+                   register={register} errors={errors}/>
+        <FormInput label="First Name" name="firstName" className={styles.form_input} register={register}
+                   errors={errors}/>
+        <FormInput label="Last Name" name="lastName" className={styles.form_input} register={register}
+                   errors={errors}/>
         <FormSubmit label="Continue" stage={stage}/>
     </form>
 }
