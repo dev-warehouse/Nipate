@@ -1,10 +1,10 @@
 import {Input, InputProps} from ".";
 import styles from "./index.module.scss";
 import {Control, useController, UseFormRegister} from "react-hook-form";
-import {CheckBox, Option, Select, SelectProps} from "@components/common";
+import {CheckBox, Option, Radio, Select, SelectProps} from "@components/common";
 import Image from "next/image";
 import {ChangeEvent} from "react";
-import {Country, MobileNumber} from "@core/models";
+import {Country, Gender, MobileNumber} from "@core/models";
 
 /**
  * Form Input props, extends Input Props
@@ -270,6 +270,42 @@ function PhoneInput({
             )}
         </div>
     );
+}
+
+export interface GenderInputProps extends Omit<FormInputProps, 'register'> {
+    control: Control<Gender | any>;
+}
+
+export function GenderInput({trigger, errors, control, label, name, dataValidity}: GenderInputProps) {
+
+    const {field: {value, onChange}} = useController({control, name})
+
+    const handleMale = () => onChange('male')
+    const handleFemale = () => onChange('female')
+
+    return (
+        <div className={styles.form_root}>
+            <label htmlFor={name} className={styles.form_label}
+                   data-validity={dataValidity ? dataValidity : errors[name] ? "error" : "initial"}
+            >{label}</label>
+            <div>
+                <label htmlFor='male'>Male</label>
+                <Radio id='male' name={name} value={value} checked={value === 'male'} onChange={handleMale}/>
+                <label htmlFor='female'>Female</label>
+                <Radio id='female' name={name} value={value} checked={value === 'female'} onChange={handleFemale}/>
+            </div>
+            {errors[name] ? (
+                <p
+                    className={styles.form_message}
+                    data-validity={dataValidity ? dataValidity : errors[name] ? "error" : "initial"}
+                >
+                    {errors[name].message}
+                </p>
+            ) : (
+                <></>
+            )}
+        </div>
+    )
 }
 
 export {FormInput, PhoneInput, FormCheckBox};
