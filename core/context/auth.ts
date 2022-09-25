@@ -1,6 +1,14 @@
-import {createContext} from "react";
+import {createContext, Reducer} from "react";
 import {UserModel} from "@core/models";
 
+export type AuthActions = { type: 'setToken', data: string }
+    | { type: 'setUser', data: UserModel }
+    | { type: 'removeUser' }
+    | { type: 'updateUser', data: UserModel }
+
+export interface AuthReducer extends Reducer<AuthLifecycleData, AuthActions> {
+
+}
 
 /**
  * Interface for the functions that will interact with the user and authentication data

@@ -1,7 +1,8 @@
-import {DOMAttributes, useCallback, useEffect, useState} from "react";
+import {DOMAttributes, useMemo, useReducer} from "react";
+import {AuthActions, authContext, AuthLifecycleData, AuthReducer} from "@core/context";
+import {useCrypto, useNotification} from "@core/hooks";
 import {UserModel} from "@core/models";
-import {authContext, AuthLifecycleData} from "@core/context";
-import {useCrypto, useLocalStorage, useNotification} from "@core/hooks";
+import {useLocalStorage} from "usehooks-ts";
 
 
 const {encrypt, decrypt, hash} = useCrypto()
@@ -44,6 +45,19 @@ function decryptToken(token: string): string {
         return res
     }, [token])()
 
+function reducerAuth(prevState: AuthLifecycleData, action: AuthActions): AuthLifecycleData {
+    switch (action.type) {
+        case "removeUser":
+            return {}
+        case "setToken":
+            return {authToken: action.data}
+        case "setUser":
+            return {currentUser: action.data}
+        case "updateUser":
+            return {currentUser: {...action.data}}
+        default:
+            return {}
+    }
 }
 
 /**
@@ -55,52 +69,18 @@ function decryptToken(token: string): string {
  */
 export function AuthProvider(props: DOMAttributes<any>) {
 
-    const [state, setState] = useState<AuthLifecycleData>()
+    const [state, dispatch] = useReducer<AuthReducer>(reducerAuth, {})
+    const [token, setSavedToken] = useLocalStorage<string>(`n_${hash('token')}`, '')
 
-    const [token, saveTokenStorage] = useLocalStorage('token', '')
-
-
-    useEffect(() => {
-
-        /**
-         * This is responsible to auto authenticating user when one has saved their login details
-         */
-        if (token !== '') {
-            const tkn = decryptToken(token)
-            setState({authToken: tkn})
-        }
-    })
-
-    /**
-     * Implementation of `login` lifecycle
-     * @param model
-     */
-    const setUser = (model: UserModel) => setState({currentUser: model})
-
-    const setToken = (token: string) => {
-        setState({authToken: token})
-    }
-
-    const saveToken = (token: string) => {
-        const tkn = encryptToken(token)
-        saveTokenStorage(tkn)
-    }
-
-    /**
-     * Implementation of `logout` lifecycle
-     */
-    const removeUser = () => setState({currentUser: undefined});
-
-    /**
-     * Implementation of `update` lifecycle
-     * @param model
-     */
-    const updateUser = (model: UserModel) => setState({currentUser: {...model}});
-
+    const setToken = (data: string) => dispatch({type: 'setToken', data: data})
+    const saveToken = (token: string) => setSavedToken(token)
+    const setUser = (data: UserModel) => dispatch({type: 'setUser', data: data})
+    const updateUser = (data: UserModel) => dispatch({type: 'updateUser', data: data})
+    const removeUser = () => dispatch({type: 'removeUser'})
 
     return <authContext.Provider value={{
-        currentUser: state?.currentUser,
-        authToken: state?.authToken,
+        currentUser: state.currentUser,
+        authToken: state.authToken,
         setUser: setUser,
         setToken: setToken,
         saveToken: saveToken,
