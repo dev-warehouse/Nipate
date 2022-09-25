@@ -55,7 +55,8 @@ function CreateUserForm({stage, setStage}: StageProps) {
         <p className={styles.form_header}>Create your account</p>
         <PhoneInput control={control} trigger={trigger} label="Mobile Number" placeholder="eg 712345678" name={'mobile'}
                     errors={errors}/>
-        <FormInput label="ID Number" placeholder="eg 31234567" name="idNumber" className={styles.form_input}
+        <FormInput label="ID Number" placeholder="eg 31234567" name="idNumber"
+                   className={styles.form_input}
                    register={register} errors={errors}/>
         <FormInput label="First Name" name="firstName" className={styles.form_input} register={register}
                    errors={errors}/>
@@ -82,12 +83,13 @@ function RegisterUserForm({stage, setStage}: StageProps) {
     }
 
     return <form onSubmit={handleSubmit(submit)} className={styles.form_root}>
-        <p className={styles.form_header}>😊 Let's Register</p>
-        <GenderInput control={control} label="Gender" name="gender" errors={errors} trigger={trigger}/>
+        <p className={styles.form_header}>Finalize on registration</p>
+        <GenderInput required={true} control={control} label="Gender" name="gender" errors={errors} trigger={trigger}/>
         <FormInput
             label="Password"
             name="password"
             type="password"
+            required={true}
             placeholder="••••••••••"
             className={styles.form_input}
             register={register}
@@ -98,6 +100,7 @@ function RegisterUserForm({stage, setStage}: StageProps) {
             name="confirmPassword"
             type="password"
             placeholder="••••••••••"
+            required={true}
             className={styles.form_input}
             register={register}
             errors={errors}

@@ -25,6 +25,10 @@ interface FormInputProps extends InputProps {
      */
     register: UseFormRegister<any>;
     /**
+     * For Required indicator
+     */
+    required?: boolean
+    /**
      * Triggers the form validation
      */
     trigger?: any
@@ -34,7 +38,7 @@ interface FormInputProps extends InputProps {
     errors: any;
 }
 
-function FormCheckBox({label, name, dataValidity, register, errors}: FormInputProps) {
+function FormCheckBox({label, name, required, dataValidity, register, errors}: FormInputProps) {
     return <div className="self-start">
         <div className="inline-flex gap-2 flex-row-reverse">
             <label
@@ -45,6 +49,10 @@ function FormCheckBox({label, name, dataValidity, register, errors}: FormInputPr
                 }
             >
                 {label}
+                {
+                    required ?
+                        <span className="mx-1 text-red-500 align-super">*</span> : <></>
+                }
             </label>
             <CheckBox id={name} {...register(name)}/>
         </div>
@@ -72,6 +80,7 @@ function FormCheckBox({label, name, dataValidity, register, errors}: FormInputPr
  */
 function FormInput({
                        label,
+                       required,
                        className = "",
                        name,
                        register,
@@ -94,6 +103,10 @@ function FormInput({
                 }
             >
                 {label}
+                {
+                    required ?
+                        <span className="mx-1 text-red-500 align-super">*</span> : <></>
+                }
             </label>
             {children ?? (
                 <Input
@@ -207,6 +220,7 @@ interface PhoneInputProps extends Omit<FormInputProps, "register"> {
 
 function PhoneInput({
                         label,
+                        required,
                         name,
                         control,
                         trigger,
@@ -240,6 +254,10 @@ function PhoneInput({
                 }
             >
                 {label}
+                {
+                    required ?
+                        <span className="mx-1 text-red-500 align-super">*</span> : <></>
+                }
             </label>
             <div className={styles.phone_root}>
                 <SelectCountries
@@ -276,7 +294,7 @@ export interface GenderInputProps extends Omit<FormInputProps, 'register'> {
     control: Control<Gender | any>;
 }
 
-export function GenderInput({trigger, errors, control, label, name, dataValidity}: GenderInputProps) {
+export function GenderInput({required, errors, control, label, name, dataValidity}: GenderInputProps) {
 
     const {field: {value, onChange}} = useController({control, name})
 
@@ -287,7 +305,13 @@ export function GenderInput({trigger, errors, control, label, name, dataValidity
         <div className={styles.gender_form_root}>
             <label htmlFor={name} className={styles.form_label}
                    data-validity={dataValidity ? dataValidity : errors[name] ? "error" : "initial"}
-            >{label}</label>
+            >
+                {label}
+                {
+                    required ?
+                        <span className="mx-1 text-red-500 align-super">*</span> : <></>
+                }
+            </label>
             <div className={styles.gender_root}>
                 <main>
                     <label htmlFor='male' className={styles.gender_label}>Male: </label>
