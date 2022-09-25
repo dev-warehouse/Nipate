@@ -11,6 +11,7 @@ function NotificationItem({id, type, props}: Notification) {
 function NotificationList() {
     const {alerts} = useNotification()
 
+    // TODO Add animation on notification enter and exit
     return <div>
         {
             alerts.map(({id, type, props}, index) => {

@@ -14,6 +14,8 @@ interface StageProps {
 
 export function RegisterForm() {
     const [stage, setStage] = useState<RegisterStage>(0)
+
+    //TODO Add Swipe animation on state change
     return <div className={styles.root}>
         {
             stage === 0 ? <CreateUserForm setStage={setStage}/> : <RegisterUserForm setStage={setStage}/>
