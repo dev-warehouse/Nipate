@@ -1,4 +1,4 @@
-import {Gender, LoginFormData, UserModel, UserRole,} from "@core/models";
+import {LoginFormData, UserModel, UserRole,} from "@core/models";
 import {array, mixed, number, object, ref, string} from "yup";
 
 /**
@@ -85,8 +85,8 @@ class Validator {
     /**
      * Yup Schema for gender validation
      */
-    static genderSchema = mixed<Gender>()
-        .oneOf(Object.values(Gender) as number[], "Serialization of gender failed")
+    static genderSchema = string()
+        .oneOf(['male', 'female'], "Runtime error: Serialization of gender failed")
         .required("Your gender is required");
 
     static roleSchema = mixed<UserRole>()
