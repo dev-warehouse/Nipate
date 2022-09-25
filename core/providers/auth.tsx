@@ -4,8 +4,10 @@ import {authContext, AuthLifecycleData} from "@core/context";
 import {useCrypto, useLocalStorage, useNotification} from "@core/hooks";
 
 
-const encryptToken = (token: string): string => {
-    const {encrypt, hash} = useCrypto()
+const {encrypt, decrypt, hash} = useCrypto()
+
+function encryptToken(token: string): string {
+
     const {alert} = useNotification()
     return useCallback(() => {
         let res = ''
@@ -25,8 +27,8 @@ const encryptToken = (token: string): string => {
 }
 
 
-const decryptToken = (token: string): string => {
-    const {decrypt, hash} = useCrypto()
+function decryptToken(token: string): string {
+
     return useCallback(() => {
         let res = ''
         decrypt(token, hash('NipateAuthToken_')).then(res => res).catch(() =>
