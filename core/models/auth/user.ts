@@ -1,6 +1,6 @@
 export enum UserRole {user, provider, admin}
 
-export enum Gender {male, female}
+export type Gender = 'male' | 'female'
 
 export type MobileNumber = {
     code?: string;
