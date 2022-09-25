@@ -10,7 +10,7 @@ const {encrypt, decrypt, hash} = useCrypto()
 function encryptToken(token: string): string {
 
     const {alert} = useNotification()
-    return useCallback(() => {
+    return useMemo(() => {
         let res = ''
         encrypt(token, hash('NipateAuthToken_')).then(res => res).catch(() =>
             alert([{
@@ -23,14 +23,14 @@ function encryptToken(token: string): string {
             }])
         )
         return res
-    }, [token])()
+    }, [token])
 
 }
 
-
 function decryptToken(token: string): string {
 
-    return useCallback(() => {
+    const {alert} = useNotification()
+    return useMemo(() => {
         let res = ''
         decrypt(token, hash('NipateAuthToken_')).then(res => res).catch(() =>
             alert([{
@@ -43,7 +43,9 @@ function decryptToken(token: string): string {
             }])
         )
         return res
-    }, [token])()
+    }, [token])
+
+}
 
 function reducerAuth(prevState: AuthLifecycleData, action: AuthActions): AuthLifecycleData {
     switch (action.type) {
