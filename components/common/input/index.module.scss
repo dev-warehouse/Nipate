@@ -122,3 +122,18 @@
     }
   }
 }
+
+.gender_form_root {
+  @apply w-full min-w-[20rem] flex flex-col gap-3;
+}
+
+.gender_root {
+  @apply inline-flex  items-center gap-6;
+  main {
+    @apply inline-flex flex-row gap-2.5;
+  }
+}
+
+.gender_label {
+  @apply text-sm;
+}

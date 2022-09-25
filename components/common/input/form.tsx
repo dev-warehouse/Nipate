@@ -284,15 +284,19 @@ export function GenderInput({trigger, errors, control, label, name, dataValidity
     const handleFemale = () => onChange('female')
 
     return (
-        <div className={styles.form_root}>
+        <div className={styles.gender_form_root}>
             <label htmlFor={name} className={styles.form_label}
                    data-validity={dataValidity ? dataValidity : errors[name] ? "error" : "initial"}
             >{label}</label>
-            <div>
-                <label htmlFor='male'>Male</label>
-                <Radio id='male' name={name} value={value} checked={value === 'male'} onChange={handleMale}/>
-                <label htmlFor='female'>Female</label>
-                <Radio id='female' name={name} value={value} checked={value === 'female'} onChange={handleFemale}/>
+            <div className={styles.gender_root}>
+                <main>
+                    <label htmlFor='male' className={styles.gender_label}>Male: </label>
+                    <Radio id='male' name={name} value={value} checked={value === 'male'} onChange={handleMale}/>
+                </main>
+                <main>
+                    <label htmlFor='female' className={styles.gender_label}>Female: </label>
+                    <Radio id='female' name={name} value={value} checked={value === 'female'} onChange={handleFemale}/>
+                </main>
             </div>
             {errors[name] ? (
                 <p
