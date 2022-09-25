@@ -1,4 +1,4 @@
-import {Gender, LoginFormData, RegisterFormData, UserModel, UserRole,} from "@core/models";
+import {Gender, LoginFormData, UserModel, UserRole,} from "@core/models";
 import {array, mixed, number, object, string} from "yup";
 
 /**
@@ -45,16 +45,6 @@ class Validator {
     static validateLoginDetails(model: LoginFormData): boolean {
         let isValid: boolean = false;
         this.loginDetailsSchema.isValid(model).then((res) => (isValid = res));
-        return isValid;
-    }
-
-    /**
-     * This validates the whole register form data
-     * @param model
-     */
-    static validateRegisterDetails(model: RegisterFormData): boolean {
-        let isValid: boolean = false;
-        this.registerDetailsSchema.isValid(model).then((res) => (isValid = res));
         return isValid;
     }
 
@@ -140,14 +130,11 @@ class Validator {
     /**
      * Yup schema for register details validation
      */
-    static registerDetailsSchema = object().shape({
+    static createUserSchema = object().shape({
         mobile: this.mobileSchema,
-        password: this.passwordSchema,
+        idNumber: this.idNumberSchema,
         firstName: this.firstNameSchema,
         lastName: this.lastNameSchema,
-        idNumber: this.idNumberSchema,
-        gender: this.genderSchema,
-        location: this.locationSchema,
     });
 }
 
