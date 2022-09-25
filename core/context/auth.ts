@@ -27,6 +27,7 @@ interface AuthLifecycleActions {
      * @param token
      */
     setToken: (token: string) => void
+    saveToken: () => void
     /**
      * This handles user logout lifecycle
      * @param model

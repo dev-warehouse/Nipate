@@ -25,6 +25,7 @@ export function useLogin({clearErrors, reset, setError}: UseLoginProps) {
         },
         onSuccess: ({data: {Auth_token, FirstName}}) => {
             setToken(Auth_token)
+            if (saveTokenS) saveToken()
             alert([{
                 id: `welcome_${FirstName}`,
                 type: 'toast',

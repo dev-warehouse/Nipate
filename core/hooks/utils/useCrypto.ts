@@ -1,12 +1,10 @@
-import {useMemo} from "react";
-
 /**
  * Hook for encrypting and decrypting
  */
 export function useCrypto() {
-    const encrypt = (plainText: string, password: string) => useMemo(() => aesGcmEncrypt(plainText, password), [plainText, password])
-    const decrypt = (cipher: string, password: string) => useMemo(() => aesGcmDecrypt(cipher, password), [cipher, password])
-    const hash = (hashStr: string): string => useMemo(() => hashFn(hashStr), [hashStr])
+    const encrypt = aesGcmEncrypt
+    const decrypt = aesGcmDecrypt
+    const hash = hashFn
     return {encrypt, decrypt, hash}
 }
 
