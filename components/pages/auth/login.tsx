@@ -4,7 +4,7 @@ import styles from "./styles/login.module.scss";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Validator} from "@core/services";
 import {LoginFormData} from "@core/models";
-import {useAuth, useNotification} from "@core/hooks";
+import {useNotification} from "@core/hooks";
 import {useLogin} from "@core/data";
 import {RiSignalWifiErrorLine} from 'react-icons/ri'
 import {MdErrorOutline, MdOutlineCheckCircle} from "react-icons/md";
@@ -13,7 +13,6 @@ import Link from "next/link";
 
 export function LoginForm() {
 
-    const {setUser} = useAuth()
     const {alert} = useNotification()
 
     const {

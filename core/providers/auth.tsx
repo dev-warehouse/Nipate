@@ -1,8 +1,7 @@
 import {DOMAttributes, useCallback, useEffect, useState} from "react";
 import {UserModel} from "@core/models";
 import {authContext, AuthLifecycleData} from "@core/context";
-import {useCrypto, useLocalStorage} from "@core/hooks/utils";
-import {useNotification} from "@core/hooks";
+import {useCrypto, useLocalStorage, useNotification} from "@core/hooks";
 
 
 const encryptToken = (token: string): string => {
