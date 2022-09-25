@@ -3,3 +3,13 @@ export function RegisterForm() {
         Register Form
     </div>
 }
+
+function CreateForm() {
+    return <div>
+
+    </div>
+}
+
+function RegisterUser() {
+    return <div></div>
+}
