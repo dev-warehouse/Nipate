@@ -1,5 +1,5 @@
 import {Gender, LoginFormData, UserModel, UserRole,} from "@core/models";
-import {array, mixed, number, object, string} from "yup";
+import {array, mixed, number, object, ref, string} from "yup";
 
 /**
  * This class deals with all containing validation
@@ -128,13 +128,23 @@ class Validator {
     });
 
     /**
-     * Yup schema for register details validation
+     * Yup schema for create user details validation
      */
     static createUserSchema = object().shape({
         mobile: this.mobileSchema,
         idNumber: this.idNumberSchema,
         firstName: this.firstNameSchema,
         lastName: this.lastNameSchema,
+    });
+
+    /**
+     * Yup schema for register user details validation
+     */
+    static registerUserSchema = object().shape({
+        gender: this.genderSchema,
+        location: this.locationSchema,
+        password: this.passwordSchema,
+        confirmPassword: string().oneOf([ref('password'), null], "Passwords don't match"),
     });
 }
 

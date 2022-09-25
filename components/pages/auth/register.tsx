@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-import {CreateUserFormData} from "@core/models";
+import {CreateUserFormData, RegisterUserFormData} from "@core/models";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Validator} from "@core/services";
 
@@ -28,5 +28,16 @@ function CreateUserForm() {
 }
 
 function RegisterUser() {
+
+    const {
+        register,
+        control,
+        handleSubmit,
+        trigger,
+        setError,
+        clearErrors,
+        reset,
+        formState: {errors},
+    } = useForm<RegisterUserFormData>({resolver: yupResolver(Validator.registerUserSchema)});
     return <div></div>
 }
