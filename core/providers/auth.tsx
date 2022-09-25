@@ -1,4 +1,4 @@
-import {DOMAttributes, useEffect, useMemo, useReducer, useState} from "react";
+import {DOMAttributes, useMemo, useReducer, useState} from "react";
 import {AuthActions, authContext, AuthLifecycleData, AuthReducer} from "@core/context";
 import {useCrypto, useNotification} from "@core/hooks";
 import {UserModel} from "@core/models";
@@ -37,70 +37,49 @@ export function AuthProvider(props: DOMAttributes<any>) {
     const [state, dispatch] = useReducer<AuthReducer>(reducerAuth, {})
 
     // For whether to save token to storage
-    const [saveTokenStorage, setSaveTokenStorage] = useState(false)
+    const [rememberToken, setRememberToken] = useState(false)
 
     // Utils hooks
     const {encrypt, decrypt, hash} = useCrypto()
-    const [token, setTokenStorage] = useLocalStorage<string>(`t_${hash('token')}`, '')
+    const [token, saveToStorage] = useLocalStorage<string>(`t_${hash('token')}`, '')
     const {alert} = useNotification()
 
-    // Utils functions
-    function encryptToken(token: string): string {
-        let tkn = ''
-        encrypt(token, hash('NipateAuthToken_')).then(res => {
-            console.log(`Prev: ${token} Returned encrypted: ${res}`)
-            tkn = token
-        }).catch(() =>
-            alert([{
-                id: 'decrypt_error',
-                type: 'toast',
-                props: {
-                    message: 'Unable to save details : 0x284',
-                    status: 'error'
-                }
-            }])
-        )
-        console.log(`oToken: ${token} nToken: ${tkn}`)
-        return tkn
-    }
-
-    function decryptToken(token: string): string {
-        let tkn = ''
-        decrypt(token, hash('NipateAuthToken_')).then(r => {
-            tkn = r.toString()
-        }).catch(() =>
-            alert([{
-                id: 'decrypt_error',
-                type: 'toast',
-                props: {
-                    message: 'Unable to save details : 0x284',
-                    status: 'error'
-                }
-            }])
-        )
-        console.log(`oToken: ${token} nToken: ${tkn}`)
-        return tkn
-    }
-
     // Auto Login and update token on token change
-    useEffect(() => {
+    useMemo(() => {
         if (token !== '') {
-            dispatch({type: 'setToken', data: decryptToken(token)})
+            decrypt(token, `${hash('NipateAuthToken_')}`).then(res => {
+                dispatch({type: 'setToken', data: res})
+            }).catch(() => {
+                }
+            )
         }
-    })
+    }, [token])
 
     // For Saving token to storage
-    useMemo(
-        () => {
-            if (saveTokenStorage) {
-                setTokenStorage(encryptToken(state.authToken ?? 'No token'))
+    useMemo(() => {
+        if (rememberToken) {
+            if (state.authToken) {
+                encrypt(state.authToken, hash('NipateAuthToken_')).then(res => {
+                    saveToStorage(res)
+                }).catch(() =>
+                    alert([{
+                        id: 'decrypt_error',
+                        type: 'toast',
+                        props: {
+                            message: 'Unable to save details : 0x284',
+                            status: 'error'
+                        }
+                    }])
+                )
             }
-        }, [saveTokenStorage]
-    )
+        }
+    }, [rememberToken])
+
+    // Auto Fetching user details
 
     // Lifecycle Methods
     const setToken = (data: string) => dispatch({type: 'setToken', data: data})
-    const saveToken = () => setSaveTokenStorage(true)
+    const saveToken = () => setRememberToken(true)
     const setUser = (data: UserModel) => dispatch({type: 'setUser', data: data})
     const updateUser = (data: UserModel) => dispatch({type: 'updateUser', data: data})
     const removeUser = () => dispatch({type: 'removeUser'})
