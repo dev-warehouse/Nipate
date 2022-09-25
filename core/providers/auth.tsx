@@ -4,49 +4,11 @@ import {useCrypto, useNotification} from "@core/hooks";
 import {UserModel} from "@core/models";
 import {useLocalStorage} from "usehooks-ts";
 
-
-const {encrypt, decrypt, hash} = useCrypto()
-
-function encryptToken(token: string): string {
-
-    const {alert} = useNotification()
-    return useMemo(() => {
-        let res = ''
-        encrypt(token, hash('NipateAuthToken_')).then(res => res).catch(() =>
-            alert([{
-                id: 'encrypt_error',
-                type: 'toast',
-                props: {
-                    message: 'Unable to save details : 0x184',
-                    status: 'error'
-                }
-            }])
-        )
-        return res
-    }, [token])
-
-}
-
-function decryptToken(token: string): string {
-
-    const {alert} = useNotification()
-    return useMemo(() => {
-        let res = ''
-        decrypt(token, hash('NipateAuthToken_')).then(res => res).catch(() =>
-            alert([{
-                id: 'decrypt_error',
-                type: 'toast',
-                props: {
-                    message: 'Unable to save details : 0x284',
-                    status: 'error'
-                }
-            }])
-        )
-        return res
-    }, [token])
-
-}
-
+/**
+ * Reducer for Auth States
+ * @param prevState
+ * @param action
+ */
 function reducerAuth(prevState: AuthLifecycleData, action: AuthActions): AuthLifecycleData {
     switch (action.type) {
         case "removeUser":
@@ -62,6 +24,25 @@ function reducerAuth(prevState: AuthLifecycleData, action: AuthActions): AuthLif
     }
 }
 
+export function saveAuthToken(token: string) {
+    const {encrypt, hash} = useCrypto()
+    const [, setToken] = useLocalStorage<string>(`n_${hash('token')}`, '')
+    const {alert} = useNotification()
+
+    encrypt(token, hash('NipateAuthToken_')).then((res: string) => {
+        setToken(res)
+    }).catch(() =>
+        alert([{
+            id: 'encrypt_error',
+            type: 'toast',
+            props: {
+                message: 'Unable to save details : 0x184',
+                status: 'error'
+            }
+        }])
+    )
+}
+
 /**
  * This provider is responsible to all things to do with user authentication
  *
@@ -71,11 +52,40 @@ function reducerAuth(prevState: AuthLifecycleData, action: AuthActions): AuthLif
  */
 export function AuthProvider(props: DOMAttributes<any>) {
 
+    // Auth Lifecycle state hook
     const [state, dispatch] = useReducer<AuthReducer>(reducerAuth, {})
-    const [token, setSavedToken] = useLocalStorage<string>(`n_${hash('token')}`, '')
 
+    // Utils hooks
+    const {decrypt, hash} = useCrypto()
+    const [token] = useLocalStorage<string>(`n_${hash('token')}`, '')
+    const {alert} = useNotification()
+
+    // Utils functions
+    function decryptToken(token: string): string {
+        let res = ''
+        decrypt(token, hash('NipateAuthToken_')).then(res => res).catch(() =>
+            alert([{
+                id: 'decrypt_error',
+                type: 'toast',
+                props: {
+                    message: 'Unable to save details : 0x284',
+                    status: 'error'
+                }
+            }])
+        )
+        return res
+
+    }
+
+    // Auto Login and update token on token change
+    useMemo(() => {
+        if (token !== '') {
+            dispatch({type: 'setToken', data: decryptToken(token)})
+        }
+    }, [token])
+
+    // Lifecycle Methods
     const setToken = (data: string) => dispatch({type: 'setToken', data: data})
-    const saveToken = (token: string) => setSavedToken(token)
     const setUser = (data: UserModel) => dispatch({type: 'setUser', data: data})
     const updateUser = (data: UserModel) => dispatch({type: 'updateUser', data: data})
     const removeUser = () => dispatch({type: 'removeUser'})
@@ -85,7 +95,6 @@ export function AuthProvider(props: DOMAttributes<any>) {
         authToken: state.authToken,
         setUser: setUser,
         setToken: setToken,
-        saveToken: saveToken,
         removeUser: removeUser,
         updateUser: updateUser
     }} {...props}/>
