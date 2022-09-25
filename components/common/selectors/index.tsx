@@ -16,9 +16,10 @@ const CheckBox = forwardRef((props: InputHTMLAttributes<HTMLInputElement>, ref: 
  * @param props
  * @constructor
  */
-function Radio(props: InputHTMLAttributes<HTMLInputElement>) {
-    return <input type="radio" className={styles.radio} {...props} />;
-}
+const Radio = forwardRef(
+    (props: InputHTMLAttributes<HTMLInputElement>, ref: ForwardedRef<any>) =>
+        <input type="radio" className={styles.radio} ref={ref} {...props} />
+);
 
 export interface SelectProps extends SelectUnstyledProps<any> {
     dataValidity?: 'initial' | 'success' | 'error'
