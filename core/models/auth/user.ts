@@ -1,3 +1,5 @@
+import {County} from "@core/models";
+
 export type UserRole = 'user' | 'provider' | 'admin'
 
 export type Gender = 'male' | 'female'
@@ -21,5 +23,5 @@ export interface UserModel {
     idNumber: number
     roles: UserRole[]
     gender: Gender
-    location?: GeoLocation
+    location: County
 }
