@@ -45,7 +45,7 @@ function Avatar({user, page}: { user: UserModel, page: HeaderProps['page'] }): J
                 <ProviderDashboardDetails user={user}/>
             </> : <></>}
             <div className={styles.avatar} ref={avatarRef} onClick={() => setOpen(!open)}>
-                <Image src={user.avatar ?? "https://avatars.dicebear.com/api/adventurer/sdjka01dflsds.svg"}
+                <Image src={`https://avatars.dicebear.com/api/adventurer/${user.userId}.svg`}
                        layout={"fill"}/>
             </div>
             <PopperUnstyled open={open} anchorEl={avatarRef.current}>
