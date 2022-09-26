@@ -34,33 +34,36 @@ export interface SelectProps extends SelectUnstyledProps<any> {
  * @param listStyles Customizes select listbox
  * @constructor
  */
-function Select({className = '', listStyles = '', dataValidity, ...props}: SelectProps) {
-    return (
-        <SelectUnstyled
-            data-validity={dataValidity}
-            {...props}
-            componentsProps={{
-                root: {
-                    className: [className, styles.select_root].join(' '),
-                },
-                listbox: {
-                    className: [listStyles, styles.select_listbox].join(' '),
-                },
-                popper: {
-                    className: styles.select_popper,
-                },
-            }}
-        />
-    );
-}
+const Select = forwardRef(({
+                               className = '',
+                               listStyles = '',
+                               dataValidity,
+                               ...props
+                           }: SelectProps, ref: ForwardedRef<any>) => (
+    <SelectUnstyled
+        data-validity={dataValidity}
+        ref={ref}
+        {...props}
+        componentsProps={{
+            root: {
+                className: [className, styles.select_root].join(' '),
+            },
+            listbox: {
+                className: [listStyles, styles.select_listbox].join(' '),
+            },
+            popper: {
+                className: styles.select_popper,
+            },
+        }}
+    />
+));
 
-function Option<OValue>({className, ...props}: OptionUnstyledProps<OValue>) {
-    return (
-        <OptionUnstyled
-            className={[className, styles.option].join(" ")}
-            {...props}
-        />
-    );
-}
+const Option = forwardRef(({className, ...props}: OptionUnstyledProps<any>, ref: ForwardedRef<any>) => (
+    <OptionUnstyled
+        className={[className, styles.option].join(" ")}
+        ref={ref}
+        {...props}
+    />
+))
 
 export {CheckBox, Radio, Select, Option};
