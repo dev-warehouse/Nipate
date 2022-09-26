@@ -57,21 +57,19 @@ export function AuthProvider(props: DOMAttributes<any>) {
 
     // For Saving token to storage
     useMemo(() => {
-        if (rememberToken) {
-            if (state.authToken) {
-                encrypt(state.authToken, hash('NipateAuthToken_')).then(res => {
-                    saveToStorage(res)
-                }).catch(() =>
-                    alert([{
-                        id: 'decrypt_error',
-                        type: 'toast',
-                        props: {
-                            message: 'Unable to save details : 0x284',
-                            status: 'error'
-                        }
-                    }])
-                )
-            }
+        if (rememberToken && state.authToken) {
+            encrypt(state.authToken, hash('NipateAuthToken_')).then(res => {
+                saveToStorage(res)
+            }).catch(() =>
+                alert([{
+                    id: 'encrypt_error',
+                    type: 'toast',
+                    props: {
+                        message: 'Unable to save details : 0x284',
+                        status: 'error'
+                    }
+                }])
+            )
         }
     }, [rememberToken])
 
