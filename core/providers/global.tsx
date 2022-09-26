@@ -7,16 +7,16 @@ import {NotificationFrame} from "@components/notification";
 
 function GlobalProviders(props: DOMAttributes<any>) {
     return <>
-        <AxiosProvider>
+        <NotificationProvider>
             <QueryClientProvider client={queryClient}>
-                <NotificationProvider>
-                    <AuthProvider>
+                <AuthProvider>
+                    <AxiosProvider>
                         {props.children}
-                    </AuthProvider>
-                    <NotificationFrame/>
-                </NotificationProvider>
+                    </AxiosProvider>
+                </AuthProvider>
+                <NotificationFrame/>
             </QueryClientProvider>
-        </AxiosProvider>
+        </NotificationProvider>
     </>
 }
 
