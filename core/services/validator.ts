@@ -98,7 +98,7 @@ class Validator {
     /**
      * Yup Schema for location validation
      */
-    static locationSchema = object()
+    static geoLocationSchema = object()
         .optional()
         .shape({
             label: string().required("Please provide label for identification"),
@@ -142,7 +142,7 @@ class Validator {
      */
     static registerUserSchema = object().shape({
         gender: this.genderSchema,
-        location: this.locationSchema,
+        location: this.geoLocationSchema,
         password: this.passwordSchema,
         confirmPassword: string().oneOf([ref('password'), null], "Passwords don't match"),
     });

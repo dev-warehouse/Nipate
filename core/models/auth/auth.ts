@@ -1,4 +1,4 @@
-import {Gender, Location, UserModel} from ".";
+import {Gender, GeoLocation, UserModel} from ".";
 
 export interface LoginFormData extends Pick<UserModel, "mobile"> {
     password: string
@@ -14,7 +14,7 @@ export interface CreateUserFormData {
 
 export interface RegisterUserFormData {
     gender: Gender
-    location?: Location
+    location?: GeoLocation
     password: string
     confirmPassword: string
 }

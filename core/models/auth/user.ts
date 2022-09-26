@@ -7,7 +7,7 @@ export type MobileNumber = {
     number?: string;
 }
 
-export interface Location {
+export interface GeoLocation {
     label: string,
     longitude: number
     latitude: number
@@ -21,5 +21,5 @@ export interface UserModel {
     idNumber: number
     roles: UserRole[]
     gender: Gender
-    location?: Location
+    location?: GeoLocation
 }
