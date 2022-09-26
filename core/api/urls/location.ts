@@ -1,4 +1,4 @@
-import {BASE_API_URL} from "@core/api";
+import {BASE_API_URL} from "./index";
 
 export const COUNTIES_LIST_URL = `${BASE_API_URL}/location/counties`
 export const LOCATIONS_LIST_URL = `${BASE_API_URL}/location/locations`
