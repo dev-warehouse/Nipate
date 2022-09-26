@@ -4,13 +4,15 @@ import {AxiosContext, axiosInstance} from "@core/context";
 import {useAuth} from "../hooks";
 
 export function AxiosProvider({children}: PropsWithChildren<any>) {
+
+    const {authToken} = useAuth()
+
     const axios: AxiosInstance = useMemo(() => {
         axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
             // Read token for anywhere, in this case directly from localStorage
-            const {authToken: token} = useAuth()
-            if (token) {
+            if (authToken) {
                 config.headers = {
-                    Authorization: `Token ${token?.replace(/(^["']|["']$)/g, '')}`,
+                    Authorization: `Token ${authToken?.replace(/(^["']|["']$)/g, '')}`,
                 }
             }
 
@@ -18,7 +20,7 @@ export function AxiosProvider({children}: PropsWithChildren<any>) {
         })
 
         return axiosInstance
-    }, [])
+    }, [authToken])
 
     return <AxiosContext.Provider value={axios}>{children}</AxiosContext.Provider>
 }
