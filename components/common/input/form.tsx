@@ -381,7 +381,8 @@ export function SelectCountyInput({label, name, control, register, errors, trigg
     }
 
     return <FormInput className="w-full" label={label} name={name} register={register} errors={errors} {...props}>
-        <Select renderValue={renderValue} onChange={handleChange} listboxOpen={open} onClick={closeSelect}>
+        <Select renderValue={renderValue} onChange={handleChange} listboxOpen={open} onClick={closeSelect}
+                dataValidity={errors[name] ? 'error' : undefined}>
             <ClickAwayListener onClickAway={closeSelect}>
                 <div>
                     <div className="mb-3">

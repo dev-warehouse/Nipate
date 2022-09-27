@@ -124,6 +124,7 @@ class Validator {
         Name: string().required("Required name"),
     }).typeError("Your County is required").required("Your County is required")
 
+
     /**
      * Yup schema for login details validation
      */
@@ -147,8 +148,8 @@ class Validator {
      */
     static registerUserSchema = object().shape({
         gender: this.genderSchema,
-        location: this.countySchema,
         password: this.passwordSchema,
+        location: object().typeError("Your County is required").required("Your County is required"),
         confirmPassword: string().oneOf([ref('password'), null], "Passwords don't match"),
     });
 }
