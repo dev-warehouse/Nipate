@@ -3,6 +3,8 @@ import {AuthActions, authContext, AuthLifecycleData, AuthReducer} from "@core/co
 import {useCrypto, useNotification} from "@core/hooks";
 import {UserModel} from "@core/models";
 import {useLocalStorage} from "usehooks-ts";
+import axios, {AxiosError, AxiosResponse} from "axios";
+import {AuthDeserializer, USER_DETAILS_URL, UserModelResponse} from "@core/api";
 
 /**
  * Reducer for Auth States
@@ -74,6 +76,19 @@ export function AuthProvider(props: DOMAttributes<any>) {
     }, [rememberToken])
 
     // Auto Fetching user details
+    useMemo(() => {
+        if (state.authToken) {
+            axios.get<UserModelResponse>(`${USER_DETAILS_URL}`, {
+                headers: {
+                    Authorization: `Token ${state.authToken?.replace(/(^["']|["']$)/g, '')}`,
+                }
+            }).then(({data}: AxiosResponse<UserModelResponse>) => {
+                dispatch({type: 'setUser', data: AuthDeserializer.userModel(data)})
+            }).catch(({config}: AxiosError) => {
+                console.log(config)
+            })
+        }
+    }, [state.authToken])
 
     // Lifecycle Methods
     const setToken = (data: string) => dispatch({type: 'setToken', data: data})
