@@ -349,6 +349,8 @@ interface SelectCountyProps extends FormInputProps {
 export function SelectCountyInput({label, name, control, register, errors, trigger, ...props}: SelectCountyProps) {
 
 
+    const {field: {value, ref, onChange}} = useController({control, name})
+
     const [open, setOpen] = useState<boolean>(false)
     const [data, setData] = useState<County[]>([])
 
@@ -372,6 +374,7 @@ export function SelectCountyInput({label, name, control, register, errors, trigg
 
 
     function handleChange(value: County) {
+        onChange(value)
         setOpen(!open)
     }
 
@@ -381,8 +384,10 @@ export function SelectCountyInput({label, name, control, register, errors, trigg
     }
 
     return <FormInput className="w-full" label={label} name={name} register={register} errors={errors} {...props}>
-        <Select renderValue={renderValue} onChange={handleChange} listboxOpen={open} onClick={closeSelect}
-                dataValidity={errors[name] ? 'error' : undefined}>
+        <Select
+            ref={ref}
+            renderValue={renderValue} onChange={handleChange} listboxOpen={open} onClick={closeSelect}
+            dataValidity={errors[name] ? 'error' : undefined}>
             <ClickAwayListener onClickAway={closeSelect}>
                 <div>
                     <div className="mb-3">
