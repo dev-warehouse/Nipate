@@ -97,5 +97,19 @@ export class AuthSerializer {
 }
 
 export class AuthDeserializer {
-    
+    static userModel = (response: UserModelResponse): UserModel => {
+        return {
+            userId: response.id.toString(),
+            firstName: response.FirstName,
+            lastName: response.SurName,
+            location: response.Location,
+            gender: response.Gender.id === 1 ? 'male' : 'female',
+            idNumber: parseInt(response.IDNumber),
+            mobile: {
+                code: response.MobileNumber.split(/^(\d{3})/)[1],
+                number: response.MobileNumber.split(/^(\d{3})/)[2]
+            },
+            roles: ['user']
+        }
+    }
 }
