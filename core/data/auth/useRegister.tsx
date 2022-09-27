@@ -1,5 +1,5 @@
 import {UseFormReturn} from "react-hook-form";
-import {CreateUserFormData, LoginFormData, RegisterUserFormData} from "@core/models";
+import {CreateUserFormData, RegisterUserFormData} from "@core/models";
 import {useMutation} from "@tanstack/react-query";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {
@@ -13,7 +13,7 @@ import {Dispatch, SetStateAction} from "react";
 import {RiSignalWifiErrorLine} from "react-icons/ri";
 import {useAuth} from "@core/hooks";
 
-interface UseRegisterProps extends Pick<UseFormReturn<LoginFormData>, 'clearErrors' | 'reset' | 'setError'> {
+interface UseRegisterProps extends Pick<UseFormReturn<any>, 'clearErrors' | 'reset' | 'setError'> {
     setContinueData: Dispatch<SetStateAction<CreateUserResponseData>>
     setStage?: Dispatch<SetStateAction<0 | 1>>
 }
@@ -50,8 +50,8 @@ export function useCreateUser({clearErrors, reset, setError, setContinueData}: U
 export function useRegisterUser({clearErrors, reset, setError, setStage}: UseRegisterProps) {
     const {setToken} = useAuth()
 
-    return useMutation<AxiosResponse<LoginResponseData>, AxiosError<any>, { createdID: number, remember?: boolean, payload: RegisterUserFormData }>({
-        mutationFn: ({remember, ...data}) => {
+    return useMutation<AxiosResponse<LoginResponseData>, AxiosError<any>, { createdID: number, payload: RegisterUserFormData }>({
+        mutationFn: (data) => {
             return axios.put(FINALIZE_REGISTER_URL, AuthSerializer.registerUser(data))
         },
         onSuccess: ({data: {Auth_token}}) => {
