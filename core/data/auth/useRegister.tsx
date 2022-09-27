@@ -71,6 +71,10 @@ export function useRegisterUser({clearErrors, reset, setError, setStage}: UseReg
                     }
                 }])
             }
+            if (response?.data?.password[0] === "Ensure this field has at least 8 characters.") {
+                setError('password', {message: "Password should have at least 8 characters for better hashing"})
+            }
+
             if (response?.data?.Error === "User doesn't exists") {
                 setError('password', {message: "User with number doesn't exist, try again"})
                 if (setStage) {

@@ -147,7 +147,12 @@ class Validator {
      */
     static registerUserSchema = object().shape({
         gender: this.genderSchema,
-        password: this.passwordSchema,
+        password: string()
+            .required("Password is required")
+            .matches(
+                /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%? "]?).*$/,
+                "Password should contain least a number, capital letter or a symbol "
+            ),
         location: object().typeError("Your County is required").required("Your County is required"),
         confirmPassword: string().oneOf([ref('password'), null], "Passwords don't match"),
     });
