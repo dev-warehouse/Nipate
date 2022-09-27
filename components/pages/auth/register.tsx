@@ -87,7 +87,7 @@ function CreateUserForm({stage, setStage, setContinueData}: StageProps) {
     </form>
 }
 
-function RegisterUserForm({stage, setStage}: StageProps) {
+function RegisterUserForm({stage, setStage, setContinueData, continueData}: StageProps) {
 
     const {
         register,
@@ -100,7 +100,23 @@ function RegisterUserForm({stage, setStage}: StageProps) {
         formState: {errors},
     } = useForm<RegisterUserFormData>({resolver: yupResolver(Validator.registerUserSchema)});
 
+
+    const {mutate, isError, isSuccess, isLoading, isPaused} = useRegisterUser({
+        clearErrors,
+        reset,
+        setError,
+        setStage,
+        setContinueData,
+    })
+
     const submit = (data: RegisterUserFormData) => {
+        mutate({createdID: continueData.id, payload: data})
+    }
+
+    const router = useRouter()
+
+    if (isSuccess) {
+        router.push('/')
     }
 
     return <form onSubmit={handleSubmit(submit)} className={styles.form_root}>
