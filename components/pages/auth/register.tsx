@@ -5,22 +5,28 @@ import {Validator} from "@core/services";
 import {Button, FormInput, GenderInput, PhoneInput, SelectCountyInput} from "@components/common";
 import {Dispatch, SetStateAction, useState} from "react";
 import styles from "./styles/register.module.scss";
+import {CreateUserResponseData} from "@core/api";
 
 type RegisterStage = 0 | 1
 
 interface StageProps {
     stage: RegisterStage
     setStage: Dispatch<SetStateAction<RegisterStage>>
+    continueData: CreateUserResponseData
+    setContinueData: Dispatch<SetStateAction<CreateUserResponseData>>
 }
 
 export function RegisterForm() {
     const [stage, setStage] = useState<RegisterStage>(1)
+    const [continueData, setContinueData] = useState<CreateUserResponseData>({} as CreateUserResponseData)
 
     //TODO Add Swipe animation on state change
     return <div className={styles.root}>
         {
-            stage === 0 ? <CreateUserForm stage={0} setStage={setStage}/> :
-                <RegisterUserForm stage={1} setStage={setStage}/>
+            stage === 0 ? <CreateUserForm stage={0} setStage={setStage} continueData={continueData}
+                                          setContinueData={setContinueData}/> :
+                <RegisterUserForm stage={1} setStage={setStage} continueData={continueData}
+                                  setContinueData={setContinueData}/>
         }
     </div>
 }
