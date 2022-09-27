@@ -29,6 +29,7 @@ function ProviderDashboardDetails({user}: { user: UserModel }) {
  * @constructor
  */
 function Avatar({user, page}: { user: UserModel, page: HeaderProps['page'] }): JSX.Element {
+    const {removeUser} = useAuth()
     // This state opens the detail menu for avatar element
     const [open, setOpen] = useState<boolean>(false)
 
@@ -37,6 +38,7 @@ function Avatar({user, page}: { user: UserModel, page: HeaderProps['page'] }): J
 
     // This handles User feedback on signOut
     const signOut = () => {
+        removeUser()
     }
 
     return <ClickAwayListener onClickAway={() => setOpen(false)}>
@@ -88,7 +90,6 @@ function Auth({page}: { page: HeaderProps['page'] }): JSX.Element {
             <Button variant={"outline"} onClick={login}>Login</Button>
             <Button onClick={register}>Register</Button>
         </div>
-        {/*    TODO Implement Automatic Avatars API*/}
     </> : <Avatar user={currentUser} page={page}/>
 }
 

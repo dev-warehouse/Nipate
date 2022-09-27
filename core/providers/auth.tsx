@@ -95,7 +95,12 @@ export function AuthProvider(props: DOMAttributes<any>) {
     const saveToken = () => setRememberToken(true)
     const setUser = (data: UserModel) => dispatch({type: 'setUser', data: data})
     const updateUser = (data: UserModel) => dispatch({type: 'updateUser', data: data})
-    const removeUser = () => dispatch({type: 'removeUser'})
+    const removeUser = () => {
+        dispatch({type: 'removeUser'})
+        if (token) {
+            saveToStorage('')
+        }
+    }
 
     return <authContext.Provider value={{
         currentUser: state.currentUser,
