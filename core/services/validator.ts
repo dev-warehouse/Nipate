@@ -120,7 +120,7 @@ class Validator {
         .required("Please provide your last name");
 
     static countySchema = object().shape({
-        id: string().required("Required id"),
+        id: number().required("Required id"),
         Name: string().required("Required name"),
     }).typeError("Your County is required").required("Your County is required")
 
