@@ -11,7 +11,7 @@ import {
 } from "@core/api";
 import {Dispatch, SetStateAction} from "react";
 import {RiSignalWifiErrorLine} from "react-icons/ri";
-import {useAuth} from "@core/hooks";
+import {useAuth, useNotification} from "@core/hooks";
 
 interface UseRegisterProps extends Pick<UseFormReturn<any>, 'clearErrors' | 'reset' | 'setError'> {
     setContinueData: Dispatch<SetStateAction<CreateUserResponseData>>
@@ -49,15 +49,24 @@ export function useCreateUser({clearErrors, reset, setError, setContinueData}: U
 
 export function useRegisterUser({clearErrors, reset, setError, setStage}: UseRegisterProps) {
     const {setToken} = useAuth()
+    const {alert} = useNotification()
 
     return useMutation<AxiosResponse<LoginResponseData>, AxiosError<any>, { createdID: number, payload: RegisterUserFormData }>({
         mutationFn: (data) => {
             return axios.put(FINALIZE_REGISTER_URL, AuthSerializer.registerUser(data))
         },
-        onSuccess: ({data: {Auth_token}}) => {
+        onSuccess: ({data: {Auth_token, FirstName}}) => {
             setToken(Auth_token)
             reset(undefined)
             clearErrors()
+            alert([{
+                id: `registration_${FirstName}_successful`,
+                type: 'toast',
+                props: {
+                    message: `Your Account has been created, you will be redirected automatically`,
+                    status: 'success',
+                }
+            }])
         },
         onError: ({code, response}) => {
             if (code === AxiosError.ERR_NETWORK) {
