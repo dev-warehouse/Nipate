@@ -4,7 +4,11 @@ import {Control, useController, UseFormRegister} from "react-hook-form";
 import {CheckBox, Option, Radio, Select, SelectProps} from "@components/common";
 import Image from "next/image";
 import {ChangeEvent} from "react";
-import {Country, Gender, MobileNumber} from "@core/models";
+import {Country, County, Gender, MobileNumber} from "@core/models";
+import {useCounties} from "@core/data";
+import {CgSpinner} from "react-icons/cg";
+import {IoCaretDown} from "react-icons/io5";
+import {SelectOption} from "@mui/base";
 
 /**
  * Form Input props, extends Input Props
@@ -334,6 +338,34 @@ export function GenderInput({required, errors, control, label, name, dataValidit
             )}
         </div>
     )
+}
+
+interface SelectCountyProps extends FormInputProps {
+    control: Control<County | any>
+}
+
+export function SelectCountyInput({label, name, control, register, errors, trigger, ...props}: SelectCountyProps) {
+    const {data, isLoading} = useCounties()
+
+    function renderValue(option: SelectOption<County> | null): JSX.Element {
+        return <div className="w-full h-[1.5rem] flex flex-row items-center justify-between">
+            <span>{option?.label}</span>
+            <IoCaretDown className="inline"/>
+        </div>
+    }
+
+
+    return <FormInput className="w-full" label={label} name={name} register={register} errors={errors} {...props}>
+        <Select renderValue={renderValue}>
+            {
+                isLoading ? <div className="inline-flex items-center p-2">
+                    Fetching counties
+                    <CgSpinner className="mx-1 animate-spin"/>
+                </div> : data?.map((county, index) => <Option key={index} value={county}
+                                                              label={county.Name}>{county.Name}</Option>)
+            }
+        </Select>
+    </FormInput>
 }
 
 export {FormInput, PhoneInput, FormCheckBox};
