@@ -14,7 +14,7 @@ interface StageProps {
 }
 
 export function RegisterForm() {
-    const [stage, setStage] = useState<RegisterStage>(0)
+    const [stage, setStage] = useState<RegisterStage>(1)
 
     //TODO Add Swipe animation on state change
     return <div className={styles.root}>
@@ -83,13 +83,17 @@ function RegisterUserForm({stage, setStage}: StageProps) {
     }
 
     return <form onSubmit={handleSubmit(submit)} className={styles.form_root}>
-        <p className={styles.form_header}>Finalize on registration</p>
-        <GenderInput required={true} control={control} label="Gender" name="gender" errors={errors} trigger={trigger}/>
+        <GenderInput
+            label="Gender"
+            name="gender"
+            control={control}
+            errors={errors}
+            trigger={trigger}
+        />
         <FormInput
             label="Password"
             name="password"
             type="password"
-            required={true}
             placeholder="••••••••••"
             className={styles.form_input}
             register={register}
@@ -100,7 +104,6 @@ function RegisterUserForm({stage, setStage}: StageProps) {
             name="confirmPassword"
             type="password"
             placeholder="••••••••••"
-            required={true}
             className={styles.form_input}
             register={register}
             errors={errors}
