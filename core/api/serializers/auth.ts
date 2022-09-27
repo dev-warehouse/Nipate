@@ -1,4 +1,4 @@
-import {CreateUserFormData, LoginFormData, RegisterUserFormData} from "@core/models";
+import {County, CreateUserFormData, LoginFormData, RegisterUserFormData, UserModel} from "@core/models";
 
 export interface LoginRequestData {
     MobileNumber: string
@@ -30,6 +30,19 @@ export interface RegisterUserPostData {
     LocationID: number
     GenderID: number
     password: string
+}
+
+export interface UserModelResponse {
+    id: number
+    MobileNumber: string
+    IDNumber: string,
+    FirstName: string
+    SurName: string
+    Location: County
+    Gender: {
+        id: number
+        name: string
+    }
 }
 
 
@@ -69,4 +82,20 @@ export class AuthSerializer {
             password: password
         }
     }
+
+    static userModel = (model: UserModel): UserModelResponse => {
+        return {
+            id: parseInt(model.userId),
+            FirstName: model.firstName,
+            SurName: model.lastName,
+            Gender: {id: model.gender === 'male' ? 1 : 2, name: model.gender},
+            IDNumber: model.idNumber.toString(),
+            Location: model.location,
+            MobileNumber: `${model.mobile.code}${model.mobile.number}`,
+        }
+    }
+}
+
+export class AuthDeserializer {
+    
 }
