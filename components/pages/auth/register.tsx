@@ -6,7 +6,7 @@ import {Button, FormInput, GenderInput, PhoneInput, SelectCountyInput} from "@co
 import {Dispatch, SetStateAction, useState} from "react";
 import styles from "./styles/register.module.scss";
 import {CreateUserResponseData} from "@core/api";
-import {useCreateUser} from "@core/data/auth/useRegister";
+import {useCreateUser, useRegisterUser} from "@core/data";
 import {useRouter} from "next/router";
 
 type RegisterStage = 0 | 1
@@ -43,7 +43,7 @@ function FormSubmit({label, stage}: { label: string, stage: RegisterStage }) {
     </div>
 }
 
-function CreateUserForm({stage, continueData, setContinueData}: StageProps) {
+function CreateUserForm({stage, setStage, setContinueData}: StageProps) {
 
     const {
         register,
@@ -56,7 +56,6 @@ function CreateUserForm({stage, continueData, setContinueData}: StageProps) {
         formState: {errors},
     } = useForm<CreateUserFormData>({resolver: yupResolver(Validator.createUserSchema)});
 
-    const router = useRouter()
 
     const {mutate, isError, isSuccess, isLoading, isPaused} = useCreateUser({
         clearErrors,
@@ -70,7 +69,7 @@ function CreateUserForm({stage, continueData, setContinueData}: StageProps) {
     }
 
     if (isSuccess) {
-        router.push('/')
+        setStage(1)
     }
 
     return <form onSubmit={handleSubmit(submit)} className={styles.form_root}>
