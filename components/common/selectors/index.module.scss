@@ -27,7 +27,7 @@
 }
 
 .select_root {
-  @apply p-3 rounded-xl;
+  @apply p-3 rounded-xl outline-none;
   @apply bg-input_bg min-h-[2.5rem];
   @apply focus:ring-brand_yellow focus:ring-2 ring-offset-2;
 

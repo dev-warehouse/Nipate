@@ -1,6 +1,14 @@
-import {createContext} from "react";
-import {LoginFormData, RegisterFormData, UpdateDetailsFormData, UserModel} from "@core/models";
+import {createContext, Reducer} from "react";
+import {UserModel} from "@core/models";
 
+export type AuthActions = { type: 'setToken', data: string }
+    | { type: 'setUser', data: UserModel }
+    | { type: 'removeUser' }
+    | { type: 'updateUser', data: UserModel }
+
+export interface AuthReducer extends Reducer<AuthLifecycleData, AuthActions> {
+
+}
 
 /**
  * Interface for the functions that will interact with the user and authentication data
@@ -9,28 +17,28 @@ import {LoginFormData, RegisterFormData, UpdateDetailsFormData, UserModel} from 
  */
 interface AuthLifecycleActions {
     /**
-     * This handle user authentication lifecycle
+     * This handle user authentication lifecycle, it sets the user through model and token strings
      * @param model
-     * @param saveAuth
+     * @param token
      */
-    login: (model: LoginFormData, saveAuth: boolean) => boolean
+    setUser: (model: UserModel) => void
+    /**
+     * Sets the auth Token
+     * @param token
+     */
+    setToken: (token: string) => void
+    saveToken: () => void
     /**
      * This handles user logout lifecycle
      * @param model
      * @param saveAuth
      */
-    logout: () => boolean
+    removeUser: () => void
     /**
-     * This handles user registration
-     * @param model
-     * @param saveAuth
-     */
-    register: (model: RegisterFormData, saveAuth: boolean) => boolean
-    /**
-     * This enables the user to update his/her details
+     * This enables the user to update user details
      * @param model
      */
-    update: (model: UpdateDetailsFormData) => boolean
+    updateUser: (model: UserModel) => void
 }
 
 /**

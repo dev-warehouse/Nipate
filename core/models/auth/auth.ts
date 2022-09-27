@@ -1,12 +1,21 @@
-import {UserModel} from ".";
+import {Gender, UserModel} from ".";
+import {County} from "@core/models";
 
 export interface LoginFormData extends Pick<UserModel, "mobile"> {
     password: string
+    remember: boolean
 }
 
-export interface RegisterFormData extends Omit<UserModel, "roles" | "avatar" | "userId"> {
-    password: LoginFormData['password']
+export interface CreateUserFormData {
+    mobile: UserModel['mobile']
+    idNumber: UserModel['idNumber']
+    firstName: UserModel['firstName']
+    lastName: UserModel['lastName']
 }
 
-export interface UpdateDetailsFormData extends RegisterFormData {
+export interface RegisterUserFormData {
+    gender: Gender
+    location: County,
+    password: string
+    confirmPassword: string
 }

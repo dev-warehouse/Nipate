@@ -1,6 +1,28 @@
-import {Component} from "react";
-import {LoginFormData, RegisterFormData, UpdateDetailsFormData} from "@core/models";
-import {authContext, AuthLifecycleActions, AuthLifecycleData} from "@core/context";
+import {DOMAttributes, useMemo, useReducer, useState} from "react";
+import {AuthActions, authContext, AuthLifecycleData, AuthReducer} from "@core/context";
+import {useCrypto, useNotification} from "@core/hooks";
+import {UserModel} from "@core/models";
+import {useLocalStorage} from "usehooks-ts";
+
+/**
+ * Reducer for Auth States
+ * @param prevState
+ * @param action
+ */
+function reducerAuth(prevState: AuthLifecycleData, action: AuthActions): AuthLifecycleData {
+    switch (action.type) {
+        case "removeUser":
+            return {}
+        case "setToken":
+            return {authToken: action.data}
+        case "setUser":
+            return {currentUser: action.data}
+        case "updateUser":
+            return {currentUser: {...action.data}}
+        default:
+            return {}
+    }
+}
 
 /**
  * This provider is responsible to all things to do with user authentication
@@ -9,71 +31,64 @@ import {authContext, AuthLifecycleActions, AuthLifecycleData} from "@core/contex
  * by inheriting from `AuthLifecycleActions` and handles the state of all lifecycle data by
  * taking `AuthLifecycleData` as a state argument.
  */
-class AuthProvider extends Component<any, AuthLifecycleData> implements AuthLifecycleActions {
+export function AuthProvider(props: DOMAttributes<any>) {
 
-    // TODO : Auth Provider Implementation
-    state: AuthLifecycleData = {}
+    // Auth Lifecycle state hook
+    const [state, dispatch] = useReducer<AuthReducer>(reducerAuth, {})
 
-    /**
-     * This is responsible to auto authenticating user when one has saved their login details
-     */
-    autoLogin() {
-        console.log("Auto Login")
-    }
+    // For whether to save token to storage
+    const [rememberToken, setRememberToken] = useState(false)
 
-    /**
-     * This is where automatic lifecycle methods are done
-     */
-    componentDidMount() {
-        this.autoLogin()
-    }
+    // Utils hooks
+    const {encrypt, decrypt, hash} = useCrypto()
+    const [token, saveToStorage] = useLocalStorage<string>(`t_${hash('token')}`, '')
+    const {alert} = useNotification()
 
-    /**
-     * Implementation of `login` lifecycle
-     * @param model
-     * @param saveAuth
-     */
-    login = (model: LoginFormData, saveAuth: boolean): boolean => {
-        return false;
-    };
+    // Auto Login and update token on token change
+    useMemo(() => {
+        if (token !== '') {
+            decrypt(token, `${hash('NipateAuthToken_')}`).then(res => {
+                dispatch({type: 'setToken', data: res})
+            }).catch(() => {
+                }
+            )
+        }
+    }, [token])
 
-    /**
-     * Implementation of `logout` lifecycle
-     */
-    logout = (): boolean => {
-        return false;
-    };
+    // For Saving token to storage
+    useMemo(() => {
+        if (rememberToken && state.authToken) {
+            encrypt(state.authToken, hash('NipateAuthToken_')).then(res => {
+                saveToStorage(res)
+            }).catch(() =>
+                alert([{
+                    id: 'encrypt_error',
+                    type: 'toast',
+                    props: {
+                        message: 'Unable to save details : 0x284',
+                        status: 'error'
+                    }
+                }])
+            )
+        }
+    }, [rememberToken])
 
-    /**
-     * Implementation of `register` lifecycle
-     * @param model
-     * @param saveAuth
-     */
-    register = (model: RegisterFormData, saveAuth: boolean): boolean => {
-        return false;
-    };
+    // Auto Fetching user details
 
-    /**
-     * Implementation of `update` lifecycle
-     * @param model
-     */
-    update = (model: UpdateDetailsFormData): boolean => {
-        return false;
-    };
+    // Lifecycle Methods
+    const setToken = (data: string) => dispatch({type: 'setToken', data: data})
+    const saveToken = () => setRememberToken(true)
+    const setUser = (data: UserModel) => dispatch({type: 'setUser', data: data})
+    const updateUser = (data: UserModel) => dispatch({type: 'updateUser', data: data})
+    const removeUser = () => dispatch({type: 'removeUser'})
 
-    /**
-     * This is where the provider is baked
-     */
-    render() {
-        return <authContext.Provider value={{
-            currentUser: this.state.currentUser,
-            authToken: this.state.authToken,
-            login: this.login,
-            logout: this.logout,
-            register: this.register,
-            update: this.update
-        }} {...this.props}/>
-    }
+    return <authContext.Provider value={{
+        currentUser: state.currentUser,
+        authToken: state.authToken,
+        setUser: setUser,
+        setToken: setToken,
+        saveToken: saveToken,
+        removeUser: removeUser,
+        updateUser: updateUser
+    }} {...props}/>
 }
-
-export {AuthProvider}

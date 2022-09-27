@@ -1,10 +1,10 @@
 import {Input, InputProps} from ".";
 import styles from "./index.module.scss";
 import {Control, useController, UseFormRegister} from "react-hook-form";
-import {Option, Select, SelectProps} from "@components/common";
+import {CheckBox, Option, Radio, Select, SelectProps} from "@components/common";
 import Image from "next/image";
 import {ChangeEvent} from "react";
-import {MobileNumber} from "@core/models";
+import {Country, Gender, MobileNumber} from "@core/models";
 
 /**
  * Form Input props, extends Input Props
@@ -25,6 +25,10 @@ interface FormInputProps extends InputProps {
      */
     register: UseFormRegister<any>;
     /**
+     * For Required indicator
+     */
+    required?: boolean
+    /**
      * Triggers the form validation
      */
     trigger?: any
@@ -32,6 +36,39 @@ interface FormInputProps extends InputProps {
      * Feedback message
      */
     errors: any;
+}
+
+function FormCheckBox({label, name, required, dataValidity, register, errors}: FormInputProps) {
+    return <div className="self-start">
+        <div className="inline-flex gap-2 flex-row-reverse">
+            <label
+                htmlFor={name}
+                className="text-sm font-medium"
+                data-validity={
+                    dataValidity ? dataValidity : errors[name] ? "error" : "initial"
+                }
+            >
+                {label}
+                {
+                    required ?
+                        <span className="mx-1 text-red-500 align-super">*</span> : <></>
+                }
+            </label>
+            <CheckBox id={name} {...register(name)}/>
+        </div>
+        {errors[name] ? (
+            <p
+                className={styles.form_message}
+                data-validity={
+                    dataValidity ? dataValidity : errors[name] ? "error" : "initial"
+                }
+            >
+                {errors[name].message}
+            </p>
+        ) : (
+            <></>
+        )}
+    </div>
 }
 
 /**
@@ -43,6 +80,7 @@ interface FormInputProps extends InputProps {
  */
 function FormInput({
                        label,
+                       required,
                        className = "",
                        name,
                        register,
@@ -65,6 +103,10 @@ function FormInput({
                 }
             >
                 {label}
+                {
+                    required ?
+                        <span className="mx-1 text-red-500 align-super">*</span> : <></>
+                }
             </label>
             {children ?? (
                 <Input
@@ -106,21 +148,21 @@ function FormInput({
  */
 function SelectCountries(props: SelectProps) {
     // Specify for now but it will be fetched
-    const countries: { flag: string; name: string; callingCodes: string }[] = [
+    const countries: Country[] = [
         {
             flag: "https://flagcdn.com/ke.svg",
             name: "Kenya",
-            callingCodes: "+254",
+            callingCodes: 254,
         },
         {
             flag: "https://flagcdn.com/tz.svg",
             name: "Tanzania",
-            callingCodes: "+255",
+            callingCodes: 255,
         },
         {
             flag: "https://flagcdn.com/ug.svg",
             name: "Uganda",
-            callingCodes: "+256",
+            callingCodes: 256,
         },
     ];
 
@@ -135,7 +177,7 @@ function SelectCountries(props: SelectProps) {
                     <div className={styles.phone_option_img}>
                         <Image src={option.label} layout="fill"/>
                     </div>
-                    <span>{option.value}</span>
+                    <span>+{option.value}</span>
                 </div>
             );
         }
@@ -178,6 +220,7 @@ interface PhoneInputProps extends Omit<FormInputProps, "register"> {
 
 function PhoneInput({
                         label,
+                        required,
                         name,
                         control,
                         trigger,
@@ -211,6 +254,10 @@ function PhoneInput({
                 }
             >
                 {label}
+                {
+                    required ?
+                        <span className="mx-1 text-red-500 align-super">*</span> : <></>
+                }
             </label>
             <div className={styles.phone_root}>
                 <SelectCountries
@@ -243,4 +290,50 @@ function PhoneInput({
     );
 }
 
-export {FormInput, PhoneInput};
+export interface GenderInputProps extends Omit<FormInputProps, 'register'> {
+    control: Control<Gender | any>;
+}
+
+export function GenderInput({required, errors, control, label, name, dataValidity}: GenderInputProps) {
+
+    const {field: {value, onChange}} = useController({control, name})
+
+    const handleMale = () => onChange('male')
+    const handleFemale = () => onChange('female')
+
+    return (
+        <div className={styles.gender_form_root}>
+            <label htmlFor={name} className={styles.form_label}
+                   data-validity={dataValidity ? dataValidity : errors[name] ? "error" : "initial"}
+            >
+                {label}
+                {
+                    required ?
+                        <span className="mx-1 text-red-500 align-super">*</span> : <></>
+                }
+            </label>
+            <div className={styles.gender_root}>
+                <main>
+                    <label htmlFor='male' className={styles.gender_label}>Male: </label>
+                    <Radio id='male' name={name} value={value} checked={value === 'male'} onChange={handleMale}/>
+                </main>
+                <main>
+                    <label htmlFor='female' className={styles.gender_label}>Female: </label>
+                    <Radio id='female' name={name} value={value} checked={value === 'female'} onChange={handleFemale}/>
+                </main>
+            </div>
+            {errors[name] ? (
+                <p
+                    className={styles.form_message}
+                    data-validity={dataValidity ? dataValidity : errors[name] ? "error" : "initial"}
+                >
+                    {errors[name].message}
+                </p>
+            ) : (
+                <></>
+            )}
+        </div>
+    )
+}
+
+export {FormInput, PhoneInput, FormCheckBox};

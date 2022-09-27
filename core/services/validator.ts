@@ -1,5 +1,5 @@
-import {Gender, LoginFormData, RegisterFormData, UserModel, UserRole,} from "@core/models";
-import {array, mixed, number, object, string} from "yup";
+import {LoginFormData, UserModel,} from "@core/models";
+import {array, number, object, ref, string} from "yup";
 
 /**
  * This class deals with all containing validation
@@ -49,22 +49,12 @@ class Validator {
     }
 
     /**
-     * This validates the whole register form data
-     * @param model
-     */
-    static validateRegisterDetails(model: RegisterFormData): boolean {
-        let isValid: boolean = false;
-        this.registerDetailsSchema.isValid(model).then((res) => (isValid = res));
-        return isValid;
-    }
-
-    /**
      * Yup schema for mobile number validation
      */
     static mobileSchema = object().shape({
         code: string()
             .required("Country Code is required")
-            .matches(/^\+\d{3}$/, "Please enter a valid country code"),
+            .matches(/^\d{3}$/, "Please enter a valid country code"),
         number: string()
             .required("Phone number is required")
             .matches(
@@ -95,12 +85,12 @@ class Validator {
     /**
      * Yup Schema for gender validation
      */
-    static genderSchema = mixed<Gender>()
-        .oneOf(Object.values(Gender) as number[], "Serialization of gender failed")
+    static genderSchema = string()
+        .oneOf(['male', 'female'], "Runtime error: Serialization of gender failed")
         .required("Your gender is required");
 
-    static roleSchema = mixed<UserRole>()
-        .oneOf(Object.values(UserRole) as number[], "Serialization of role failed")
+    static roleSchema = string()
+        .oneOf(['provider', 'user', 'admin'], "Serialization of role failed")
         .required("Your role is required");
 
     static rolesSchema = array().of(this.roleSchema).typeError("Serialization of roles failed");
@@ -108,7 +98,7 @@ class Validator {
     /**
      * Yup Schema for location validation
      */
-    static locationSchema = object()
+    static geoLocationSchema = object()
         .optional()
         .shape({
             label: string().required("Please provide label for identification"),
@@ -129,6 +119,11 @@ class Validator {
     static lastNameSchema = string()
         .required("Please provide your last name");
 
+    static countySchema = object().shape({
+        id: string().required("Required id"),
+        Name: string().required("Required name"),
+    }).typeError("Your County is required").required("Your County is required")
+
     /**
      * Yup schema for login details validation
      */
@@ -138,16 +133,23 @@ class Validator {
     });
 
     /**
-     * Yup schema for register details validation
+     * Yup schema for create user details validation
      */
-    static registerDetailsSchema = object().shape({
+    static createUserSchema = object().shape({
         mobile: this.mobileSchema,
-        password: this.passwordSchema,
+        idNumber: this.idNumberSchema,
         firstName: this.firstNameSchema,
         lastName: this.lastNameSchema,
-        idNumber: this.idNumberSchema,
+    });
+
+    /**
+     * Yup schema for register user details validation
+     */
+    static registerUserSchema = object().shape({
         gender: this.genderSchema,
-        location: this.locationSchema,
+        location: this.countySchema,
+        password: this.passwordSchema,
+        confirmPassword: string().oneOf([ref('password'), null], "Passwords don't match"),
     });
 }
 
