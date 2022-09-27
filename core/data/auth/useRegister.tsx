@@ -41,7 +41,7 @@ export function useCreateUser({clearErrors, reset, setError, setContinueData}: U
                 }])
             }
             if (response?.data?.Error === "User with number already exist") {
-                setError('mobile', {message: "User with number already exist, you can log in with the account"})
+                setError('mobile.number', {message: "User with number already exist, you can log in with the account"})
             }
         }
     })

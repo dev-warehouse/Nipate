@@ -76,11 +76,10 @@ class Validator {
     /**
      * Yup Schema for id number validation
      */
-    static idNumberSchema = number()
+    static idNumberSchema = string()
+        .matches(/^\d{10}$/, "Identification has length of 10 numbers")
         .typeError("Invalid Id number")
         .required("Identification number is required")
-        .min(10, "Identification has a minimum length of 10")
-        .max(10, "Identification has a maximum length of 10");
 
     /**
      * Yup Schema for gender validation
