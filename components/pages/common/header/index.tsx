@@ -7,23 +7,40 @@ import {useRouter} from "next/router";
 import styles from './index.module.scss'
 import {ClickAwayListener, PopperUnstyled} from "@mui/base";
 import Link from "next/link";
-import {UserModel} from "@core/models";
 
 export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     page?: 'auth' | 'normal' | 'provider'
 }
 
-function NotificationSection({page}:HeaderProps) {
-    return <div className="w-4 h-4 rounded-lg bg-gray-300"></div>;
+function NotificationSection({page}: HeaderProps) {
+    return <div className="w-6 h-6 rounded-lg bg-gray-200"></div>;
 }
 
-function MessagerSection({page}:HeaderProps) {
-    return <div className="w-4 h-4 rounded-lg bg-gray-400"></div>;
+function MessagerSection({page}: HeaderProps) {
+    return <div className="w-6 h-6 rounded-lg bg-gray-200"></div>;
 }
 
+function UserSection({page}: HeaderProps) {
 
+    const {currentUser, removeUser} = useAuth()
+
+    // This state opens the detail menu for avatar element
+    const [openNav, setOpenNav] = useState<boolean>(false)
+
+    // Ref for avatar component to enable popper to anchor to it
+    const useDetailsRef = useRef(null)
+
+    // This handles User feedback on signOut
+    const signOut = () => {
+        removeUser()
+    }
+
+    const nav = () => {
+        return <ClickAwayListener onClickAway={() => setOpenNav(false)}>
+            <PopperUnstyled open={openNav} anchorEl={useDetailsRef.current}>
                 <div className={styles.menu}>
                     <div className={styles.menuOption}>
+                        {currentUser?.roles.includes('provider') ?
                             <Link href={'/provider/dashboard'}>Provider Dashboard</Link> :
                             <Link href={'/provider/register'}> Register as Provider</Link>
                         }
@@ -31,13 +48,22 @@ function MessagerSection({page}:HeaderProps) {
                     <div className={styles.menuOption}>
                         <Link href={'#'}>Profile</Link>
                     </div>
+                    <Button onClick={signOut}>LogOut</Button>
                 </div>
             </PopperUnstyled>
-    </ClickAwayListener>
+        </ClickAwayListener>
+    }
 
+    return <div className="flex flex-row items-center gap-7" ref={useDetailsRef} onClick={() => setOpenNav(!openNav)}>
+        <p className="text-xl font-semibold text-gray-600">user.firstName</p>
+        <div className={styles.avatar}>
+            <Image src={`https://avatars.dicebear.com/api/adventurer/${currentUser?.userId}.svg`}
+                   layout={"fill"}/>
+        </div>
+    </div>;
 }
 
-function Details({page}:HeaderProps) {
+function Details({page}: HeaderProps) {
     const {currentUser} = useAuth()
 
     const router = useRouter()
@@ -52,7 +78,7 @@ function Details({page}:HeaderProps) {
         router.push('/auth/register')
     }
 
-        return currentUser === undefined ? 
+    return currentUser === undefined ?
         <div className={"flex flex-row gap-1"}>
             <Button variant={"outline"} onClick={handleLogin}>Login</Button>
             <Button onClick={handleRegister}>Register</Button>
@@ -72,7 +98,7 @@ function Header({page, className, ...props}: HeaderProps): JSX.Element {
             </div>
         </Link>
     </>
-    
+
     return <nav className={[className, styles.header_root].join(' ')} {...props}>
         <Logo/>
         {page !== "auth" ? <Details page={page}/> : <></>}
