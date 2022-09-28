@@ -13,6 +13,12 @@ export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     page?: 'auth' | 'normal' | 'provider'
 }
 
+function NotificationSection({page}:HeaderProps) {
+    return <div className="w-4 h-4 rounded-lg bg-gray-300"></div>;
+}
+
+function MessagerSection({page}:HeaderProps) {
+    return <div className="w-4 h-4 rounded-lg bg-gray-400"></div>;
 }
 
 
