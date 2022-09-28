@@ -35,7 +35,7 @@ function UserSection({page}: HeaderProps) {
         removeUser()
     }
 
-    const nav = () => {
+    const Nav = () => {
         return <ClickAwayListener onClickAway={() => setOpenNav(false)}>
             <PopperUnstyled open={openNav} anchorEl={useDetailsRef.current}>
                 <div className={styles.menu}>
@@ -54,12 +54,14 @@ function UserSection({page}: HeaderProps) {
         </ClickAwayListener>
     }
 
-    return <div className="flex flex-row items-center gap-7" ref={useDetailsRef} onClick={() => setOpenNav(!openNav)}>
-        <p className="text-xl font-semibold text-gray-600">user.firstName</p>
+    return <div className="flex flex-row items-center gap-7 cursor-pointer" ref={useDetailsRef}
+                onClick={() => setOpenNav(!openNav)}>
+        <p className="text-gray-600">{currentUser?.firstName}</p>
         <div className={styles.avatar}>
             <Image src={`https://avatars.dicebear.com/api/adventurer/${currentUser?.userId}.svg`}
                    layout={"fill"}/>
         </div>
+        <Nav/>
     </div>;
 }
 
