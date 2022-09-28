@@ -7,6 +7,7 @@ import {useRouter} from "next/router";
 import styles from './index.module.scss'
 import {ClickAwayListener, PopperUnstyled} from "@mui/base";
 import Link from "next/link";
+import {TbExternalLink} from "react-icons/tb";
 
 export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     page?: 'auth' | 'normal' | 'provider'
@@ -38,12 +39,16 @@ function UserSection({page}: HeaderProps) {
     const Nav = () => {
         return <ClickAwayListener onClickAway={() => setOpenNav(false)}>
             <PopperUnstyled open={openNav} anchorEl={useDetailsRef.current}>
-                <div className={styles.menu}>
+                <div className={styles.section_nav_menu}>
                     <div className={styles.menuOption}>
-                        {currentUser?.roles.includes('provider') ?
-                            <Link href={'/provider/dashboard'}>Provider Dashboard</Link> :
-                            <Link href={'/provider/register'}> Register as Provider</Link>
-                        }
+                        <span
+                            className="inline-flex flex-row items-center gap-1">
+                            {currentUser?.roles.includes('provider') ?
+                                <Link href={'/provider/dashboard'}>Provider Dashboard</Link> :
+                                <Link href={'/provider/register'}>Register as Provider</Link>
+                            }
+                            <TbExternalLink/>
+                        </span>
                     </div>
                     <div className={styles.menuOption}>
                         <Link href={'#'}>Profile</Link>
