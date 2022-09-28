@@ -81,10 +81,10 @@ function Details({page}: HeaderProps) {
     }
 
     return currentUser === undefined ?
-        <div className={"flex flex-row gap-1"}>
+        <div className={styles.no_auth}>
             <Button variant={"outline"} onClick={handleLogin}>Login</Button>
             <Button onClick={handleRegister}>Register</Button>
-        </div> : <div className="flex flex-row items-center justify-center gap-8">
+        </div> : <div className={styles.authenticated}>
             <NotificationSection page={page}/>
             <MessagerSection page={page}/>
             <UserSection page={page}/>
