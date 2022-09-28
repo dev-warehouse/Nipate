@@ -54,9 +54,9 @@ function UserSection({page}: HeaderProps) {
         </ClickAwayListener>
     }
 
-    return <div className="flex flex-row items-center gap-7 cursor-pointer" ref={useDetailsRef}
+    return <div className={styles.user_section_root} ref={useDetailsRef}
                 onClick={() => setOpenNav(!openNav)}>
-        <p className="text-gray-600">{currentUser?.firstName}</p>
+        <p>{currentUser?.firstName}</p>
         <div className={styles.avatar}>
             <Image src={`https://avatars.dicebear.com/api/adventurer/${currentUser?.userId}.svg`}
                    layout={"fill"}/>

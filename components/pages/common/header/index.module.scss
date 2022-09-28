@@ -2,8 +2,13 @@
   @apply relative h-[2rem] w-[8rem] cursor-pointer;
 }
 
+.user_section_root {
+  @apply flex flex-row items-center gap-7;
+  @apply cursor-pointer hover:bg-gray-100 px-1.5 py-0.5 rounded-lg;
+}
+
 .avatar {
-  @apply relative w-10 h-10;
+  @apply relative w-12 h-12;
   @apply bg-input_bg rounded-full;
 }
 
