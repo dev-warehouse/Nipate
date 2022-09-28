@@ -1,29 +1,29 @@
 import {Portal} from "@mui/base";
-import {Notification} from '@core/context'
+import {AlertNotification} from '@core/context'
 import {Snackbar} from "./snackbar";
 import {Toast} from "./toast";
-import {useNotification} from "@core/hooks";
+import {useAlertNotification} from "@core/hooks";
 
-function NotificationItem({id, type, props}: Notification) {
+function AlertItem({id, type, props}: AlertNotification) {
     return type === 'toast' ? <Toast id={id} {...props}/> : type === 'snackbar' ? <Snackbar {...props}/> : <></>
 }
 
-function NotificationList() {
-    const {alerts} = useNotification()
+function AlertList() {
+    const {alerts} = useAlertNotification()
 
     // TODO Add animation on notification enter and exit
     return <div>
         {
             alerts.map(({id, type, props}, index) => {
-                return <NotificationItem key={index} id={id} type={type} props={props}/>
+                return <AlertItem key={index} id={id} type={type} props={props}/>
             })
         }
     </div>
 }
 
-export function NotificationFrame() {
+export function AlertNotificationContainer() {
     return <Portal>
-        <NotificationList/>
+        <AlertList/>
     </Portal>
 }
 

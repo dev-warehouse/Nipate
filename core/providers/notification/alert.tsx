@@ -1,13 +1,13 @@
 import {DOMAttributes, Reducer, useReducer} from "react";
-import {Notification, notificationContext} from "@core/context";
+import {AlertNotification, alertNotificationContext} from "@core/context";
 
-type Action = { type: 'alert', data: Notification[] } | { type: 'dismiss', data: string }
+type Action = { type: 'alert', data: AlertNotification[] } | { type: 'dismiss', data: string }
 
-interface DispatchReducer extends Reducer<Notification[], Action> {
+interface DispatchReducer extends Reducer<AlertNotification[], Action> {
 
 }
 
-function reducer(prevState: Notification[], action: Action) {
+function reducer(prevState: AlertNotification[], action: Action) {
     switch (action.type) {
         case "alert":
             return [...prevState, ...action.data]
@@ -17,20 +17,20 @@ function reducer(prevState: Notification[], action: Action) {
     }
 }
 
-export function NotificationProvider({children, ...props}: DOMAttributes<any>) {
+export function AlertNotificationProvider({children, ...props}: DOMAttributes<any>) {
 
     const [state, dispatch] = useReducer<DispatchReducer>(reducer, [])
 
-    const alert = (alerts: Notification[]) => {
+    const alert = (alerts: AlertNotification[]) => {
         dispatch({type: 'alert', data: alerts})
     }
     const dismissAlert = (id: string) => {
         dispatch({type: 'dismiss', data: id})
     }
 
-    return <notificationContext.Provider value={{
+    return <alertNotificationContext.Provider value={{
         alerts: state,
         alert: alert,
         dismissAlert: dismissAlert
-    }} {...props}>{children}</notificationContext.Provider>
+    }} {...props}>{children}</alertNotificationContext.Provider>
 }

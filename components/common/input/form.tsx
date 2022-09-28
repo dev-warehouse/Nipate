@@ -3,8 +3,14 @@ import styles from "./index.module.scss";
 import {Control, useController, UseFormRegister} from "react-hook-form";
 import {CheckBox, Option, Radio, Select, SelectProps} from "@components/common";
 import Image from "next/image";
-import {ChangeEvent} from "react";
-import {Country, Gender, MobileNumber} from "@core/models";
+import {ChangeEvent, useState} from "react";
+import {Country, County, Gender, MobileNumber} from "@core/models";
+import {IoCaretDown, IoCaretUp} from "react-icons/io5";
+import {ClickAwayListener, SelectOption} from "@mui/base";
+import {CgSearch, CgSpinner} from "react-icons/cg";
+import {useQuery} from "@tanstack/react-query";
+import {useAxios} from "@core/hooks";
+import {COUNTIES_LIST_URL} from "@core/api";
 
 /**
  * Form Input props, extends Input Props
@@ -334,6 +340,76 @@ export function GenderInput({required, errors, control, label, name, dataValidit
             )}
         </div>
     )
+}
+
+interface SelectCountyProps extends FormInputProps {
+    control: Control<County | any>
+}
+
+export function SelectCountyInput({label, name, control, register, errors, trigger, ...props}: SelectCountyProps) {
+
+
+    const {field: {value, ref, onChange}} = useController({control, name})
+
+    const [open, setOpen] = useState<boolean>(false)
+    const [data, setData] = useState<County[]>([])
+
+    const axios = useAxios()
+
+    const {data: result, isLoading} = useQuery<County[]>(['countries'], async () => {
+        const {data} = await axios.get(COUNTIES_LIST_URL)
+        return data
+    }, {
+        onSuccess: (data) => {
+            setData(data)
+        }
+    })
+
+    function renderValue(option: SelectOption<County> | null): JSX.Element {
+        return <div className="w-full h-[1.5rem] flex flex-row items-center justify-between">
+            <span>{option?.label}</span>
+            {open ? <IoCaretUp className="inline"/> : <IoCaretDown className="inline"/>}
+        </div>
+    }
+
+
+    function handleChange(value: County) {
+        onChange(value)
+        setOpen(!open)
+    }
+
+    function closeSelect() {
+        setData(result ?? [])
+        setOpen(!open)
+    }
+
+    return <FormInput className="w-full" label={label} name={name} register={register} errors={errors} {...props}>
+        <Select
+            ref={ref}
+            renderValue={renderValue} onChange={handleChange} listboxOpen={open} onClick={closeSelect}
+            dataValidity={errors[name] ? 'error' : undefined}>
+            <ClickAwayListener onClickAway={closeSelect}>
+                <div>
+                    <div className="mb-3">
+                        <Input placeholder="Filter counties" onChange={(e) => {
+                            if (result) setData(result.filter((county) => county.Name.includes(e.target.value)))
+                        }
+                        } endAdornment={<CgSearch className="w-5 h-5"/>}/>
+                    </div>
+                    <div className="h-40 overflow-hidden overflow-y-scroll">
+                        {
+                            isLoading ? <div className="inline-flex items-center p-2">
+                                Fetching counties
+                                <CgSpinner className="mx-1 animate-spin"/>
+                            </div> : data?.map((county, index) =>
+                                <Option key={index} value={county} label={county.Name}>{county.Name}</Option>
+                            )
+                        }
+                    </div>
+                </div>
+            </ClickAwayListener>
+        </Select>
+    </FormInput>
 }
 
 export {FormInput, PhoneInput, FormCheckBox};

@@ -3,7 +3,7 @@ import axios, {AxiosError, AxiosResponse} from "axios";
 import {AuthSerializer, LOGIN_URL, LoginResponseData} from "@core/api";
 import {LoginFormData} from "@core/models";
 import {UseFormReturn} from "react-hook-form";
-import {useAuth, useNotification} from "@core/hooks";
+import {useAlertNotification, useAuth} from "@core/hooks";
 import {useRouter} from "next/router";
 import {RiSignalWifiErrorLine} from "react-icons/ri";
 
@@ -13,7 +13,7 @@ interface UseLoginProps extends Pick<UseFormReturn<LoginFormData>, 'clearErrors'
 export function useLogin({clearErrors, reset, setError}: UseLoginProps) {
 
     const {setToken, saveToken} = useAuth()
-    const {alert} = useNotification()
+    const {alert} = useAlertNotification()
     const router = useRouter()
 
     let saveTokenS = false

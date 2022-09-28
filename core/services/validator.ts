@@ -76,11 +76,10 @@ class Validator {
     /**
      * Yup Schema for id number validation
      */
-    static idNumberSchema = number()
+    static idNumberSchema = string()
+        .matches(/^\d{10}$/, "Identification has length of 10 numbers")
         .typeError("Invalid Id number")
         .required("Identification number is required")
-        .min(10, "Identification has a minimum length of 10")
-        .max(10, "Identification has a maximum length of 10");
 
     /**
      * Yup Schema for gender validation
@@ -120,9 +119,10 @@ class Validator {
         .required("Please provide your last name");
 
     static countySchema = object().shape({
-        id: string().required("Required id"),
+        id: number().required("Required id"),
         Name: string().required("Required name"),
     }).typeError("Your County is required").required("Your County is required")
+
 
     /**
      * Yup schema for login details validation
@@ -147,8 +147,13 @@ class Validator {
      */
     static registerUserSchema = object().shape({
         gender: this.genderSchema,
-        location: this.countySchema,
-        password: this.passwordSchema,
+        password: string()
+            .required("Password is required")
+            .matches(
+                /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%? "]?).*$/,
+                "Password should contain least a number, capital letter or a symbol "
+            ),
+        location: object().typeError("Your County is required").required("Your County is required"),
         confirmPassword: string().oneOf([ref('password'), null], "Passwords don't match"),
     });
 }
