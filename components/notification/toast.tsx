@@ -3,7 +3,7 @@ import {Status} from "@core/context";
 import styles from "./styles/toast.module.scss";
 import {IoMdCheckmark, IoMdClose, IoMdWarning} from "react-icons/io";
 import {CgBell} from 'react-icons/cg'
-import {useNotification} from "@core/hooks";
+import {useAlertNotification} from "@core/hooks";
 import {AiOutlineInfo} from "react-icons/ai";
 
 export interface ToastProps {
@@ -56,7 +56,7 @@ export function Toast({
                           position = "bottom-right",
                       }: ToastProps) {
 
-    const {dismissAlert} = useNotification()
+    const {dismissAlert} = useAlertNotification()
 
     // Automatically dismiss
     if (shouldTimeout) {

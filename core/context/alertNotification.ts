@@ -4,22 +4,22 @@ import {SnackbarProps, ToastProps} from "@components/notification";
 export type Status = "warning" | "error" | "info" | "success" | "notification";
 
 
-export interface Notification {
+export interface AlertNotification {
     id: string
     type: "toast" | "snackbar";
     props: ToastProps | SnackbarProps;
 }
 
-export interface NotificationState {
-    alerts: Notification[];
+export interface AlertNotificationState {
+    alerts: AlertNotification[];
 }
 
-export interface NotificationAction {
+export interface AlertNotificationAction {
     /**
      * Used to add a notification to notification system
      * @param notification
      */
-    alert: (alerts: Notification[]) => void;
+    alert: (alerts: AlertNotification[]) => void;
     /**
      * Dismisses a given notification
      * @param id
@@ -27,4 +27,4 @@ export interface NotificationAction {
     dismissAlert: (id: string) => void;
 }
 
-export const notificationContext = createContext<NotificationState & NotificationAction>({} as NotificationState & NotificationAction)
+export const alertNotificationContext = createContext<AlertNotificationState & AlertNotificationAction>({} as AlertNotificationState & AlertNotificationAction)

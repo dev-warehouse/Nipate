@@ -1,22 +1,22 @@
 import {DOMAttributes} from "react";
-import {AuthProvider, AxiosProvider, NotificationProvider} from ".";
+import {AlertNotificationProvider, AuthProvider, AxiosProvider} from ".";
 import {QueryClientProvider} from "@tanstack/react-query";
 import {queryClient} from "@core/context";
-import {NotificationFrame} from "@components/notification";
+import {AlertNotificationContainer} from "@components/notification";
 
 
 function GlobalProviders(props: DOMAttributes<any>) {
     return <>
-        <NotificationProvider>
+        <AlertNotificationProvider>
             <QueryClientProvider client={queryClient}>
                 <AuthProvider>
                     <AxiosProvider>
                         {props.children}
                     </AxiosProvider>
                 </AuthProvider>
-                <NotificationFrame/>
+                <AlertNotificationContainer/>
             </QueryClientProvider>
-        </NotificationProvider>
+        </AlertNotificationProvider>
     </>
 }
 

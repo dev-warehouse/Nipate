@@ -1,6 +1,6 @@
 import {DOMAttributes, useMemo, useReducer, useState} from "react";
 import {AuthActions, authContext, AuthLifecycleData, AuthReducer} from "@core/context";
-import {useCrypto, useNotification} from "@core/hooks";
+import {useAlertNotification, useCrypto} from "@core/hooks";
 import {UserModel} from "@core/models";
 import {useLocalStorage} from "usehooks-ts";
 import axios, {AxiosError, AxiosResponse} from "axios";
@@ -44,7 +44,7 @@ export function AuthProvider(props: DOMAttributes<any>) {
     // Utils hooks
     const {encrypt, decrypt, hash} = useCrypto()
     const [token, saveToStorage] = useLocalStorage<string>(`t_${hash('token')}`, '')
-    const {alert} = useNotification()
+    const {alert} = useAlertNotification()
 
     // Auto Login and update token on token change
     useMemo(() => {
