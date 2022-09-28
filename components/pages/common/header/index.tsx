@@ -1,6 +1,6 @@
 import {HTMLAttributes, useRef, useState} from "react";
 import Image from "next/image";
-import Logo from '/public/assets/logo_full.svg'
+import logo_img from '/public/assets/logo_full.svg'
 import {Button} from "@components/common";
 import {useAuth} from "@core/hooks";
 import {useRouter} from "next/router";
@@ -94,12 +94,16 @@ function Auth({page}: { page: HeaderProps['page'] }): JSX.Element {
 }
 
 function Header({page, className, ...props}: HeaderProps): JSX.Element {
-    return <nav className={[className, styles.header_root].join(' ')} {...props}>
+    const Logo = () => <>
         <Link href="/">
             <div className={styles.logo}>
-                <Image src={Logo} alt={"App Logo"} layout={'fill'}/>
+                <Image src={logo_img} alt={"App Logo"} layout={'fill'}/>
             </div>
         </Link>
+    </>
+    
+    return <nav className={[className, styles.header_root].join(' ')} {...props}>
+        <Logo/>
         {page !== "auth" ? <Auth page={page}/> : <></>}
     </nav>
 }
