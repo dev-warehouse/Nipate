@@ -31,30 +31,45 @@ export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 
 }
 
+function Details({page}:HeaderProps) {
     const {currentUser} = useAuth()
+
     const router = useRouter()
 
     // Navigate to Login Page
+    const handleLogin = (): void => {
         router.push('/auth')
     }
+
     // Navigate to user registration page
+    const handleRegister = (): void => {
         router.push('/auth/register')
     }
 
+        return currentUser === undefined ? 
         <div className={"flex flex-row gap-1"}>
+            <Button variant={"outline"} onClick={handleLogin}>Login</Button>
+            <Button onClick={handleRegister}>Register</Button>
+        </div> : <div className="flex flex-row items-center justify-center gap-8">
+            <NotificationSection page={page}/>
+            <MessagerSection page={page}/>
+            <UserSection page={page}/>
         </div>
 }
+
 
 function Header({page, className, ...props}: HeaderProps): JSX.Element {
     const Logo = () => <>
         <Link href="/">
             <div className={styles.logo}>
+                <Image src={logo_img} alt={"Nipate Logo"} layout={'fill'}/>
             </div>
         </Link>
     </>
     
     return <nav className={[className, styles.header_root].join(' ')} {...props}>
         <Logo/>
+        {page !== "auth" ? <Details page={page}/> : <></>}
     </nav>
 }
 
