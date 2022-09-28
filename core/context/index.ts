@@ -1,5 +1,5 @@
 // Barrel
 export * from './auth'
 export * from './query'
-export * from './alertNotification'
+export * from './notification'
 export * from './axios'
