@@ -28,13 +28,13 @@ function ProviderDashboardDetails({user}: { user: UserModel }) {
  * @param page
  * @constructor
  */
-function Avatar({user, page}: { user: UserModel, page: HeaderProps['page'] }): JSX.Element {
+function SignedInDetails({user, page}: { user: UserModel, page: HeaderProps['page'] }): JSX.Element {
     const {removeUser} = useAuth()
     // This state opens the detail menu for avatar element
     const [open, setOpen] = useState<boolean>(false)
 
     // Ref for avatar component to enable popper to anchor to it
-    const avatarRef = useRef(null)
+    const useDetailsRef = useRef(null)
 
     // This handles User feedback on signOut
     const signOut = () => {
@@ -46,11 +46,11 @@ function Avatar({user, page}: { user: UserModel, page: HeaderProps['page'] }): J
             {page === 'provider' ? <>
                 <ProviderDashboardDetails user={user}/>
             </> : <></>}
-            <div className={styles.avatar} ref={avatarRef} onClick={() => setOpen(!open)}>
+            <div className={styles.avatar} ref={useDetailsRef} onClick={() => setOpen(!open)}>
                 <Image src={`https://avatars.dicebear.com/api/adventurer/${user.userId}.svg`}
                        layout={"fill"}/>
             </div>
-            <PopperUnstyled open={open} anchorEl={avatarRef.current}>
+            <PopperUnstyled open={open} anchorEl={useDetailsRef.current}>
                 <div className={styles.menu}>
                     <div className={styles.menuOption}>
                         {user.roles.includes('provider') ?
@@ -90,7 +90,7 @@ function Auth({page}: { page: HeaderProps['page'] }): JSX.Element {
             <Button variant={"outline"} onClick={login}>Login</Button>
             <Button onClick={register}>Register</Button>
         </div>
-    </> : <Avatar user={currentUser} page={page}/>
+    </> : <SignedInDetails user={currentUser} page={page}/>
 }
 
 function Header({page, className, ...props}: HeaderProps): JSX.Element {
