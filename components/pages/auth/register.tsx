@@ -71,7 +71,7 @@ function CreateUserForm({stage, setStage, setContinueData}: StageProps) {
         formState: {errors},
     } = useForm<CreateUserFormData>({resolver: yupResolver(Validator.createUserSchema)});
 
-    const {alert} = useAlertNotification()
+    const {showAlert} = useAlertNotification()
 
 
     const {mutate, isError, isSuccess, isLoading, isPaused} = useCreateUser({
@@ -84,7 +84,7 @@ function CreateUserForm({stage, setStage, setContinueData}: StageProps) {
     const submit = (data: CreateUserFormData) => {
         mutate(data)
         if (isPaused) {
-            alert([{
+            showAlert([{
                 id: 'no_internet',
                 type: 'toast',
                 props: {
@@ -128,6 +128,7 @@ function RegisterUserForm({stage, setStage, setContinueData, continueData}: Stag
         formState: {errors},
     } = useForm<RegisterUserFormData>({resolver: yupResolver(Validator.registerUserSchema)});
 
+    const {showAlert} = useAlertNotification()
 
     const {mutate, isError, isSuccess, isLoading, isPaused} = useRegisterUser({
         clearErrors,
@@ -140,7 +141,7 @@ function RegisterUserForm({stage, setStage, setContinueData, continueData}: Stag
     const submit = (data: RegisterUserFormData) => {
         mutate({createdID: continueData.id, payload: data})
         if (isPaused) {
-            alert([{
+            showAlert([{
                 id: 'no_internet',
                 type: 'toast',
                 props: {

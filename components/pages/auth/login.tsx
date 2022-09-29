@@ -13,7 +13,7 @@ import Link from "next/link";
 
 export function LoginForm() {
 
-    const {alert} = useAlertNotification()
+    const {showAlert} = useAlertNotification()
 
     const {
         register,
@@ -31,7 +31,7 @@ export function LoginForm() {
     const submit = (data: LoginFormData) => {
         mutate(data)
         if (isPaused) {
-            alert([{
+            showAlert([{
                 id: 'no_internet',
                 type: 'toast',
                 props: {

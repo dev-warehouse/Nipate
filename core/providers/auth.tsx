@@ -44,7 +44,7 @@ export function AuthProvider(props: DOMAttributes<any>) {
     // Utils hooks
     const {encrypt, decrypt, hash} = useCrypto()
     const [token, saveToStorage] = useLocalStorage<string>(`t_${hash('token')}`, '')
-    const {alert} = useAlertNotification()
+    const {showAlert} = useAlertNotification()
 
     // Auto Login and update token on token change
     useMemo(() => {
@@ -63,7 +63,7 @@ export function AuthProvider(props: DOMAttributes<any>) {
             encrypt(state.authToken, hash('NipateAuthToken_')).then(res => {
                 saveToStorage(res)
             }).catch(() =>
-                alert([{
+                showAlert([{
                     id: 'encrypt_error',
                     type: 'toast',
                     props: {
