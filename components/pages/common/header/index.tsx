@@ -7,18 +7,22 @@ import {useRouter} from "next/router";
 import styles from './index.module.scss'
 import {ClickAwayListener, PopperUnstyled} from "@mui/base";
 import Link from "next/link";
-import {TbExternalLink} from "react-icons/tb";
+import {TbExternalLink, TbNotification} from "react-icons/tb";
 
 export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
     page?: 'auth' | 'normal' | 'provider'
 }
 
 function NotificationSection({page}: HeaderProps) {
-    return <div className="w-6 h-6 rounded-lg bg-gray-200"></div>;
+    return <div>
+        <TbNotification className="w-6 h-6"/>
+    </div>;
 }
 
 function MessagerSection({page}: HeaderProps) {
-    return <div className="w-6 h-6 rounded-lg bg-gray-200"></div>;
+    return <div>
+        <TbNotification className="w-6 h-6"/>
+    </div>;
 }
 
 function UserSection({page}: HeaderProps) {
@@ -40,6 +44,9 @@ function UserSection({page}: HeaderProps) {
         return <ClickAwayListener onClickAway={() => setOpenNav(false)}>
             <PopperUnstyled open={openNav} anchorEl={useDetailsRef.current}>
                 <div className={styles.section_nav_menu}>
+                    <p className={styles.user_section_userName}>
+                        {currentUser?.firstName} {currentUser?.lastName}
+                    </p>
                     <div className={styles.menuOption}>
                         <span
                             className="inline-flex flex-row items-center gap-1">
@@ -61,7 +68,7 @@ function UserSection({page}: HeaderProps) {
 
     return <div className={styles.user_section_root} ref={useDetailsRef}
                 onClick={() => setOpenNav(!openNav)}>
-        <p>{currentUser?.firstName}</p>
+        <p className={styles.user_section_name}>{currentUser?.firstName}</p>
         <div className={styles.avatar}>
             <Image src={`https://avatars.dicebear.com/api/adventurer/${currentUser?.userId}.svg`}
                    layout={"fill"}/>
