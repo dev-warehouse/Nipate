@@ -11,6 +11,7 @@ import {useRouter} from "next/router";
 import {RiSignalWifiErrorLine} from "react-icons/ri";
 import {CgSpinner} from "react-icons/cg";
 import {MdErrorOutline, MdOutlineCheckCircle} from "react-icons/md";
+import {useAlertNotification} from "@core/hooks";
 
 type RegisterStage = 0 | 1
 
@@ -70,6 +71,8 @@ function CreateUserForm({stage, setStage, setContinueData}: StageProps) {
         formState: {errors},
     } = useForm<CreateUserFormData>({resolver: yupResolver(Validator.createUserSchema)});
 
+    const {alert} = useAlertNotification()
+
 
     const {mutate, isError, isSuccess, isLoading, isPaused} = useCreateUser({
         clearErrors,
@@ -80,6 +83,17 @@ function CreateUserForm({stage, setStage, setContinueData}: StageProps) {
 
     const submit = (data: CreateUserFormData) => {
         mutate(data)
+        if (isPaused) {
+            alert([{
+                id: 'no_internet',
+                type: 'toast',
+                props: {
+                    message: 'Please Check your Network Connection',
+                    status: 'warning',
+                    icon: <RiSignalWifiErrorLine/>
+                }
+            }])
+        }
     }
 
     if (isSuccess) {
@@ -125,6 +139,17 @@ function RegisterUserForm({stage, setStage, setContinueData, continueData}: Stag
 
     const submit = (data: RegisterUserFormData) => {
         mutate({createdID: continueData.id, payload: data})
+        if (isPaused) {
+            alert([{
+                id: 'no_internet',
+                type: 'toast',
+                props: {
+                    message: 'Please Check your Network Connection',
+                    status: 'warning',
+                    icon: <RiSignalWifiErrorLine/>
+                }
+            }])
+        }
     }
 
     const router = useRouter()
