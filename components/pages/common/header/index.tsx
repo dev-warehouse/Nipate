@@ -60,7 +60,7 @@ function UserSection({page}: HeaderProps) {
                     <div className={styles.menuOption}>
                         <Link href={'#'}>Profile</Link>
                     </div>
-                    <Button onClick={signOut}>LogOut</Button>
+                    <Button onClick={signOut}>Logout</Button>
                 </div>
             </PopperUnstyled>
         </ClickAwayListener>
