@@ -19,6 +19,9 @@ interface UseRegisterProps extends Pick<UseFormReturn<any>, 'clearErrors' | 'res
 }
 
 export function useCreateUser({clearErrors, reset, setError, setContinueData}: UseRegisterProps) {
+
+    const {showAlert} = useAlertNotification()
+
     return useMutation<AxiosResponse<CreateUserResponseData>, AxiosError<any>, CreateUserFormData>({
         mutationFn: (data) => {
             return axios.post(REGISTER_URL, AuthSerializer.createUser(data))
@@ -30,7 +33,7 @@ export function useCreateUser({clearErrors, reset, setError, setContinueData}: U
         },
         onError: ({code, response}) => {
             if (code === AxiosError.ERR_NETWORK) {
-                alert([{
+                showAlert([{
                     id: 'network_error',
                     type: 'toast',
                     props: {
@@ -49,7 +52,7 @@ export function useCreateUser({clearErrors, reset, setError, setContinueData}: U
 
 export function useRegisterUser({clearErrors, reset, setError, setStage}: UseRegisterProps) {
     const {setToken} = useAuth()
-    const {alert} = useAlertNotification()
+    const {showAlert} = useAlertNotification()
 
     return useMutation<AxiosResponse<LoginResponseData>, AxiosError<any>, { createdID: number, payload: RegisterUserFormData }>({
         mutationFn: (data) => {
@@ -59,7 +62,7 @@ export function useRegisterUser({clearErrors, reset, setError, setStage}: UseReg
             setToken(Auth_token)
             reset(undefined)
             clearErrors()
-            alert([{
+            showAlert([{
                 id: `registration_${FirstName}_successful`,
                 type: 'toast',
                 props: {
@@ -70,7 +73,7 @@ export function useRegisterUser({clearErrors, reset, setError, setStage}: UseReg
         },
         onError: ({code, response}) => {
             if (code === AxiosError.ERR_NETWORK) {
-                alert([{
+                showAlert([{
                     id: 'network_error',
                     type: 'toast',
                     props: {

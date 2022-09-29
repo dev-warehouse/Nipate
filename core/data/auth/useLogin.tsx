@@ -13,7 +13,7 @@ interface UseLoginProps extends Pick<UseFormReturn<LoginFormData>, 'clearErrors'
 export function useLogin({clearErrors, reset, setError}: UseLoginProps) {
 
     const {setToken, saveToken} = useAuth()
-    const {alert} = useAlertNotification()
+    const {showAlert} = useAlertNotification()
     const router = useRouter()
 
     let saveTokenS = false
@@ -26,7 +26,7 @@ export function useLogin({clearErrors, reset, setError}: UseLoginProps) {
         onSuccess: ({data: {Auth_token, FirstName}}) => {
             setToken(Auth_token)
             if (saveTokenS) saveToken()
-            alert([{
+            showAlert([{
                 id: `welcome_${FirstName}`,
                 type: 'toast',
                 props: {
@@ -40,7 +40,7 @@ export function useLogin({clearErrors, reset, setError}: UseLoginProps) {
         },
         onError: ({code, response}) => {
             if (code === AxiosError.ERR_NETWORK) {
-                alert([{
+                showAlert([{
                     id: 'network_error',
                     type: 'toast',
                     props: {

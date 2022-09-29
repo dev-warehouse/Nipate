@@ -30,7 +30,7 @@ export function AlertNotificationProvider({children, ...props}: DOMAttributes<an
 
     return <alertNotificationContext.Provider value={{
         alerts: state,
-        alert: alert,
+        showAlert: alert,
         dismissAlert: dismissAlert
     }} {...props}>{children}</alertNotificationContext.Provider>
 }
