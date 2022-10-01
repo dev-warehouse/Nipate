@@ -1,10 +1,10 @@
 import {NextPageWithLayout} from "@pages/_app";
 import {GlobalLayout} from "@components/layouts/page";
+import {Landing} from "@components/pages";
 
 const Home: NextPageWithLayout = () => {
     return (
-        <main className="h-full">
-        </main>
+        <Landing/>
     );
 };
 
