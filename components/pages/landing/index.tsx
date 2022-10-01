@@ -12,28 +12,6 @@ export function Landing() {
     </main>
 }
 
-const advertList: Advert[] = [
-    {
-        id: 1,
-        User: {
-            id: 1,
-            FirstName: "Rafiki",
-            MobileNumber: "254712345678",
-            IDNumber: "723623282"
-        },
-        Product: {
-            id: 1,
-            Name: "Catering",
-            CategoryID: 1
-        },
-        Location: {
-            id: '1',
-            Name: "Kagemi, Nairobi"
-        }
-
-    }
-]
-
 type Category = { id: number, Name: string }
 
 function ServiceCatergories() {
