@@ -35,6 +35,7 @@ switch (hostname) {
         BASE_API_URL = PRODUCTION_BASE_API_URL
         break
     default:
-        BASE_API_URL = `${hostname}:8000`
+        // BASE_API_URL = `${hostname}:8000`
+        BASE_API_URL = PRODUCTION_BASE_API_URL
         break
 }
