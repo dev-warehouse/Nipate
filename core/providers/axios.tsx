@@ -12,7 +12,7 @@ export function AxiosProvider({children}: PropsWithChildren<any>) {
             // Read token for anywhere, in this case directly from localStorage
             if (authToken) {
                 config.headers = {
-                    Authorization: `Token ${authToken?.replace(/(^["']|["']$)/g, '')}`,
+                    Authorization: `${authToken?.replace(/(^["']|["']$)/g, '')}`,
                 }
             }
 
