@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  @apply font-sans text-nipate-text;
+}
+
+/* custom scrollbar */
+* {
+  /* Firefox */
+  scrollbar-width: 0.75rem;
+  scrollbar-color: #326976 #f3f4f6;
+
+  /* Webkit browsers */
+  &::-webkit-scrollbar {
+    @apply w-3;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-nipate-text-600 rounded-[0.375rem] bg-clip-content;
+    border: 0.1875rem solid transparent;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-nipate-text-800;
+  }
+
+  &::-webkit-scrollbar-track:hover {
+    @apply bg-gray-100;
+  }
+}
