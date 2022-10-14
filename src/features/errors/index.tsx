@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, HTMLAttributes, ReactNode } from 'react'
+import styles from './index.module.scss'
 
 export interface ErrorState {
   error?: Error
@@ -27,16 +28,16 @@ export default class RootErrorBoundary extends Component<
     const { state, props } = this
     if (state.error) {
       return (
-        <div className='w-screen h-screen space-y-2 p-1'>
-          <header className='px-2 py-4 flex flex-row items-center justify-between sticky top-0 backdrop-blur-md'>
+        <div className={styles.root}>
+          <header className={styles.header}>
             <a href='/'>
               <img src='/assets/logo_full.svg' alt='Logo' className='h-8' />
             </a>
           </header>
-          <main className='w-full h-full flex flex-col items-center justify-center'>
-            <section>TODO Write Message</section>
-            <div>
-              <details style={{ whiteSpace: 'pre-wrap' }}>
+          <main className={styles.main}>
+            <div className={styles.error_container}>
+              <h1 className={styles.error_message}>TODO Write Message</h1>
+              <details className={styles.error_details}>
                 {state.error?.message}
                 <br />
                 {state.errorInfo?.componentStack}
