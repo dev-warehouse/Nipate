@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "prettier src --check && eslint src",
+    "lint:fix": "prettier src --write && eslint src --fix"
   },
   "dependencies": {
     "react": "^18.2.0",
