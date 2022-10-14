@@ -1,7 +1,12 @@
 import Router from '@router/router'
+import RootErrorBoundary from '@features/errors'
 
 function App() {
-  return <Router />
+  return (
+    <RootErrorBoundary>
+      <Router />
+    </RootErrorBoundary>
+  )
 }
 
 export default App

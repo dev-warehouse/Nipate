@@ -1,8 +1,8 @@
 import { Component, ErrorInfo, HTMLAttributes, ReactNode } from 'react'
 
 export interface ErrorState {
-  hasError: boolean
-  error: { error: Error; info: ErrorInfo }
+  error?: Error
+  errorInfo?: ErrorInfo
 }
 
 export interface ErrorProps {
@@ -10,17 +10,22 @@ export interface ErrorProps {
   message: ReactNode
 }
 
-export class RootErrorBoundary extends Component<
+export default class RootErrorBoundary extends Component<
   HTMLAttributes<HTMLDivElement>,
   ErrorState
 > {
+  constructor(props: HTMLAttributes<HTMLDivElement>) {
+    super(props)
+    this.state = { error: undefined, errorInfo: undefined }
+  }
+
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    this.setState({ error: { error, info: errorInfo } })
+    this.setState({ error, errorInfo })
   }
 
   render() {
     const { state, props } = this
-    if (state.hasError) {
+    if (state.error) {
       return (
         <div className='w-screen h-screen space-y-2 p-1'>
           <header className='px-2 py-4 flex flex-row items-center justify-between sticky top-0 backdrop-blur-md'>
@@ -28,13 +33,13 @@ export class RootErrorBoundary extends Component<
               <img src='/assets/logo_full.svg' alt='Logo' className='h-8' />
             </a>
           </header>
-          <main>
+          <main className='w-full h-full flex flex-col items-center justify-center'>
             <section>TODO Write Message</section>
             <div>
               <details style={{ whiteSpace: 'pre-wrap' }}>
-                {state.error.error.message}
+                {state.error?.message}
                 <br />
-                {state.error.info.componentStack}
+                {state.errorInfo?.componentStack}
               </details>
             </div>
           </main>
