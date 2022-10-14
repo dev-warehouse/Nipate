@@ -1,0 +1,8 @@
+.root {
+  @apply w-screen h-screen space-y-2 p-1;
+}
+
+.header {
+  @apply px-2 py-4 flex flex-row items-center justify-between;
+  @apply sticky top-0 backdrop-blur-md;
+}
