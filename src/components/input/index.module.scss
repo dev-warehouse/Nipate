@@ -11,14 +11,14 @@
     @apply w-full placeholder-input;
   }
 
-  &[data-validity="success"] {
+  &[data-validity='success'] {
     @apply bg-green-50 text-green-700;
     input {
       @apply placeholder-green-500;
     }
   }
 
-  &[data-validity="error"] {
+  &[data-validity='error'] {
     @apply bg-red-50 text-red-700;
     input {
       @apply placeholder-red-500;
@@ -30,11 +30,11 @@
 .root_focused {
   @apply bg-input-background/[0.7] ring ring-nipate-yellow;
 
-  &[data-validity="success"] {
+  &[data-validity='success'] {
     @apply ring-green-500;
   }
 
-  &[data-validity="error"] {
+  &[data-validity='error'] {
     @apply ring-red-500;
   }
 }

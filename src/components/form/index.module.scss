@@ -9,11 +9,11 @@
 .form_label {
   @apply text-sm font-semibold;
 
-  &[data-validity="success"] {
+  &[data-validity='success'] {
     @apply text-green-600;
   }
 
-  &[data-validity="error"] {
+  &[data-validity='error'] {
     @apply text-red-600;
   }
 }
@@ -21,11 +21,11 @@
 .form_message {
   @apply mt-1 text-xs font-medium;
 
-  &[data-validity="success"] {
+  &[data-validity='success'] {
     @apply text-green-700;
   }
 
-  &[data-validity="error"] {
+  &[data-validity='error'] {
     @apply text-red-700;
   }
 }
