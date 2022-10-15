@@ -1,5 +1,8 @@
+// Layout for both webapp and website
 .root {
-  @apply w-screen h-screen space-y-2 p-1;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  @apply min-h-screen p-1 gap-1;
 }
 
 .header {
