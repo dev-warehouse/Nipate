@@ -1,4 +1,5 @@
 import { Link, Outlet } from 'react-router-dom'
+import RouteErrorHandling from '@router/error'
 import styles from './index.module.scss'
 
 function Header() {
@@ -15,7 +16,9 @@ function PageRoot() {
   return (
     <div className={styles.root}>
       <Header />
-      <Outlet />
+      <RouteErrorHandling>
+        <Outlet />
+      </RouteErrorHandling>
     </div>
   )
 }
