@@ -1,0 +1,31 @@
+.form_root {
+  @apply w-full flex flex-col gap-2;
+}
+
+.form_input {
+  @apply w-full;
+}
+
+.form_label {
+  @apply text-sm font-semibold;
+
+  &[data-validity="success"] {
+    @apply text-green-600;
+  }
+
+  &[data-validity="error"] {
+    @apply text-red-600;
+  }
+}
+
+.form_message {
+  @apply mt-1 text-xs font-medium;
+
+  &[data-validity="success"] {
+    @apply text-green-700;
+  }
+
+  &[data-validity="error"] {
+    @apply text-red-700;
+  }
+}
