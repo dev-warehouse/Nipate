@@ -3,7 +3,7 @@
 }
 
 .page_footer {
-  @apply px-5 py-2 self-center sticky bottom-2
+  @apply px-4 self-center sticky bottom-0;
 }
 
 .hero_root {
@@ -12,15 +12,19 @@
 }
 
 .hero_text {
-  @apply text-page-hero-sm md:text-page-hero text-center
+  @apply text-page-hero-sm md:text-page-hero text-center;
 }
 
 .hero_input {
   @apply rounded-2xl;
+  @apply mx-8 md:mx-0;
+  input {
+    @apply overflow-ellipsis;
+  }
 }
 
 .hero_search_actions {
-  @apply flex flex-row items-center gap-4
+  @apply flex flex-row items-center gap-4;
 }
 
 .hero_location_pin {
@@ -28,5 +32,5 @@
 }
 
 .hero_search_btn {
-  @apply rounded-lg md:rounded-2xl
+  @apply rounded-lg md:rounded-2xl;
 }
