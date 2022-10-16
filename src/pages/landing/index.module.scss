@@ -41,3 +41,17 @@
 .services_label {
   @apply text-page-heading-sm md:text-page-heading
 }
+
+.advert_list {
+  @apply w-full overflow-x-auto snap-x snap-mandatory;
+  @apply flex flex-row items-center gap-5 p-1;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+}
