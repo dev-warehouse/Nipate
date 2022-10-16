@@ -61,6 +61,10 @@
 
 .advert_title {
   @apply text-card-title;
+
+  &[data-state='loading'] {
+    @apply h-8 w-1/2 bg-slate-200 rounded animate-pulse;
+  }
 }
 
 .advert_details {
@@ -73,16 +77,31 @@
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   @apply text-card-description-sm md:text-card-description;
+
+  &[data-state='loading'] {
+    @apply h-32 bg-slate-200 rounded animate-pulse;
+  }
 }
 
 .provider_root {
   @apply w-full flex flex-row items-center justify-between text-content-sm;
+
+  &[data-state='loading'] > p {
+    @apply h-6 w-20 bg-slate-200 animate-pulse;
+  }
 }
 
 .provider_avatar {
-  @apply w-8 h-8 rounded-full bg-gray-200;
+  @apply w-8 h-8 rounded-full bg-input-background;
+
+  &[data-state='loading'] {
+    @apply bg-slate-200 animate-pulse;
+  }
 }
 
 .provider_profile {
-  @apply flex flex-col gap-[5px] text-content-xs;
+  @apply flex flex-col gap-2 text-content-xs;
+  &[data-state='loading'] > p {
+    @apply h-4 w-20 bg-slate-200 animate-pulse;
+  }
 }

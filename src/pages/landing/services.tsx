@@ -19,6 +19,24 @@ interface Advert {
   }
 }
 
+function AdvertItemLoading() {
+  return (
+    <div className={styles.advert_root}>
+      <h3 className={styles.advert_title} data-state={'loading'} />
+      <div className={styles.advert_details}>
+        <p className={styles.advert_description} data-state={'loading'} />
+        <div className={styles.provider_root} data-state={'loading'}>
+          <div className={styles.provider_profile} data-state={'loading'}>
+            <div className={styles.provider_avatar} data-state={'loading'} />
+            <p />
+          </div>
+          <p />
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function AdvertItem({
   title,
   description,
@@ -41,6 +59,17 @@ function AdvertItem({
           <p>{location}</p>
         </div>
       </div>
+    </div>
+  )
+}
+
+function AdvertListLoading() {
+  return (
+    <div className={styles.advert_list}>
+      <AdvertItemLoading />
+      <AdvertItemLoading />
+      <AdvertItemLoading />
+      <AdvertItemLoading />
     </div>
   )
 }
@@ -110,6 +139,7 @@ export default function Services({ url, label }: ServicesProps) {
     <div className={styles.services_root}>
       <p className={styles.services_label}>{label}</p>
       <AdvertList url={url} label={label} />
+      <AdvertListLoading />
     </div>
   )
 }
