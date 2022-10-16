@@ -1,13 +1,13 @@
 .page_root {
   @apply w-full h-full flex flex-col items-center justify-between;
-  @apply px-4 gap-9;
+  @apply px-4 gap-9 overflow-hidden;
 }
 
 .hero_root {
   @apply w-full h-full py-12 text-nipate-text-800;
   @apply flex flex-col items-center justify-center gap-10;
   // TODO: Add Hero transition
-  @apply md:mt-[4rem];
+  @apply mt-5 md:mt-8;
 }
 
 .hero_text {
