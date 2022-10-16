@@ -35,11 +35,11 @@
 }
 
 .services_root {
-  @apply w-full flex flex-col gap-6
+  @apply w-full flex flex-col gap-6;
 }
 
 .services_label {
-  @apply text-page-heading-sm md:text-page-heading
+  @apply text-page-heading-sm md:text-page-heading;
 }
 
 .advert_list {
