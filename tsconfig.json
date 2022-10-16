@@ -32,6 +32,9 @@
             ],
             "@features/*": [
                 "src/features/*"
+            ],
+            "@components/*": [
+                "src/components/*"
             ]
         }
     },
