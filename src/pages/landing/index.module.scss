@@ -63,10 +63,26 @@
   @apply text-card-title;
 }
 
+.advert_details {
+  @apply h-full w-full gap-5 flex flex-col justify-between items-center;
+}
+
 .advert_description {
   @apply w-60 leading-6 text-ellipsis overflow-hidden;
   display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   @apply text-card-description-sm md:text-card-description;
+}
+
+.provider_root {
+  @apply w-full flex flex-row items-center justify-between text-content-sm;
+}
+
+.provider_avatar {
+  @apply w-8 h-8 rounded-full bg-gray-200;
+}
+
+.provider_profile {
+  @apply flex flex-col gap-[5px] text-content-xs;
 }
