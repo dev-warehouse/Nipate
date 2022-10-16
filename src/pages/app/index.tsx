@@ -7,7 +7,7 @@ function Header() {
   return (
     <header className={styles.header}>
       <Link to='..'>
-        <img src='/assets/logo_full.svg' alt='Logo' className='h-8' />
+        <img src='/assets/logo_full.svg' alt='Logo' className='h-8 md:h-9' />
       </Link>
     </header>
   )

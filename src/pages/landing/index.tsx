@@ -2,6 +2,7 @@ import { MdOutlineMyLocation } from 'react-icons/md'
 import { Button } from '@components/buttons'
 import { Input } from '@components/input'
 import { PageFooter } from '@pages/app'
+import Services from '@pages/landing/services'
 import styles from './index.module.scss'
 
 function Hero() {
@@ -32,7 +33,9 @@ export default function Default() {
   return (
     <div className={styles.page_root}>
       <Hero />
-      <PageFooter className={styles.page_footer} />
+      <Services url='popular' label='Popular Services' />
+      <Services url='near-you' label='Services Near You' />
+      <PageFooter />
     </div>
   )
 }
