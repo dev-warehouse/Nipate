@@ -3,12 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "prettier src --check && eslint src",
-    "lint:fix": "prettier src --write && eslint src --fix"
+    "lint:fix": "prettier src --write && eslint src --fix",
+    "ci": "yarn install --immutable --immutable-cache --check-cache"
   },
   "dependencies": {
     "@mui/base": "^5.0.0-alpha.101",
