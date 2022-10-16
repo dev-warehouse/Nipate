@@ -54,4 +54,19 @@
   scrollbar-width: none; /* Firefox */
 }
 
+.advert_root {
+  @apply px-6 py-10 bg-white shadow rounded-lg;
+  @apply h-full gap-5 flex flex-col snap-start;
+}
+
+.advert_title {
+  @apply text-card-title;
+}
+
+.advert_description {
+  @apply w-60 leading-6 text-ellipsis overflow-hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  @apply text-card-description-sm md:text-card-description;
 }
