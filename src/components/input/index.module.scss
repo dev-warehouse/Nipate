@@ -2,7 +2,7 @@
   // Layout styles
   @apply bg-input-background rounded-lg p-2.5;
   @apply text-sm outline-none ring-offset-2;
-  @apply hover:bg-input_bg/[0.6];
+  @apply hover:bg-input-background/[0.6];
   @apply inline-flex flex-row gap-2;
 
   //  Input Data States
