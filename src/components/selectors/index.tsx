@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// Eslint down boy, stop barking when this is a multi type component
 import { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react'
 import {
   OptionUnstyled,
@@ -33,7 +35,7 @@ const Radio = forwardRef(
   ) => <input type='radio' className={styles.radio} ref={ref} {...props} />
 )
 
-export interface SelectProps extends SelectUnstyledProps<HTMLSelectElement> {
+export interface SelectProps extends SelectUnstyledProps<any> {
   dataValidity?: 'initial' | 'success' | 'error'
   listStyles?: string
 }
@@ -77,7 +79,7 @@ Select.defaultProps = {
 
 const Option = forwardRef(
   (
-    { className, ...props }: OptionUnstyledProps<HTMLOptionElement>,
+    { className, ...props }: OptionUnstyledProps<any>,
     ref: ForwardedRef<HTMLLIElement>
   ) => (
     <OptionUnstyled
