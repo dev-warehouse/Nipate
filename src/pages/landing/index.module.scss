@@ -33,3 +33,11 @@
 .hero_search_btn {
   @apply rounded-lg md:rounded-2xl;
 }
+
+.services_root {
+  @apply w-full flex flex-col gap-6
+}
+
+.services_label {
+  @apply text-page-heading-sm md:text-page-heading
+}
