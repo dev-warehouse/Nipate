@@ -3,11 +3,16 @@ import PageRoot from '@pages/app'
 import { lazy } from 'react'
 
 const LandingPage = lazy(() => import('@pages/landing'))
+const SearchPage = lazy(() => import('@pages/search'))
 
 const routes: RouteObject[] = [
   {
     path: '/',
     element: <LandingPage />
+  },
+  {
+    path: 'search',
+    element: <SearchPage />
   }
 ]
 

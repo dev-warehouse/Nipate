@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// Eslint down boy, stop barking when this is a multi type component
+import MultiSelectUnstyled, {
+  MultiSelectUnstyledProps
+} from '@mui/base/MultiSelectUnstyled'
+import OptionUnstyled, { OptionUnstyledProps } from '@mui/base/OptionUnstyled'
+import SelectUnstyled, { SelectUnstyledProps } from '@mui/base/SelectUnstyled'
 import { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react'
-import {
-  OptionUnstyled,
-  OptionUnstyledProps,
-  SelectUnstyled,
-  SelectUnstyledProps
-} from '@mui/base'
 import styles from './index.module.scss'
 
 /**
@@ -33,7 +34,7 @@ const Radio = forwardRef(
   ) => <input type='radio' className={styles.radio} ref={ref} {...props} />
 )
 
-export interface SelectProps extends SelectUnstyledProps<HTMLSelectElement> {
+export interface SelectProps extends SelectUnstyledProps<any> {
   dataValidity?: 'initial' | 'success' | 'error'
   listStyles?: string
 }
@@ -75,9 +76,43 @@ Select.defaultProps = {
   listStyles: ''
 }
 
+export interface MultiSelectProps extends MultiSelectUnstyledProps<any> {
+  dataValidity?: 'initial' | 'success' | 'error'
+  listStyles?: string
+}
+
+export const MultiSelect = forwardRef(
+  (
+    { className, listStyles, dataValidity, ...props }: MultiSelectProps,
+    ref: ForwardedRef<HTMLButtonElement>
+  ) => (
+    <MultiSelectUnstyled
+      data-validity={dataValidity}
+      ref={ref}
+      {...props}
+      componentsProps={{
+        root: {
+          className: [className, styles.select_root].join(' ')
+        },
+        listbox: {
+          className: [listStyles, styles.select_listbox].join(' ')
+        },
+        popper: {
+          className: styles.select_popper
+        }
+      }}
+    />
+  )
+)
+
+MultiSelect.defaultProps = {
+  dataValidity: 'initial',
+  listStyles: ''
+}
+
 const Option = forwardRef(
   (
-    { className, ...props }: OptionUnstyledProps<HTMLOptionElement>,
+    { className, ...props }: OptionUnstyledProps<any>,
     ref: ForwardedRef<HTMLLIElement>
   ) => (
     <OptionUnstyled

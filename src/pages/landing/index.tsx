@@ -3,6 +3,7 @@ import { Button } from '@components/buttons'
 import { Input } from '@components/input'
 import { PageFooter } from '@pages/app'
 import Services from '@pages/landing/services'
+import { Link } from 'react-router-dom'
 import styles from './index.module.scss'
 
 function Hero() {
@@ -13,18 +14,20 @@ function Hero() {
         <br />
         to serve you
       </p>
-      <Input
-        placeholder='Search for Service'
-        className={styles.hero_input}
-        endAdornment={
-          <div className={styles.hero_search_actions}>
-            <div className={styles.hero_location_pin}>
-              <MdOutlineMyLocation />
+      <Link to='search'>
+        <Input
+          placeholder='Search for Service'
+          className={styles.hero_input}
+          endAdornment={
+            <div className={styles.hero_search_actions}>
+              <div className={styles.hero_location_pin}>
+                <MdOutlineMyLocation />
+              </div>
+              <Button className={styles.hero_search_btn}>Search</Button>
             </div>
-            <Button className={styles.hero_search_btn}>Search</Button>
-          </div>
-        }
-      />
+          }
+        />
+      </Link>
     </div>
   )
 }

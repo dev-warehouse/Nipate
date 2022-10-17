@@ -1,4 +1,4 @@
-import { ButtonUnstyled, ButtonUnstyledProps } from '@mui/base'
+import ButtonUnstyled, { ButtonUnstyledProps } from '@mui/base/ButtonUnstyled'
 import { ForwardedRef, forwardRef } from 'react'
 import styles from './index.module.scss'
 
