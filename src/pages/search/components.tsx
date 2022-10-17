@@ -6,6 +6,8 @@ import ButtonUnstyled from '@mui/base/ButtonUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled/PopperUnstyled'
 import ClickAwayListener from '@mui/base/ClickAwayListener/ClickAwayListener'
 import useSelect from '@mui/base/SelectUnstyled/useSelect'
+import { Input } from '@components/input'
+import { CgSearch } from 'react-icons/cg'
 import styles from './index.module.scss'
 
 export function FilterItem({
@@ -159,6 +161,49 @@ export function AvailabilitySelect() {
                   </label>
                 </div>
               ))}
+            </div>
+          </div>
+        </PopperUnstyled>
+      </div>
+    </ClickAwayListener>
+  )
+}
+
+export function LocationSelect() {
+  const [isOpen, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  const { getListboxProps, getButtonProps, value } = useSelect<string>({
+    options: []
+  })
+
+  return (
+    <ClickAwayListener onClickAway={() => setOpen(false)}>
+      <div ref={ref}>
+        <ButtonUnstyled
+          className={styles.availability_btn}
+          {...getButtonProps()}
+          onClick={() => setOpen(prevState => !prevState)}
+        >
+          <div className={styles.category_select_root}>
+            <div className={styles.category_select_items_container}>
+              <main>
+                <div className={styles.category_select_item}>
+                  <p>{value ?? 'Location'}</p>
+                </div>
+              </main>
+            </div>
+            {isOpen ? <TbChevronUp /> : <TbChevronDown />}
+          </div>
+        </ButtonUnstyled>
+        <PopperUnstyled open={isOpen} anchorEl={ref.current}>
+          <div className='px-2.5 py-3 m-2 rounded-lg shadow bg-white flex flex-col gap-2'>
+            <Input
+              placeholder='Filter Locations'
+              endAdornment={<CgSearch className='w-5 h-5' />}
+            />
+            <div className='grid grid-cols-2' {...getListboxProps()}>
+              {/*  TODO Location Fetching */}
             </div>
           </div>
         </PopperUnstyled>
