@@ -1,3 +1,5 @@
 import searchGif from './search.gif'
 
-export { searchGif }
+const removeMe = ''
+
+export { searchGif, removeMe }
