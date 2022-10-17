@@ -39,10 +39,10 @@ export function CategorySelect() {
   // TODO  Fetch Categories from server
   return (
     <MultiSelect renderValue={renderCategorySelect}>
-      <Option value='Hello' className={styles.category_select_option}>
+      <Option value='Hello' className={styles.select_option}>
         Housing
       </Option>
-      <Option value='Hellos' className={styles.category_select_option}>
+      <Option value='Hellos' className={styles.select_option}>
         Catering
       </Option>
     </MultiSelect>
