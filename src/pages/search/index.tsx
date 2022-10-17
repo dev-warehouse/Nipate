@@ -64,6 +64,7 @@ function SearchInput() {
   return (
     <Input
       placeholder='Search by location, service or category'
+      autoFocus
       className={styles.hero_input}
       endAdornment={
         <div className={styles.hero_search_actions}>
