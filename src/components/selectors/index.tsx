@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Eslint down boy, stop barking when this is a multi type component
+import MultiSelectUnstyled, {
+  MultiSelectUnstyledProps
+} from '@mui/base/MultiSelectUnstyled'
 import OptionUnstyled, { OptionUnstyledProps } from '@mui/base/OptionUnstyled'
 import SelectUnstyled, { SelectUnstyledProps } from '@mui/base/SelectUnstyled'
 import { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react'
@@ -69,6 +72,40 @@ const Select = forwardRef(
 )
 
 Select.defaultProps = {
+  dataValidity: 'initial',
+  listStyles: ''
+}
+
+export interface MultiSelectProps extends MultiSelectUnstyledProps<any> {
+  dataValidity?: 'initial' | 'success' | 'error'
+  listStyles?: string
+}
+
+export const MultiSelect = forwardRef(
+  (
+    { className, listStyles, dataValidity, ...props }: MultiSelectProps,
+    ref: ForwardedRef<HTMLButtonElement>
+  ) => (
+    <MultiSelectUnstyled
+      data-validity={dataValidity}
+      ref={ref}
+      {...props}
+      componentsProps={{
+        root: {
+          className: [className, styles.select_root].join(' ')
+        },
+        listbox: {
+          className: [listStyles, styles.select_listbox].join(' ')
+        },
+        popper: {
+          className: styles.select_popper
+        }
+      }}
+    />
+  )
+)
+
+MultiSelect.defaultProps = {
   dataValidity: 'initial',
   listStyles: ''
 }
