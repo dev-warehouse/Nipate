@@ -26,7 +26,10 @@ const renderCategorySelect = (options: SelectOption<string>[]): JSX.Element => (
       <main>
         {options.length > 0 ? (
           options.map(option => (
-            <div className={styles.category_select_item_selected}>
+            <div
+              className={styles.category_select_item_selected}
+              key={option.value}
+            >
               <p>{option.label}</p>
             </div>
           ))
@@ -115,7 +118,10 @@ export function AvailabilitySelect() {
               <main>
                 {value.length > 0 ? (
                   value.map(option => (
-                    <div className={styles.category_select_item_selected}>
+                    <div
+                      className={styles.category_select_item_selected}
+                      key={option}
+                    >
                       <p>{option}</p>
                     </div>
                   ))
@@ -140,6 +146,8 @@ export function AvailabilitySelect() {
                   <CheckBox
                     id={day.value}
                     checked={getOptionState(day).selected}
+                    // eslint-disable-next-line @typescript-eslint/no-empty-function
+                    onChange={() => {}}
                     {...getOptionProps(day)}
                   />
                   <label
