@@ -7,12 +7,15 @@ import { TbFilter } from 'react-icons/tb'
 import PopperUnstyled from '@mui/base/PopperUnstyled/PopperUnstyled'
 import { useRef, useState } from 'react'
 import ClickAwayListener from '@mui/base/ClickAwayListener/ClickAwayListener'
+import { CategorySelect, FilterItem } from './components'
 import styles from './index.module.scss'
 
 function FilterForm() {
   return (
     <div className='p-5 flex flex-col gap-7'>
       <p className='text-lg font-semibold'>Filter query</p>
+      <FilterItem label='Services'>
+      </FilterItem>
     </div>
   )
 }
