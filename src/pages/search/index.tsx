@@ -15,6 +15,7 @@ function FilterForm() {
     <div className='p-5 flex flex-col gap-7'>
       <p className='text-lg font-semibold'>Filter query</p>
       <FilterItem label='Services'>
+        <CategorySelect />
       </FilterItem>
     </div>
   )
