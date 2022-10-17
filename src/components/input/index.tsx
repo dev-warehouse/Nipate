@@ -1,8 +1,7 @@
-import {
-  InputUnstyled,
+import InputUnstyled, {
   inputUnstyledClasses,
   InputUnstyledProps
-} from '@mui/base'
+} from '@mui/base/InputUnstyled'
 import { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react'
 import styles from './index.module.scss'
 

@@ -1,12 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Eslint down boy, stop barking when this is a multi type component
+import OptionUnstyled, { OptionUnstyledProps } from '@mui/base/OptionUnstyled'
+import SelectUnstyled, { SelectUnstyledProps } from '@mui/base/SelectUnstyled'
 import { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react'
-import {
-  OptionUnstyled,
-  OptionUnstyledProps,
-  SelectUnstyled,
-  SelectUnstyledProps
-} from '@mui/base'
 import styles from './index.module.scss'
 
 /**
