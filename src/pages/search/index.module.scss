@@ -22,6 +22,14 @@
   @apply w-6 h-6;
 }
 
+.filter_item_container {
+  @apply flex flex-col gap-4;
+}
+
+.filter_item_label {
+  @apply text-base font-medium;
+}
+
 .no_data_root {
   @apply flex flex-col items-center justify-center;
 }
