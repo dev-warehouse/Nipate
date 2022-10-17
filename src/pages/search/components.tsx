@@ -17,17 +17,17 @@ export function FilterItem({
 }
 
 const renderCategorySelect = (options: SelectOption<string>[]): JSX.Element => (
-  <div className='flex flex-row items-center justify-between gap-2.5'>
-    <div className='flex flex-row gap-1 items-center'>
+  <div className={styles.category_select_root}>
+    <div className={styles.category_select_items_container}>
       {options.length > 0 ? (
         options.map(option => (
-          <div className='px-1.5 py-1 bg-gray-50 rounded-lg'>
-            <p className='text-content-sm'>{option.label}</p>
+          <div className={styles.category_select_item_selected}>
+            <p>{option.label}</p>
           </div>
         ))
       ) : (
-        <div className='px-1.5 py-1 rounded-lg'>
-          <p className='text-content-sm'>Category</p>
+        <div className={styles.category_select_item}>
+          <p>Category</p>
         </div>
       )}
     </div>
@@ -39,10 +39,10 @@ export function CategorySelect() {
   // TODO  Fetch Categories from server
   return (
     <MultiSelect renderValue={renderCategorySelect}>
-      <Option value='Hello' className='text-base'>
+      <Option value='Hello' className={styles.category_select_option}>
         Housing
       </Option>
-      <Option value='Hellos' className='text-base'>
+      <Option value='Hellos' className={styles.category_select_option}>
         Catering
       </Option>
     </MultiSelect>
