@@ -5,6 +5,7 @@ import { SelectOption } from '@mui/base/SelectUnstyled/useSelect.types'
 import ButtonUnstyled from '@mui/base/ButtonUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled/PopperUnstyled'
 import ClickAwayListener from '@mui/base/ClickAwayListener/ClickAwayListener'
+import useSelect from '@mui/base/SelectUnstyled/useSelect'
 import styles from './index.module.scss'
 
 export function FilterItem({
@@ -54,48 +55,102 @@ export function CategorySelect() {
   )
 }
 
-function AvailabilityItem({ label }: { label: string }) {
-  return (
-    <div className='flex flex-row gap-2.5 p-2.5 items-center'>
-      <CheckBox id={label.toLowerCase()} />
-      <label htmlFor={label.toLowerCase()} className='text-content-sm'>
-        {label}
-      </label>
-    </div>
-  )
-}
+const availabilityDays: SelectOption<string>[] = [
+  {
+    value: 'monday',
+    label: 'Monday'
+  },
+  {
+    value: 'tuesday',
+    label: 'Tuesday'
+  },
+  {
+    value: 'wednesday',
+    label: 'Wednesday'
+  },
+  {
+    value: 'thursday',
+    label: 'Thursday'
+  },
+  {
+    value: 'friday',
+    label: 'Friday'
+  },
+  {
+    value: 'saturday',
+    label: 'Saturday'
+  },
+  {
+    value: 'sunday',
+    label: 'Sunday'
+  }
+]
 
 export function AvailabilitySelect() {
   const [isOpen, setOpen] = useState(false)
   const ref = useRef(null)
+
+  const {
+    getOptionState,
+    getOptionProps,
+    getListboxProps,
+    getButtonProps,
+    value
+  } = useSelect<string>({
+    options: availabilityDays,
+    defaultValue: [],
+    multiple: true
+  })
+
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>
       <div ref={ref}>
         <ButtonUnstyled
-          className={styles.availability_root}
+          className={styles.availability_btn}
+          {...getButtonProps()}
           onClick={() => setOpen(prevState => !prevState)}
         >
           <div className={styles.category_select_root}>
-            <div className={styles.category_select_item}>
-              <p>Availability</p>
+            <div className={styles.category_select_items_container}>
+              <main>
+                {value.length > 0 ? (
+                  value.map(option => (
+                    <div className={styles.category_select_item_selected}>
+                      <p>{option}</p>
+                    </div>
+                  ))
+                ) : (
+                  <div className={styles.category_select_item}>
+                    <p>Availability</p>
+                  </div>
+                )}
+              </main>
             </div>
             {isOpen ? <TbChevronUp /> : <TbChevronDown />}
           </div>
         </ButtonUnstyled>
         <PopperUnstyled open={isOpen} anchorEl={ref.current}>
           <div className='px-2.5 py-5 m-2 rounded-lg shadow bg-white'>
-            <div className='flex flex-row gap-1'>
-              <div className='flex flex-col gap-1'>
-                <AvailabilityItem label='Monday' />
-                <AvailabilityItem label='Tuesday' />
-                <AvailabilityItem label='Wednesday' />
-                <AvailabilityItem label='Thursday' />
-              </div>
-              <div className='flex flex-col gap-1'>
-                <AvailabilityItem label='Friday' />
-                <AvailabilityItem label='Saturday' />
-                <AvailabilityItem label='Sunday' />
-              </div>
+            <div className='grid grid-cols-2' {...getListboxProps()}>
+              {availabilityDays.map(day => (
+                <div
+                  className='flex flex-row gap-2.5 p-2.5 items-center'
+                  key={day.value}
+                >
+                  <CheckBox
+                    id={day.value}
+                    checked={getOptionState(day).selected}
+                    {...getOptionProps(day)}
+                  />
+                  <label
+                    htmlFor={day.value}
+                    {...getOptionProps(day)}
+                    className='text-content-sm'
+                  >
+                    {day.label}
+                  </label>
+                </div>
+              ))}
             </div>
           </div>
         </PopperUnstyled>
