@@ -92,11 +92,7 @@ function SearchPage() {
           <SearchNoData />
         </div>
       </div>
-      {matches && (
-        <div className='min-w-[15rem]'>
-          <FilterForm />
-        </div>
-      )}
+      {matches && <FilterForm />}
     </div>
   )
 }

@@ -22,17 +22,19 @@ export function FilterItem({
 const renderCategorySelect = (options: SelectOption<string>[]): JSX.Element => (
   <div className={styles.category_select_root}>
     <div className={styles.category_select_items_container}>
-      {options.length > 0 ? (
-        options.map(option => (
-          <div className={styles.category_select_item_selected}>
-            <p>{option.label}</p>
+      <main>
+        {options.length > 0 ? (
+          options.map(option => (
+            <div className={styles.category_select_item_selected}>
+              <p>{option.label}</p>
+            </div>
+          ))
+        ) : (
+          <div className={styles.category_select_item}>
+            <p>Category</p>
           </div>
-        ))
-      ) : (
-        <div className={styles.category_select_item}>
-          <p>Category</p>
-        </div>
-      )}
+        )}
+      </main>
     </div>
     <TbChevronDown />
   </div>

@@ -57,7 +57,11 @@
 }
 
 .category_select_items_container {
-  @apply flex flex-row gap-1 items-center
+  @apply w-full overflow-hidden;
+  & > main {
+    @apply flex flex-row gap-1 items-center;
+    @apply overflow-x-auto;
+
 }
 
 .category_select_item {
