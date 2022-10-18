@@ -1,4 +1,107 @@
+.provider_pic_root {
+  @apply flex flex-row md:flex-col items-center md:items-end gap-2.5 md:gap-6;
+}
+
+.provider_pic_img {
+  @apply w-12 h-12 md:w-16 md:h-16 rounded-full bg-input-background;
+}
+
+.provider_pic_name {
+  @apply text-sm md:text-xl font-medium;
+}
+
+.provider_location_root {
+  @apply flex flex-row gap-2.5 items-center;
+}
+
+.provider_location_name {
+  @apply text-sm font-medium
+}
+
+.category_pin {
+  @apply px-1.5 py-1 rounded-lg bg-gray-50 snap-start;
+  & > p {
+    @apply text-content-sm;
+  }
+}
+
+.advert_catergories_root {
+  @apply max-w-[84vw] md:max-w-[12rem] flex flex-row items-center gap-1 overflow-x-auto;
+  @apply snap-x snap-mandatory;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.provider_spec_detail_root {
+  @apply flex flex-col gap-2.5
+}
+
+.provider_spec_detail_title {
+  @apply text-base font-medium;
+}
+
+.availability_root {
+  @apply flex flex-row gap-1.5 md:gap-2.5;
+}
+
+.availability_item {
+  @apply text-sm flex flex-col justify-between gap-1;
+}
+
+.working_hours_root {
+  @apply flex flex-col gap-1;
+}
+
+.working_hours_item {
+  @apply text-sm flex flex-row justify-between gap-1;
+}
+
+
+.advert_title {
+  @apply text-2xl md:text-4xl font-semibold;
+  @apply text-ellipsis overflow-hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.advert_description {
+  @apply w-full text-ellipsis overflow-hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  @apply text-card-description-sm md:text-card-description leading-normal;
+}
 
 .page_root {
   @apply w-full h-full flex flex-col md:flex-row gap-5 px-3 py-5 md:p-5;
+}
+
+.advert_detail_root {
+  @apply flex flex-col gap-16 px-2.5 py-8 lg:px-5 md:py-10;
+}
+
+.map_container {
+  @apply w-full h-60 md:h-80
+}
+
+.provider_root {
+  @apply flex flex-col justify-around md:items-end gap-8 lg:gap-16 w-full p-4 md:px-6 md:py-4;
+}
+
+.provider_prof_section_root {
+  @apply flex flex-col gap-2.5 md:gap-5 md:items-end;
+}
+
+.provider_profile_pic_root {
+  @apply flex flex-row md:flex-col items-center md:items-end gap-2.5 md:gap-5 justify-between
+}
+
+.provider_specs_root {
+  @apply flex flex-row md:flex-col justify-between gap-5
 }
