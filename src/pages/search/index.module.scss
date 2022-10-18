@@ -100,7 +100,9 @@
 }
 
 .hero_input {
-  @apply rounded-2xl w-full;
+  @apply w-full;
+  border-radius: 1rem !important;
+
   input {
     @apply ml-2 md:ml-4 overflow-ellipsis;
   }
