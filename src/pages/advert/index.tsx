@@ -1,3 +1,86 @@
+import { MapView } from '@components/map'
+import { Button } from '@components/buttons'
+import { TbMapPin } from 'react-icons/tb'
+import styles from './index.module.scss'
+
+function ProviderPic() {
+  return (
+    <div className={styles.provider_pic_root}>
+      <img
+        className={styles.provider_pic_img}
+        src='https://avatars.dicebear.com/api/adventurer/userId.svg'
+        alt='Providers Avatar'
+      />
+      <p className={styles.provider_pic_name}>Rafiki cafe</p>
+    </div>
+  )
+}
+
+function ProviderLocation() {
+  return (
+    <div className={styles.provider_location_root}>
+      <TbMapPin />
+      <p className={styles.provider_location_name}>Kagemi, Nairobi</p>
+    </div>
+  )
+}
+
+function CategoryPin() {
+  return (
+    <div className={styles.category_pin}>
+      <p>Housing</p>
+    </div>
+  )
+}
+
+function AdvertCategories() {
+  return (
+    <div className={styles.advert_catergories_root}>
+      <CategoryPin />
+      <CategoryPin />
+      <CategoryPin />
+      <CategoryPin />
+      <CategoryPin />
+      <CategoryPin />
+      <CategoryPin />
+      <CategoryPin />
+      <CategoryPin />
+      <CategoryPin />
+    </div>
+  )
+}
+
+function Availability() {
+  return (
+    <div className={styles.provider_spec_detail_root}>
+      <p className={styles.provider_spec_detail_title}>Availability</p>
+      <div className={styles.availability_root}>
+        <div className={styles.availability_item}>
+          <p>Monday - Tuesday </p>
+          <p>Monday - Tuesday </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function WorkingHours() {
+  return (
+    <div className={styles.provider_spec_detail_root}>
+      <p className={styles.provider_spec_detail_title}>Working Hours</p>
+      <div className={styles.working_hours_root}>
+        <div className={styles.working_hours_item}>
+          <p>From: </p>
+          <p>7:00AM</p>
+        </div>
+        <div className={styles.working_hours_item}>
+          <p>To: </p>
+          <p>9:00PM</p>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 function AdvertPage() {
   return (
