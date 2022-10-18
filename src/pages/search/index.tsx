@@ -88,7 +88,7 @@ function SearchNoData() {
 }
 
 function SearchPage() {
-  const matches = useMediaQuery('(min-width: 768px)')
+  const matches = useMediaQuery('(min-width: 868px)')
 
   return (
     <div className={styles.page_root}>
