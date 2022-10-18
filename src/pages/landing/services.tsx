@@ -23,12 +23,12 @@ interface Advert {
 function AdvertItemLoading() {
   return (
     <div className={styles.advert_root}>
-      <h3 className={styles.advert_title} data-state={'loading'} />
+      <h3 className={styles.advert_title} data-state='loading' />
       <div className={styles.advert_details}>
-        <p className={styles.advert_description} data-state={'loading'} />
-        <div className={styles.provider_root} data-state={'loading'}>
-          <div className={styles.provider_profile} data-state={'loading'}>
-            <div className={styles.provider_avatar} data-state={'loading'} />
+        <p className={styles.advert_description} data-state='loading' />
+        <div className={styles.provider_root} data-state='loading'>
+          <div className={styles.provider_profile} data-state='loading'>
+            <div className={styles.provider_avatar} data-state='loading' />
             <p />
           </div>
           <p />
@@ -44,7 +44,7 @@ function AdvertItem({
   provider: { location, name, userId }
 }: Advert) {
   return (
-    <Link to={'advert'}>
+    <Link to='advert' className='w-full h-full'>
       <div className={styles.advert_root}>
         <h3 className={styles.advert_title}>{title}</h3>
         <div className={styles.advert_details}>

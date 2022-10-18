@@ -15,7 +15,7 @@
 }
 
 .provider_location_name {
-  @apply text-sm font-medium
+  @apply text-sm font-medium;
 }
 
 .category_pin {
@@ -38,7 +38,7 @@
 }
 
 .provider_spec_detail_root {
-  @apply flex flex-col gap-2.5
+  @apply flex flex-col gap-2.5;
 }
 
 .provider_spec_detail_title {
@@ -60,7 +60,6 @@
 .working_hours_item {
   @apply text-sm flex flex-row justify-between gap-1;
 }
-
 
 .advert_title {
   @apply text-2xl md:text-4xl font-semibold;
@@ -87,7 +86,7 @@
 }
 
 .map_container {
-  @apply w-full h-60 md:h-80
+  @apply w-full h-60 md:h-80;
 }
 
 .provider_root {
@@ -99,9 +98,9 @@
 }
 
 .provider_profile_pic_root {
-  @apply flex flex-row md:flex-col items-center md:items-end gap-2.5 md:gap-5 justify-between
+  @apply flex flex-row md:flex-col items-center md:items-end gap-2.5 md:gap-5 justify-between;
 }
 
 .provider_specs_root {
-  @apply flex flex-row md:flex-col justify-between gap-5
+  @apply flex flex-row md:flex-col justify-between gap-5;
 }
