@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styles from './index.module.scss'
 
 /* eslint-disable */
@@ -22,12 +23,12 @@ interface Advert {
 function AdvertItemLoading() {
   return (
     <div className={styles.advert_root}>
-      <h3 className={styles.advert_title} data-state={'loading'} />
+      <h3 className={styles.advert_title} data-state='loading' />
       <div className={styles.advert_details}>
-        <p className={styles.advert_description} data-state={'loading'} />
-        <div className={styles.provider_root} data-state={'loading'}>
-          <div className={styles.provider_profile} data-state={'loading'}>
-            <div className={styles.provider_avatar} data-state={'loading'} />
+        <p className={styles.advert_description} data-state='loading' />
+        <div className={styles.provider_root} data-state='loading'>
+          <div className={styles.provider_profile} data-state='loading'>
+            <div className={styles.provider_avatar} data-state='loading' />
             <p />
           </div>
           <p />
@@ -43,23 +44,25 @@ function AdvertItem({
   provider: { location, name, userId }
 }: Advert) {
   return (
-    <div className={styles.advert_root}>
-      <h3 className={styles.advert_title}>{title}</h3>
-      <div className={styles.advert_details}>
-        <p className={styles.advert_description}>{description}</p>
-        <div className={styles.provider_root}>
-          <div className={styles.provider_profile}>
-            <img
-              className={styles.provider_avatar}
-              src={`https://avatars.dicebear.com/api/adventurer/${userId}.svg`}
-              alt={"Provider's Avatar"}
-            />
-            <p>{name}</p>
+    <Link to='advert' className='w-full h-full'>
+      <div className={styles.advert_root}>
+        <h3 className={styles.advert_title}>{title}</h3>
+        <div className={styles.advert_details}>
+          <p className={styles.advert_description}>{description}</p>
+          <div className={styles.provider_root}>
+            <div className={styles.provider_profile}>
+              <img
+                className={styles.provider_avatar}
+                src={`https://avatars.dicebear.com/api/adventurer/${userId}.svg`}
+                alt={"Provider's Avatar"}
+              />
+              <p>{name}</p>
+            </div>
+            <p>{location}</p>
           </div>
-          <p>{location}</p>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

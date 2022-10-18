@@ -15,8 +15,10 @@
 }
 
 .hero_input {
-  @apply rounded-2xl;
-  @apply mx-8 md:mx-0;
+  border-radius: 1rem !important;
+  margin-left: 2rem !important;
+  margin-right: 2rem !important;
+  @apply md:mx-0;
   input {
     @apply overflow-ellipsis;
   }

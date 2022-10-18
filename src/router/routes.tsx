@@ -4,6 +4,7 @@ import { lazy } from 'react'
 
 const LandingPage = lazy(() => import('@pages/landing'))
 const SearchPage = lazy(() => import('@pages/search'))
+const AdvertPage = lazy(() => import('@pages/advert'))
 
 const routes: RouteObject[] = [
   {
@@ -13,6 +14,10 @@ const routes: RouteObject[] = [
   {
     path: 'search',
     element: <SearchPage />
+  },
+  {
+    path: 'advert',
+    element: <AdvertPage />
   }
 ]
 
