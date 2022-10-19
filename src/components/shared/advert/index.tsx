@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+import ButtonUnstyled from '@mui/base/ButtonUnstyled'
 import styles from './index.module.scss'
 
 export interface AdvertCardProps {
@@ -14,8 +16,17 @@ export interface AdvertCardProps {
 }
 
 export function AdvertCard({ advert, state }: AdvertCardProps) {
+  const navigate = useNavigate()
+
+  const showAdvert = () =>
+    navigate(`${advert ? `advert/${advert.provider.name.toLowerCase()}` : '.'}`)
+
   return (
-    <div className={styles.advert_card_root}>
+    <ButtonUnstyled
+      component='div'
+      className={styles.advert_card_root}
+      onClick={showAdvert}
+    >
       <h3 className={styles.advert_card_title} data-state={state}>
         {advert?.title}
       </h3>
@@ -45,7 +56,7 @@ export function AdvertCard({ advert, state }: AdvertCardProps) {
           <p>{advert?.provider?.location}</p>
         </div>
       </div>
-    </div>
+    </ButtonUnstyled>
   )
 }
 
