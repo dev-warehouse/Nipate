@@ -15,19 +15,6 @@ interface Advert {
   }
 }
 
-function AdvertListLoading() {
-  return (
-    <div className={styles.advert_list}>
-      <AdvertCard state='loading' />
-      <AdvertCard state='loading' />
-      <AdvertCard state='loading' />
-      <AdvertCard state='loading' />
-      <AdvertCard state='loading' />
-      <AdvertCard state='loading' />
-    </div>
-  )
-}
-
 function AdvertList() {
   const adverts: Advert[] = [
     {
