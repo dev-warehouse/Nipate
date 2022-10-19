@@ -1,5 +1,5 @@
-import { Button } from '@components/buttons'
-import { Input } from '@components/input'
+import { Button } from '@components/ui/buttons'
+import { Input } from '@components/ui/input'
 import { MdOutlineMyLocation } from 'react-icons/md'
 import { useMediaQuery } from 'usehooks-ts'
 import { searchGif } from '@assets/img'

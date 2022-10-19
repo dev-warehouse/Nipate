@@ -1,6 +1,6 @@
 import { MdOutlineMyLocation } from 'react-icons/md'
-import { Button } from '@components/buttons'
-import { Input } from '@components/input'
+import { Button } from '@components/ui/buttons'
+import { Input } from '@components/ui/input'
 import { PageFooter } from '@pages/app'
 import Services from '@pages/landing/services'
 import { Link } from 'react-router-dom'
