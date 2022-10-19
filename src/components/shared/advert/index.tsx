@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import ButtonUnstyled from '@mui/base/ButtonUnstyled'
+import { ReactNode } from 'react'
 import styles from './index.module.scss'
 
 export interface AdvertCardProps {
@@ -63,4 +64,8 @@ export function AdvertCard({ advert, state }: AdvertCardProps) {
 AdvertCard.defaultProps = {
   advert: undefined,
   state: 'default'
+}
+
+export function AdvertsContainer({ children }: { children: ReactNode }) {
+  return <div className={styles.advert_container}>{children}</div>
 }
