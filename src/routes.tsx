@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { routes } from '@core/router'
+import { routes } from '@global/errors'
 import PageRoot from './layout/app'
 
 const router = createBrowserRouter([
