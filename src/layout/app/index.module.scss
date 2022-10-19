@@ -4,3 +4,7 @@
   grid-template-rows: auto 1fr;
   @apply min-h-screen p-1 gap-1;
 }
+
+.main {
+  @apply w-full h-full overflow-hidden;
+}

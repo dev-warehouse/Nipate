@@ -8,7 +8,9 @@ function PageRoot() {
     <div className={styles.root}>
       <PageHeader />
       <RouteErrorHandling>
-        <Outlet />
+        <main className={styles.main}>
+          <Outlet />
+        </main>
       </RouteErrorHandling>
     </div>
   )
