@@ -10,7 +10,7 @@ export interface AdvertCardProps {
       avatar: string
     }
   }
-  state: 'default' | 'loading' | 'error'
+  state?: 'default' | 'loading' | 'error'
 }
 
 export function AdvertCard({ advert, state }: AdvertCardProps) {
@@ -50,5 +50,6 @@ export function AdvertCard({ advert, state }: AdvertCardProps) {
 }
 
 AdvertCard.defaultProps = {
-  advert: undefined
+  advert: undefined,
+  state: 'default'
 }
