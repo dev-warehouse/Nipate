@@ -2,9 +2,6 @@
   @apply px-6 py-10 bg-white shadow rounded-lg;
   @apply h-full gap-5 flex flex-col snap-start;
 
-  &:focus, &:focus-visible, &:focus-within {
-    @apply outline-none ring-2 ring-nipate-yellow;
-  }
 }
 
 .advert_card_title {
