@@ -1,4 +1,4 @@
-import Router from '@router/router'
+import Router from '@/routes'
 import RootErrorBoundary from '@features/errors'
 
 function App() {
