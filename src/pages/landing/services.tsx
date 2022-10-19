@@ -115,9 +115,19 @@ function AdvertList({ url, label }: ServicesProps) {
   ]
   return (
     <div className={styles.advert_list}>
-      {adverts.map((advert, index) => (
-        <AdvertItem key={`${advert.provider.userId}${index}`} {...advert} />
-      ))}
+      {adverts.map(
+        ({ provider: { userId, ...provider }, ...advert }, index) => (
+          <AdvertCard
+            advert={{
+              ...advert,
+              provider: {
+                avatar: `https://avatars.dicebear.com/api/adventurer/${userId}.svg`,
+                ...provider
+              }
+            }}
+          />
+        )
+      )}
     </div>
   )
 }
