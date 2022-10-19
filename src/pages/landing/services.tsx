@@ -1,3 +1,4 @@
+import { AdvertCard } from '@components/shared'
 import { Link } from 'react-router-dom'
 import styles from './index.module.scss'
 
@@ -18,24 +19,6 @@ interface Advert {
     name: string
     userId: string
   }
-}
-
-function AdvertItemLoading() {
-  return (
-    <div className={styles.advert_root}>
-      <h3 className={styles.advert_title} data-state='loading' />
-      <div className={styles.advert_details}>
-        <p className={styles.advert_description} data-state='loading' />
-        <div className={styles.provider_root} data-state='loading'>
-          <div className={styles.provider_profile} data-state='loading'>
-            <div className={styles.provider_avatar} data-state='loading' />
-            <p />
-          </div>
-          <p />
-        </div>
-      </div>
-    </div>
-  )
 }
 
 function AdvertItem({
@@ -69,10 +52,12 @@ function AdvertItem({
 function AdvertListLoading() {
   return (
     <div className={styles.advert_list}>
-      <AdvertItemLoading />
-      <AdvertItemLoading />
-      <AdvertItemLoading />
-      <AdvertItemLoading />
+      <AdvertCard state={'loading'} />
+      <AdvertCard state={'loading'} />
+      <AdvertCard state={'loading'} />
+      <AdvertCard state={'loading'} />
+      <AdvertCard state={'loading'} />
+      <AdvertCard state={'loading'} />
     </div>
   )
 }
