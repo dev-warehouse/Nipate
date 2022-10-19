@@ -1,5 +1,5 @@
-import { MapView } from '@components/map'
-import { Button } from '@components/buttons'
+import { MapView } from '@components/ui/map'
+import { Button } from '@components/ui/buttons'
 import { TbMapPin } from 'react-icons/tb'
 import styles from './index.module.scss'
 
