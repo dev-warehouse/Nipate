@@ -1,4 +1,4 @@
-import { AdvertCard } from '@components/shared'
+import { AdvertCard, AdvertsContainer } from '@components/shared'
 import styles from './index.module.scss'
 
 interface ServicesProps {
@@ -15,7 +15,7 @@ interface Advert {
   }
 }
 
-function AdvertList() {
+function SampleAdverts() {
   const adverts: Advert[] = [
     {
       title: 'Catering',
@@ -67,7 +67,7 @@ function AdvertList() {
     }
   ]
   return (
-    <div className={styles.advert_list}>
+    <>
       {adverts.map(({ provider: { userId, ...provider }, ...advert }) => (
         <AdvertCard
           advert={{
@@ -79,7 +79,7 @@ function AdvertList() {
           }}
         />
       ))}
-    </div>
+    </>
   )
 }
 
@@ -87,8 +87,9 @@ export default function Services({ label }: ServicesProps) {
   return (
     <div className={styles.services_root}>
       <p className={styles.services_label}>{label}</p>
-      <AdvertList />
-      <AdvertListLoading />
+      <AdvertsContainer>
+        <SampleAdverts />
+      </AdvertsContainer>
     </div>
   )
 }
