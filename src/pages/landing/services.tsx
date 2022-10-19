@@ -44,8 +44,8 @@ function AdvertItem({
   provider: { location, name, userId }
 }: Advert) {
   return (
-    <Link to='advert' className='w-full h-full'>
-      <div className={styles.advert_root}>
+    <div className={styles.advert_root}>
+      <Link to='advert' className='w-full h-full'>
         <h3 className={styles.advert_title}>{title}</h3>
         <div className={styles.advert_details}>
           <p className={styles.advert_description}>{description}</p>
@@ -61,8 +61,8 @@ function AdvertItem({
             <p>{location}</p>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   )
 }
 
