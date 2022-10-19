@@ -1,17 +1,17 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { routes } from '@global/errors'
-import PageRoot from './layout/app'
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <PageRoot />,
-    children: routes
-  }
-])
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import PageRoot from '@layout/app'
+import GlobalRoutes from '@global/routes'
 
 function Router() {
-  return <RouterProvider router={router} />
+  return (
+    <BrowserRouter>
+      <PageRoot>
+        <Routes>
+          <Route path='/*' element={<GlobalRoutes />} />
+        </Routes>
+      </PageRoot>
+    </BrowserRouter>
+  )
 }
 
 export default Router
