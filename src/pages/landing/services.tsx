@@ -1,13 +1,7 @@
 import { AdvertCard } from '@components/shared'
-import { Link } from 'react-router-dom'
 import styles from './index.module.scss'
 
-/* eslint-disable */
-
-// FIXME fix eslint errors
-
 interface ServicesProps {
-  url: string
   label: string
 }
 
@@ -21,48 +15,20 @@ interface Advert {
   }
 }
 
-function AdvertItem({
-  title,
-  description,
-  provider: { location, name, userId }
-}: Advert) {
-  return (
-    <div className={styles.advert_root}>
-      <Link to='advert' className='w-full h-full'>
-        <h3 className={styles.advert_title}>{title}</h3>
-        <div className={styles.advert_details}>
-          <p className={styles.advert_description}>{description}</p>
-          <div className={styles.provider_root}>
-            <div className={styles.provider_profile}>
-              <img
-                className={styles.provider_avatar}
-                src={`https://avatars.dicebear.com/api/adventurer/${userId}.svg`}
-                alt={"Provider's Avatar"}
-              />
-              <p>{name}</p>
-            </div>
-            <p>{location}</p>
-          </div>
-        </div>
-      </Link>
-    </div>
-  )
-}
-
 function AdvertListLoading() {
   return (
     <div className={styles.advert_list}>
-      <AdvertCard state={'loading'} />
-      <AdvertCard state={'loading'} />
-      <AdvertCard state={'loading'} />
-      <AdvertCard state={'loading'} />
-      <AdvertCard state={'loading'} />
-      <AdvertCard state={'loading'} />
+      <AdvertCard state='loading' />
+      <AdvertCard state='loading' />
+      <AdvertCard state='loading' />
+      <AdvertCard state='loading' />
+      <AdvertCard state='loading' />
+      <AdvertCard state='loading' />
     </div>
   )
 }
 
-function AdvertList({ url, label }: ServicesProps) {
+function AdvertList() {
   const adverts: Advert[] = [
     {
       title: 'Catering',
@@ -115,28 +81,26 @@ function AdvertList({ url, label }: ServicesProps) {
   ]
   return (
     <div className={styles.advert_list}>
-      {adverts.map(
-        ({ provider: { userId, ...provider }, ...advert }, index) => (
-          <AdvertCard
-            advert={{
-              ...advert,
-              provider: {
-                avatar: `https://avatars.dicebear.com/api/adventurer/${userId}.svg`,
-                ...provider
-              }
-            }}
-          />
-        )
-      )}
+      {adverts.map(({ provider: { userId, ...provider }, ...advert }) => (
+        <AdvertCard
+          advert={{
+            ...advert,
+            provider: {
+              avatar: `https://avatars.dicebear.com/api/adventurer/${userId}.svg`,
+              ...provider
+            }
+          }}
+        />
+      ))}
     </div>
   )
 }
 
-export default function Services({ url, label }: ServicesProps) {
+export default function Services({ label }: ServicesProps) {
   return (
     <div className={styles.services_root}>
       <p className={styles.services_label}>{label}</p>
-      <AdvertList url={url} label={label} />
+      <AdvertList />
       <AdvertListLoading />
     </div>
   )

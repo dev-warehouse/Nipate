@@ -36,8 +36,8 @@ export default function Default() {
   return (
     <div className={styles.page_root}>
       <Hero />
-      <Services url='popular' label='Popular Services' />
-      <Services url='near-you' label='Services Near You' />
+      <Services label='Popular Services' />
+      <Services label='Services Near You' />
       <PageFooter />
     </div>
   )
