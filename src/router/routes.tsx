@@ -1,5 +1,5 @@
 import { RouteObject } from 'react-router-dom'
-import PageRoot from '@pages/app'
+import PageRoot from '@layout/app'
 import { lazy } from 'react'
 
 const LandingPage = lazy(() => import('@pages/landing'))
