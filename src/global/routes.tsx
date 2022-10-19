@@ -7,7 +7,7 @@ const AdvertPage = lazy(() => import('@pages/advert'))
 
 export default function GlobalRoutes() {
   return (
-    <div>
+    <div className='w-full h-full'>
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='search' element={<SearchPage />} />
