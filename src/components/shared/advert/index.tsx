@@ -1,0 +1,54 @@
+import styles from './index.module.scss'
+
+export interface AdvertCardProps {
+  advert?: {
+    title: string
+    description: string
+    provider: {
+      location: string
+      name: string
+      avatar: string
+    }
+  }
+  state: 'default' | 'loading' | 'error'
+}
+
+export function AdvertCard({ advert, state }: AdvertCardProps) {
+  return (
+    <div className={styles.advert_card_root}>
+      <h3 className={styles.advert_card_title} data-state={state}>
+        {advert?.title}
+      </h3>
+      <div className={styles.advert_card_details}>
+        <p className={styles.advert_card_description} data-state={state}>
+          {advert?.description}
+        </p>
+        <div className={styles.advert_card_provider_root} data-state={state}>
+          <div
+            className={styles.advert_card_provider_profile}
+            data-state={state}
+          >
+            {advert ? (
+              <img
+                className={styles.advert_card_provider_avatar}
+                src={advert?.provider.avatar}
+                alt={"Provider's Avatar"}
+              />
+            ) : (
+              <div
+                className={styles.advert_card_provider_avatar}
+                data-state={state}
+              />
+            )}
+            <p>{advert?.provider?.name}</p>
+          </div>
+          <p>{advert?.provider?.location}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+AdvertCard.defaultProps = {
+  advert: undefined
+}
