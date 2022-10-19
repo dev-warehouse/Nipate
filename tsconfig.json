@@ -21,26 +21,26 @@
         "jsx": "react-jsx",
         "baseUrl": ".",
         "paths": {
-            "@pages/*": [
-                "src/pages/*"
-            ],
-            "@router/*": [
-                "src/router/*"
-            ],
-            "@/*": [
-                "src/*"
-            ],
-            "@features/*": [
-                "src/features/*"
+            "@assets/*": [
+                "src/assets/*"
             ],
             "@components/*": [
                 "src/components/*"
             ],
-            "@assets/*": [
-                "src/assets/*"
+            "@features/*": [
+                "src/features/*"
+            ],
+            "@global/*": [
+                "src/global/*"
             ],
             "@layout/*": [
                 "src/layout/*"
+            ],
+            "@pages/*": [
+                "src/pages/*"
+            ],
+            "@/*": [
+                "src/*"
             ]
         }
     },
