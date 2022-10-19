@@ -1,9 +1,9 @@
 import { MdOutlineMyLocation } from 'react-icons/md'
 import { Button } from '@components/ui/buttons'
 import { Input } from '@components/ui/input'
-import { PageFooter } from '@pages/app'
 import Services from '@pages/landing/services'
 import { Link } from 'react-router-dom'
+import PageFooter from '@/components/page/footer'
 import styles from './index.module.scss'
 
 function Hero() {
