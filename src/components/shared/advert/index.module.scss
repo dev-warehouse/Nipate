@@ -10,6 +10,10 @@
   &[data-state='loading'] {
     @apply h-8 w-1/2 bg-slate-200 rounded animate-pulse;
   }
+
+  &[data-state='error'] {
+    @apply h-8 w-1/2 bg-rose-100 rounded animate-pulse;
+  }
 }
 
 .advert_card_details {
@@ -26,6 +30,10 @@
   &[data-state='loading'] {
     @apply h-32 bg-slate-200 rounded animate-pulse;
   }
+
+  &[data-state='error'] {
+    @apply h-32 bg-rose-100 rounded animate-pulse;
+  }
 }
 
 .advert_card_provider_root {
@@ -33,6 +41,10 @@
 
   &[data-state='loading'] > p {
     @apply h-6 w-20 bg-slate-200 animate-pulse;
+  }
+
+  &[data-state='error'] > p {
+    @apply h-6 w-20 bg-rose-100 animate-pulse;
   }
 }
 
@@ -42,6 +54,10 @@
   &[data-state='loading'] {
     @apply bg-slate-200 animate-pulse;
   }
+
+  &[data-state='error'] {
+    @apply bg-rose-100 animate-pulse;
+  }
 }
 
 .advert_card_provider_profile {
@@ -49,6 +65,12 @@
   &[data-state='loading'] > p {
     @apply h-4 w-20 bg-slate-200 animate-pulse;
   }
+
+  &[data-state='error'] > p {
+    @apply h-4 w-20 bg-rose-100 animate-pulse;
+  }
+}
+
 .advert_container {
   @apply w-full overflow-x-auto snap-x snap-mandatory;
   @apply flex flex-row items-center gap-5 p-1;
