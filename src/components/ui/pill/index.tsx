@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import styles from './index.module.scss'
 
-export function Pill({
+export default function Pill({
   active,
   children
 }: {
