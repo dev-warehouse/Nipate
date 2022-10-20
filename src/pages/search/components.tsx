@@ -8,7 +8,7 @@ import ClickAwayListener from '@mui/base/ClickAwayListener/ClickAwayListener'
 import useSelect from '@mui/base/SelectUnstyled/useSelect'
 import { Input } from '@components/ui/input'
 import { CgSearch } from 'react-icons/cg'
-import { Pill } from '@components/shared'
+import Pill from '@components/ui/pill'
 import styles from './index.module.scss'
 
 export function FilterItem({

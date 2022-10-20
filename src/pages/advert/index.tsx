@@ -1,7 +1,7 @@
 import { MapView } from '@components/ui/map'
 import { Button } from '@components/ui/buttons'
 import { TbMapPin } from 'react-icons/tb'
-import { Pill } from '@components/shared'
+import Pill from '@components/ui/pill'
 import styles from './index.module.scss'
 
 function ProviderPic() {
