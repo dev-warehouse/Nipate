@@ -50,7 +50,11 @@ function FilterIcon() {
         >
           <TbFilter className={styles.filter_icon_icon} />
         </Button>
-        <PopperUnstyled open={openNav} anchorEl={useDetailsRef.current}>
+        <PopperUnstyled
+          open={openNav}
+          anchorEl={useDetailsRef.current}
+          disablePortal
+        >
           <div className={styles.filter_icon_dropdown}>
             <FilterForm />
           </div>
