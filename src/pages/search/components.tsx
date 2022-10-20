@@ -128,7 +128,7 @@ export function AvailabilitySelect() {
             {isOpen ? <TbChevronUp /> : <TbChevronDown />}
           </div>
         </ButtonUnstyled>
-        <PopperUnstyled open={isOpen} anchorEl={ref.current}>
+        <PopperUnstyled open={isOpen} anchorEl={ref.current} disablePortal>
           <div className='px-2.5 py-5 m-2 rounded-lg shadow bg-white'>
             <div className='grid grid-cols-2' {...getListboxProps()}>
               {availabilityDays.map(day => (
@@ -185,7 +185,7 @@ export function LocationSelect() {
             {isOpen ? <TbChevronUp /> : <TbChevronDown />}
           </div>
         </ButtonUnstyled>
-        <PopperUnstyled open={isOpen} anchorEl={ref.current}>
+        <PopperUnstyled open={isOpen} anchorEl={ref.current} disablePortal>
           <div className='px-2.5 py-3 m-2 rounded-lg shadow bg-white flex flex-col gap-2'>
             <Input
               placeholder='Filter Locations'
