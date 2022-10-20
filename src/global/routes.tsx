@@ -11,7 +11,10 @@ export default function GlobalRoutes() {
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='search' element={<SearchPage />} />
-        <Route path='advert' element={<AdvertPage />} />
+        <Route path='advert'>
+          <Route path='' element={<AdvertPage />} />
+          <Route path=':id' element={<AdvertPage />} />
+        </Route>
       </Routes>
     </div>
   )
