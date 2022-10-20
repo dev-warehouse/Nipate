@@ -6,7 +6,7 @@
 .modal_backdrop {
   @apply fixed top-0 bottom-0 left-0 right-0 -z-10;
   @apply bg-black/50 w-full h-full;
-  -webkit-tap-highlight-color: transparent
+  -webkit-tap-highlight-color: transparent;
 }
 
 .modal_container {
@@ -14,7 +14,6 @@
   @apply w-[96%] min-h-[90%] h-[78vh] p-1;
   @apply grid grid-rows-[auto_1fr];
 }
-
 
 .modal_main {
   @apply w-full h-full overflow-y-auto;
