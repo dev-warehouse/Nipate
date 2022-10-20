@@ -1,7 +1,7 @@
 import { MapView } from '@components/ui/map'
 import { Button } from '@components/ui/buttons'
 import { TbMapPin } from 'react-icons/tb'
-import { CategoryPill } from '@components/shared'
+import { Pill } from '@components/shared'
 import styles from './index.module.scss'
 
 function ProviderPic() {
@@ -29,15 +29,15 @@ function ProviderLocation() {
 function AdvertCategories() {
   return (
     <div className={styles.advert_catergories_root}>
-      <CategoryPill active>Housing</CategoryPill>
-      <CategoryPill active>Housing</CategoryPill>
-      <CategoryPill active>Housing</CategoryPill>
-      <CategoryPill active>Housing</CategoryPill>
-      <CategoryPill active>Housing</CategoryPill>
-      <CategoryPill active>Housing</CategoryPill>
-      <CategoryPill active>Housing</CategoryPill>
-      <CategoryPill active>Housing</CategoryPill>
-      <CategoryPill active>Housing</CategoryPill>
+      <Pill active>Housing</Pill>
+      <Pill active>Housing</Pill>
+      <Pill active>Housing</Pill>
+      <Pill active>Housing</Pill>
+      <Pill active>Housing</Pill>
+      <Pill active>Housing</Pill>
+      <Pill active>Housing</Pill>
+      <Pill active>Housing</Pill>
+      <Pill active>Housing</Pill>
     </div>
   )
 }

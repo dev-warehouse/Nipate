@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import styles from './index.module.scss'
 
-export function CategoryPill({
+export function Pill({
   active,
   children
 }: {
@@ -15,6 +15,6 @@ export function CategoryPill({
   )
 }
 
-CategoryPill.defaultProps = {
+Pill.defaultProps = {
   active: false
 }
