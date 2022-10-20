@@ -9,7 +9,7 @@ export function Pill({
   children: ReactNode
 }) {
   return (
-    <div className={styles.category_pill} data-active={active}>
+    <div className={styles.pill} data-active={active}>
       <p>{children}</p>
     </div>
   )
