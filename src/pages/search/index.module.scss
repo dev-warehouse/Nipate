@@ -71,22 +71,6 @@
   }
 }
 
-.category_select_item {
-  @apply px-1.5 py-1 rounded-lg snap-start;
-
-  & > p {
-    @apply text-content-sm;
-  }
-}
-
-.category_select_item_selected {
-  @apply px-1.5 py-1 rounded-lg bg-gray-50;
-
-  & > p {
-    @apply text-content-sm;
-  }
-}
-
 .no_data_root {
   @apply flex flex-col items-center justify-center;
 }

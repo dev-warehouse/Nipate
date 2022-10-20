@@ -8,6 +8,7 @@ import ClickAwayListener from '@mui/base/ClickAwayListener/ClickAwayListener'
 import useSelect from '@mui/base/SelectUnstyled/useSelect'
 import { Input } from '@components/ui/input'
 import { CgSearch } from 'react-icons/cg'
+import { CategoryPill } from '@components/shared'
 import styles from './index.module.scss'
 
 export function FilterItem({
@@ -28,17 +29,12 @@ const renderCategorySelect = (options: SelectOption<string>[]): JSX.Element => (
       <main>
         {options.length > 0 ? (
           options.map(option => (
-            <div
-              className={styles.category_select_item_selected}
-              key={option.value}
-            >
-              <p>{option.label}</p>
-            </div>
+            <CategoryPill key={option.value} active>
+              {option.label}
+            </CategoryPill>
           ))
         ) : (
-          <div className={styles.category_select_item}>
-            <p>Category</p>
-          </div>
+          <CategoryPill>Category</CategoryPill>
         )}
       </main>
     </div>
@@ -120,17 +116,12 @@ export function AvailabilitySelect() {
               <main>
                 {value.length > 0 ? (
                   value.map(option => (
-                    <div
-                      className={styles.category_select_item_selected}
-                      key={option}
-                    >
-                      <p>{option}</p>
-                    </div>
+                    <CategoryPill key={option} active>
+                      {option}
+                    </CategoryPill>
                   ))
                 ) : (
-                  <div className={styles.category_select_item}>
-                    <p>Availability</p>
-                  </div>
+                  <CategoryPill>Availability</CategoryPill>
                 )}
               </main>
             </div>
@@ -188,9 +179,7 @@ export function LocationSelect() {
           <div className={styles.category_select_root}>
             <div className={styles.category_select_items_container}>
               <main>
-                <div className={styles.category_select_item}>
-                  <p>{value ?? 'Location'}</p>
-                </div>
+                <CategoryPill>{value ?? 'Location'}</CategoryPill>
               </main>
             </div>
             {isOpen ? <TbChevronUp /> : <TbChevronDown />}
