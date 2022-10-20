@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import ButtonUnstyled from '@mui/base/ButtonUnstyled'
 import { ReactNode } from 'react'
 import styles from './index.module.scss'
@@ -18,9 +18,15 @@ export interface AdvertCardProps {
 
 export function AdvertCard({ advert, state }: AdvertCardProps) {
   const navigate = useNavigate()
+  const location = useLocation()
+
+  const advertUrl: string =
+    advert?.provider.name.split(' ').join('_').toLowerCase() ?? '.'
 
   const showAdvert = () =>
-    navigate(`${advert ? `advert/${advert.provider.name.toLowerCase()}` : '.'}`)
+    navigate(`${advert ? `advert/${advertUrl}` : '.'}`, {
+      state: { modal: location }
+    })
 
   return (
     <ButtonUnstyled
