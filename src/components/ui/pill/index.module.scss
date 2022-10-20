@@ -1,7 +1,7 @@
 .pill {
   @apply px-1.5 py-1 rounded-lg snap-start;
 
-  &[data-active = true] {
+  &[data-active='true'] {
     @apply bg-gray-50 shadow m-1;
   }
 
