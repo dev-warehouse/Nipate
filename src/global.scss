@@ -17,6 +17,8 @@
     @apply w-2 h-2;
   }
 
+  -webkit-tap-highlight-color: transparent;
+
   &::-webkit-scrollbar-track {
     @apply bg-transparent hover:bg-gray-100;
   }
