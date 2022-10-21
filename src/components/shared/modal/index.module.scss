@@ -25,5 +25,9 @@
 }
 
 .modal_close {
-  @apply p-2 text-[1.5rem] hover:bg-gray-100 active:bg-gray-50 focus:ring focus:ring-nipate-yellow rounded-lg;
+  @apply p-2 text-[1.5rem] hover:bg-gray-100 active:bg-gray-50 focus:ring focus:ring-nipate-yellow rounded-lg transition;
+  
+  &:active {
+    transform: scale(0.94);
+  }
 }
