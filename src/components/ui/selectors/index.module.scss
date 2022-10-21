@@ -4,6 +4,7 @@
 
   &:checked {
     @apply bg-nipate-gold;
+    @apply transition-colors;
   }
   &:disabled {
     @apply opacity-[.8] cursor-not-allowed;
