@@ -1,6 +1,6 @@
 @mixin select {
   @apply appearance-none w-4 h-4 bg-input-background border-gray-300 outline-none;
-  @apply focus:ring-nipate-yellow focus:ring-2 ring-offset-2;
+  @apply focus:ring-nipate-yellow focus:ring-2 ring-offset-2 transition;
 
   &:checked {
     @apply bg-nipate-gold;
@@ -27,7 +27,7 @@
 }
 
 .select_root {
-  @apply p-3 rounded-xl outline-none;
+  @apply p-3 rounded-xl outline-none transition;
   @apply bg-input-background min-h-[2.5rem];
   @apply focus:ring-nipate-yellow focus:ring-2 ring-offset-2;
 
@@ -51,5 +51,5 @@
 }
 
 .option {
-  @apply p-2 rounded-[0.5rem];
+  @apply p-2 rounded-[0.5rem] transition;
 }
