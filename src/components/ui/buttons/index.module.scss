@@ -2,9 +2,13 @@
   // Layout Styling
   @apply w-full  inline-flex items-center justify-center rounded-lg outline-none;
   // Text Styling
-  @apply font-semibold tracking-wide leading-normal;
+  @apply font-semibold tracking-wide leading-normal transition;
 
   @apply px-2 py-1.5 text-sm md:px-3 md:py-2 md:text-base;
+
+  &:active {
+    transform: scale(0.94);
+  }
 
   &:disabled {
     @apply opacity-60 cursor-not-allowed;
