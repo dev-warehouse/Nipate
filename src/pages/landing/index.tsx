@@ -15,7 +15,7 @@ function Hero() {
         <br />
         to serve you
       </p>
-      <Link to='search' state={{ modal: location }}>
+      <Link to='search' state={{ modal: location }} tabIndex={-1}>
         <Input
           placeholder='Search for Service'
           className={styles.hero_input}
