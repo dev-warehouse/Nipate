@@ -2,12 +2,13 @@ import { MdOutlineMyLocation } from 'react-icons/md'
 import { Button } from '@components/ui/buttons'
 import { Input } from '@components/ui/input'
 import Services from '@pages/landing/components'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import PageFooter from '@/components/page/footer'
 import styles from './index.module.scss'
 
 function Hero() {
   const location = useLocation()
+  const navigate = useNavigate()
   return (
     <div className={styles.hero_root}>
       <p className={styles.hero_text}>
@@ -15,20 +16,19 @@ function Hero() {
         <br />
         to serve you
       </p>
-      <Link to='search' state={{ modal: location }}>
-        <Input
-          placeholder='Search for Service'
-          className={styles.hero_input}
-          endAdornment={
-            <div className={styles.hero_search_actions}>
-              <div className={styles.hero_location_pin}>
-                <MdOutlineMyLocation />
-              </div>
-              <Button className={styles.hero_search_btn}>Search</Button>
+      <Input
+        placeholder='Search for Service'
+        className={styles.hero_input}
+        onClick={() => navigate('search', { state: { modal: location } })}
+        endAdornment={
+          <div className={styles.hero_search_actions}>
+            <div className={styles.hero_location_pin}>
+              <MdOutlineMyLocation />
             </div>
-          }
-        />
-      </Link>
+            <Button className={styles.hero_search_btn}>Search</Button>
+          </div>
+        }
+      />
     </div>
   )
 }

@@ -73,5 +73,9 @@ AdvertCard.defaultProps = {
 }
 
 export function AdvertsContainer({ children }: { children: ReactNode }) {
-  return <div className={styles.advert_container}>{children}</div>
+  return (
+    <div className={styles.advert_container} tabIndex={-1}>
+      {children}
+    </div>
+  )
 }
