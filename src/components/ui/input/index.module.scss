@@ -3,7 +3,11 @@
   @apply bg-input-background rounded-lg p-2.5;
   @apply text-sm outline-none ring-offset-2;
   @apply hover:bg-input-background/[0.6];
-  @apply inline-flex flex-row gap-2;
+  @apply inline-flex flex-row gap-2 transition;
+
+  &:active {
+    transform: scale(0.98);
+  }
 
   //  Input Data States
   input {
