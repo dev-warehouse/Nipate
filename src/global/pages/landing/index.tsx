@@ -1,7 +1,6 @@
 import { MdOutlineMyLocation } from 'react-icons/md'
 import { Button } from '@components/ui/buttons'
 import { Input } from '@components/ui/input'
-import Services from '@global/pages/landing/components'
 import { useLocation, useNavigate } from 'react-router-dom'
 import PageFooter from '@components/page/footer'
 import styles from './index.module.scss'
@@ -30,6 +29,14 @@ function Hero() {
           </div>
         }
       />
+    </div>
+  )
+}
+
+function Services({ label }: { label: string }) {
+  return (
+    <div className={styles.services_root}>
+      <p className={styles.services_label}>{label}</p>
     </div>
   )
 }
