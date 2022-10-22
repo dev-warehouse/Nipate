@@ -1,11 +1,14 @@
-export interface AppUser {
+export interface UserDetails extends User {
+  Location: UserLocation
+  Gender: Gender
+}
+
+export interface User {
   id: number
   MobileNumber: string
   IDNumber: string
   FirstName: string
   SurName: string
-  Location: UserLocation
-  Gender: Gender
 }
 
 export interface Gender {
