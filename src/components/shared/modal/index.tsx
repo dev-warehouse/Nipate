@@ -25,7 +25,7 @@ function Modal({ parentRef }: ModalProps) {
   const navigate = useNavigate()
 
   const handleClose = () => {
-    navigate(-1)
+    navigate('..')
     setOpen(false)
   }
 
