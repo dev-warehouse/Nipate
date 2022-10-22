@@ -1,49 +1,73 @@
-import { MutableRefObject, RefObject, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { ModalUnstyled } from '@mui/base'
 import ButtonUnstyled from '@mui/base/ButtonUnstyled'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { MdClose } from 'react-icons/all'
 import RouteErrorHandling from '@global/errors/router'
+import { CSSTransition } from 'react-transition-group'
 import styles from './index.module.scss'
 
-interface ModalProps {
-  parentRef: RefObject<HTMLDivElement> | MutableRefObject<HTMLDivElement>
-}
-
-function Backdrop({ onClick }: { onClick: () => void }) {
+function Backdrop({
+  setState,
+  open
+}: {
+  setState: Dispatch<SetStateAction<boolean>>
+  open: boolean
+}) {
   return (
-    <ButtonUnstyled
-      component='div'
-      className={styles.modal_backdrop}
-      onClick={onClick}
-    />
+    <CSSTransition
+      in={open}
+      classNames={{
+        enter: styles.fade_enter,
+        enterActive: styles.fade_enter_active,
+        exit: styles.fade_exit,
+        exitActive: styles.fade_exit_active
+      }}
+      timeout={250}
+      unmountOnExit
+    >
+      <ButtonUnstyled
+        component='div'
+        className={styles.modal_backdrop}
+        onClick={() => setState(false)}
+      />
+    </CSSTransition>
   )
 }
 
-function Modal({ parentRef }: ModalProps) {
-  const [open, setOpen] = useState(true)
-  const navigate = useNavigate()
-
-  const handleClose = () => {
-    navigate(-1)
-    setOpen(false)
-  }
+function ModalContent({
+  open,
+  setOpen,
+  callback
+}: {
+  open: boolean
+  setOpen: Dispatch<SetStateAction<boolean>>
+  callback: () => void
+}) {
+  useEffect(() => setOpen(true), [setOpen])
+  const ref = useRef<HTMLDivElement>(null)
 
   return (
-    <ModalUnstyled
-      open={open}
-      onClose={handleClose}
-      container={parentRef.current}
-      className={styles.modal_root}
-      components={{ Backdrop }}
-      componentsProps={{ backdrop: { onClick: handleClose } }}
+    <CSSTransition
+      in={open}
+      timeout={250}
+      onExited={callback}
+      nodeRef={ref}
+      mountOnEnter
+      unmountOnExit
+      classNames={{
+        enter: styles.show_enter,
+        enterActive: styles.show_enter_active,
+        exit: styles.show_exit,
+        exitActive: styles.show_exit_active
+      }}
     >
-      <div className={styles.modal_container}>
+      <div className={styles.modal_container} ref={ref}>
         <div className={styles.modal_header}>
           <ButtonUnstyled
             component='div'
             className={styles.modal_close}
-            onClick={handleClose}
+            onClick={() => setOpen(false)}
           >
             <MdClose />
           </ButtonUnstyled>
@@ -53,6 +77,24 @@ function Modal({ parentRef }: ModalProps) {
             <Outlet />
           </RouteErrorHandling>
         </main>
+      </div>
+    </CSSTransition>
+  )
+}
+
+function Modal() {
+  const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
+
+  const handleClose = () => {
+    navigate('..')
+  }
+
+  return (
+    <ModalUnstyled open>
+      <div className={styles.modal_root}>
+        <Backdrop setState={setOpen} open={open} />
+        <ModalContent open={open} setOpen={setOpen} callback={handleClose} />
       </div>
     </ModalUnstyled>
   )

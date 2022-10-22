@@ -1,5 +1,5 @@
 import Modal from '@components/shared/modal'
-import { lazy, useRef } from 'react'
+import { lazy } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 
 const LandingPage = lazy(() => import('@pages/landing'))
@@ -10,7 +10,6 @@ export default function GlobalRoutes() {
   const location = useLocation()
   const modal = location.state && location.state.modal
 
-  const parentRef = useRef<HTMLDivElement>(null)
   return (
     <div className='w-full h-full relative'>
       <Routes location={modal || location}>
@@ -23,7 +22,7 @@ export default function GlobalRoutes() {
       </Routes>
       {modal && (
         <Routes>
-          <Route path='' element={<Modal parentRef={parentRef} />}>
+          <Route path='' element={<Modal />}>
             <Route path='search' element={<SearchPage />} />
             <Route path='advert'>
               <Route path='' element={<AdvertPage />} />

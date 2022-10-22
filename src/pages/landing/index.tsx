@@ -20,6 +20,7 @@ function Hero() {
         placeholder='Search for Service'
         className={styles.hero_input}
         onClick={() => navigate('search', { state: { modal: location } })}
+        onChange={() => navigate('search', { state: { modal: location } })}
         endAdornment={
           <div className={styles.hero_search_actions}>
             <div className={styles.hero_location_pin}>
