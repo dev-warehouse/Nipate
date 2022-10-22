@@ -44,6 +44,9 @@
             ],
             "@auth/*": [
                 "src/auth/*"
+            ],
+            "@core/*": [
+                "src/core/*"
             ]
         }
     },
