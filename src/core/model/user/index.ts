@@ -1,20 +1,19 @@
 export interface UserDetails extends User {
-  Location: UserLocation
-  Gender: Gender
+  location: UserLocation
+  gender: Gender
+  idNumber: string
+  firstName: string
+  surName: string
 }
 
 export interface User {
-  id: number
-  MobileNumber: string
-  IDNumber: string
-  FirstName: string
-  SurName: string
+  userId: number
+  mobileNumber: string
+  displayName: string
+  avatar: string
 }
 
-export interface Gender {
-  id: number
-  name: string
-}
+export type Gender = 'male' | 'female'
 
 export interface UserLocation {
   id: number
