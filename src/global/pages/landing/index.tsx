@@ -41,12 +41,20 @@ function Services({ label }: { label: string }) {
   )
 }
 
+function PopularServices() {
+  return <Services label='Popular Services' />
+}
+
+function NearYou() {
+  return <Services label='Services Near You' />
+}
+
 export default function Default() {
   return (
     <div className={styles.page_root}>
       <Hero />
-      <Services label='Popular Services' />
-      <Services label='Services Near You' />
+      <PopularServices />
+      <NearYou />
       <PageFooter />
     </div>
   )
