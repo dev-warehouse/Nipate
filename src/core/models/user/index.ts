@@ -1,7 +1,8 @@
+import { County } from '@core/models/location'
+
 export interface UserDetails extends User {
-  location: UserLocation
+  location: County
   gender: Gender
-  idNumber: string
   firstName: string
   surName: string
 }
@@ -10,7 +11,11 @@ export interface User {
   userId: number
   mobileNumber: string
   displayName: string
+  idNumber: string
   avatar: string
 }
 
-export type Gender = 'male' | 'female'
+export enum Gender {
+  male,
+  female
+}
