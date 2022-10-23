@@ -14,8 +14,3 @@ export interface User {
 }
 
 export type Gender = 'male' | 'female'
-
-export interface UserLocation {
-  id: number
-  Name: string
-}
