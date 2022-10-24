@@ -33,20 +33,20 @@ function Hero() {
   )
 }
 
-function Services({ label }: { label: string }) {
+function PopularServices() {
   return (
     <div className={styles.services_root}>
-      <p className={styles.services_label}>{label}</p>
+      <p className={styles.services_label}>Popular Services</p>
     </div>
   )
 }
 
-function PopularServices() {
-  return <Services label='Popular Services' />
-}
-
 function NearYou() {
-  return <Services label='Services Near You' />
+  return (
+    <div className={styles.services_root}>
+      <p className={styles.services_label}>Services Near You</p>
+    </div>
+  )
 }
 
 export default function Default() {
