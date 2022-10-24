@@ -6,16 +6,13 @@ import PageFooter from '@components/page/footer'
 import {
   AdvertCard,
   AdvertListState,
+  AdvertNoData,
   AdvertsContainer
 } from '@components/shared'
 import { ErrorBoundary } from 'react-error-boundary'
 import { DOMAttributes, Suspense } from 'react'
 import { useQueryErrorResetBoundary } from '@tanstack/react-query'
-import {
-  useAdverts,
-  usePopularAdvert,
-  useProximityAdvert
-} from '@/api/hooks/advert'
+import { useAdverts, usePopularAdvert } from '@/api/hooks/advert'
 import styles from './index.module.scss'
 
 function Hero() {
@@ -50,9 +47,11 @@ function PopularServices() {
   const { data } = usePopularAdvert()
   return (
     <>
-      {data?.map(advert => (
-        <AdvertCard key={advert.id} advert={advert} />
-      ))}
+      {data && data.length > 0 ? (
+        data.map(advert => <AdvertCard key={advert.id} advert={advert} />)
+      ) : (
+        <AdvertNoData />
+      )}
       <div />
     </>
   )
@@ -62,9 +61,11 @@ function NearYou() {
   const { data } = useAdverts()
   return (
     <>
-      {data?.map(advert => (
-        <AdvertCard key={advert.id} advert={advert} />
-      ))}
+      {data && data.length > 0 ? (
+        data.map(advert => <AdvertCard key={advert.id} advert={advert} />)
+      ) : (
+        <AdvertNoData />
+      )}
       <div />
     </>
   )
