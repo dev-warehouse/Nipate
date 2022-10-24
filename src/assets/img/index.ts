@@ -1,5 +1,4 @@
 import searchGif from './search.gif'
+import noData from './no_data.svg'
 
-const removeMe = ''
-
-export { searchGif, removeMe }
+export { searchGif, noData }
