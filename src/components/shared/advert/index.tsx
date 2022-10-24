@@ -1,9 +1,10 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import ButtonUnstyled from '@mui/base/ButtonUnstyled'
-import { ReactNode } from 'react'
+import { DOMAttributes, ReactNode } from 'react'
 import { IoReload } from 'react-icons/io5'
 import { Advert } from '@/api/models/advert'
 import { FallbackProps } from 'react-error-boundary'
+import { noData } from '@assets/img'
 import styles from './index.module.scss'
 
 export interface AdvertCardProps {
@@ -102,5 +103,17 @@ export function AdvertListState({
       <AdvertCard state={state} />
       <AdvertCard state={state} />
     </>
+  )
+}
+
+export function AdvertNoData({ children }: DOMAttributes<HTMLDivElement>) {
+  return (
+    <div className='w-full flex flex-col items-center justify-center gap-4 p-6'>
+      <div>
+        <img src={noData} alt='No Data' className='h-20' />
+      </div>
+
+      {children ?? <p>Unfortunately there is no data currently</p>}
+    </div>
   )
 }
