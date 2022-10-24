@@ -1,5 +1,5 @@
 import { Advert } from '@/api/models/advert'
-import { Center, County, Location, Town } from '@/api/models/location'
+import { Center, County, Town } from '@/api/models/location'
 import { Service, ServiceCategory } from '@/api/models/service'
 import { useAxios } from '@/core/hooks/axios'
 import { useQuery } from '@tanstack/react-query'
@@ -24,25 +24,16 @@ export function useAdvert(id: Advert['id']) {
 
 export function useFilterAdvert(
   searchText:
-    | Advert['ADTitle']
-    | Service['Name']
-    | County['Name']
+    | Advert['title']
+    | Service['name']
+    | County['name']
     | Town['name']
-    | Center['DisplayName']
-    | ServiceCategory['Name']
+    | Center['displayName']
+    | ServiceCategory['name']
 ) {
   const axios = useAxios()
 
   return useQuery<Advert[]>(['adverts', searchText], async () => {
-    const { data } = await axios.get<Advert[]>(``)
-    return data
-  })
-}
-
-export function useProximityAdvert(location: Location) {
-  const axios = useAxios()
-
-  return useQuery<Advert[]>(['adverts', location], async () => {
     const { data } = await axios.get<Advert[]>(``)
     return data
   })
