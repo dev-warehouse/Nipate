@@ -1,17 +1,17 @@
 export interface County {
   id: number
-  Name: string
+  name: string
 }
 
 export interface Center {
   id: number
-  DisplayName: string
-  State: string
-  Town: Town
-  Suburb: string
-  Road: string
-  Landmark: string
-  CenterBlock: string
+  displayName: string
+  state: string
+  town: Town
+  suburb: string
+  road: string
+  landmark: string
+  centerBlock: string
 }
 
 export interface Town {

@@ -4,21 +4,21 @@ import { User } from '../user'
 
 export interface Provider {
   id: number
-  User: User
-  County: County
+  user: User
+  county: County
 }
 
 export interface ProviderProduct {
   id: number
-  Provider: Provider
-  ServiceTitle: string
-  Service: Service
-  ServiceDescription: string
-  Longitude: Location['longitude']
-  Latitude: Location['latitude']
-  Location: Center
+  provider: Provider
+  serviceTitle: string
+  service: Service
+  serviceDescription: string
+  longitude: Location['longitude']
+  latitude: Location['latitude']
+  location: Center
   workingDays: Day[]
-  AgeBracket: AgeBracket
+  ageBracket: AgeBracket
 }
 
 export enum Day {

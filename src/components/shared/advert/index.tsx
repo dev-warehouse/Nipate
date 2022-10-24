@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import ButtonUnstyled from '@mui/base/ButtonUnstyled'
 import { ReactNode } from 'react'
-import styles from './index.module.scss'
 import { IoReload } from 'react-icons/io5'
+import styles from './index.module.scss'
 
 export interface AdvertCardProps {
   advert?: {
