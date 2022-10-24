@@ -1,6 +1,6 @@
-import Router from '@/routes'
-import RootErrorBoundary from '@features/errors'
-import GlobalProviders from '@core/provider'
+import RootErrorBoundary from './core/errors'
+import GlobalProviders from './core/provider'
+import Router from './routes'
 
 function App() {
   return (
