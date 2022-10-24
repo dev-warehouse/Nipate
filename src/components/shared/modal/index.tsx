@@ -14,6 +14,7 @@ function Backdrop({
   setState: Dispatch<SetStateAction<boolean>>
   open: boolean
 }) {
+  const ref = useRef()
   return (
     <CSSTransition
       in={open}
@@ -23,6 +24,7 @@ function Backdrop({
         exit: styles.fade_exit,
         exitActive: styles.fade_exit_active
       }}
+      nodeRef={ref}
       timeout={250}
       unmountOnExit
     >
