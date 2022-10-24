@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import ButtonUnstyled from '@mui/base/ButtonUnstyled'
 import { ReactNode } from 'react'
 import styles from './index.module.scss'
+import { IoReload } from 'react-icons/io5'
 
 export interface AdvertCardProps {
   advert?: {
@@ -77,5 +78,35 @@ export function AdvertsContainer({ children }: { children: ReactNode }) {
     <div className={styles.advert_container} tabIndex={-1}>
       {children}
     </div>
+  )
+}
+
+export function AdvertListState({
+  state,
+  reset
+}: {
+  state: AdvertCardProps['state']
+  // eslint-disable-next-line react/require-default-props
+  reset?: () => void
+}) {
+  return (
+    <>
+      {state === 'error' && (
+        <ButtonUnstyled
+          component='div'
+          onClick={reset}
+          className='absolute top-2 right-2 p-2 rounded bg-white shadow font-semibold'
+        >
+          <IoReload />
+        </ButtonUnstyled>
+      )}
+      <AdvertCard state={state} />
+      <AdvertCard state={state} />
+      <AdvertCard state={state} />
+      <AdvertCard state={state} />
+      <AdvertCard state={state} />
+      <AdvertCard state={state} />
+      <AdvertCard state={state} />
+    </>
   )
 }
