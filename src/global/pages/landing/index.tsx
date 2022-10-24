@@ -3,10 +3,19 @@ import { Button } from '@components/ui/buttons'
 import { Input } from '@components/ui/input'
 import { useLocation, useNavigate } from 'react-router-dom'
 import PageFooter from '@components/page/footer'
-import { AdvertListState, AdvertsContainer } from '@components/shared'
+import {
+  AdvertCard,
+  AdvertListState,
+  AdvertsContainer
+} from '@components/shared'
 import { ErrorBoundary } from 'react-error-boundary'
 import { DOMAttributes, Suspense } from 'react'
 import { useQueryErrorResetBoundary } from '@tanstack/react-query'
+import {
+  useAdverts,
+  usePopularAdvert,
+  useProximityAdvert
+} from '@/api/hooks/advert'
 import styles from './index.module.scss'
 
 function Hero() {
@@ -38,11 +47,27 @@ function Hero() {
 }
 
 function PopularServices() {
-  return <div>Popular Services</div>
+  const { data } = usePopularAdvert()
+  return (
+    <>
+      {data?.map(advert => (
+        <AdvertCard key={advert.id} advert={advert} />
+      ))}
+      <div />
+    </>
+  )
 }
 
 function NearYou() {
-  return <div>Hello</div>
+  const { data } = useAdverts()
+  return (
+    <>
+      {data?.map(advert => (
+        <AdvertCard key={advert.id} advert={advert} />
+      ))}
+      <div />
+    </>
+  )
 }
 
 function ErrorHandling({ children }: DOMAttributes<never>) {
