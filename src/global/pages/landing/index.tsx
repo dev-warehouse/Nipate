@@ -3,6 +3,10 @@ import { Button } from '@components/ui/buttons'
 import { Input } from '@components/ui/input'
 import { useLocation, useNavigate } from 'react-router-dom'
 import PageFooter from '@components/page/footer'
+import { AdvertListState, AdvertsContainer } from '@components/shared'
+import { ErrorBoundary } from 'react-error-boundary'
+import { DOMAttributes, Suspense } from 'react'
+import { useQueryErrorResetBoundary } from '@tanstack/react-query'
 import styles from './index.module.scss'
 
 function Hero() {
@@ -34,18 +38,30 @@ function Hero() {
 }
 
 function PopularServices() {
-  return (
-    <div className={styles.services_root}>
-      <p className={styles.services_label}>Popular Services</p>
-    </div>
-  )
+  return <div>Popular Services</div>
 }
 
 function NearYou() {
+  return <div>Hello</div>
+}
+
+function ErrorHandling({ children }: DOMAttributes<never>) {
+  const { reset } = useQueryErrorResetBoundary()
   return (
-    <div className={styles.services_root}>
-      <p className={styles.services_label}>Services Near You</p>
-    </div>
+    <ErrorBoundary
+      onReset={reset}
+      // eslint-disable-next-line react/no-unstable-nested-components
+      fallbackRender={({ resetErrorBoundary }) => (
+        <AdvertListState
+          state='error'
+          resetErrorBoundary={resetErrorBoundary}
+        />
+      )}
+    >
+      <Suspense fallback={<AdvertListState state='loading' />}>
+        {children}
+      </Suspense>
+    </ErrorBoundary>
   )
 }
 
@@ -53,8 +69,22 @@ export default function Default() {
   return (
     <div className={styles.page_root}>
       <Hero />
-      <PopularServices />
-      <NearYou />
+      <div className={styles.services_root}>
+        <p className={styles.services_label}>Popular Services</p>
+        <AdvertsContainer>
+          <ErrorHandling>
+            <PopularServices />
+          </ErrorHandling>
+        </AdvertsContainer>
+      </div>
+      <div className={styles.services_root}>
+        <p className={styles.services_label}>Services Near You</p>
+        <AdvertsContainer>
+          <ErrorHandling>
+            <NearYou />
+          </ErrorHandling>
+        </AdvertsContainer>
+      </div>
       <PageFooter />
     </div>
   )
