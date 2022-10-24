@@ -1,4 +1,4 @@
-import { ErrorState } from '@features/errors'
+import { ErrorState } from '@/core/errors'
 import {
   Component,
   DOMAttributes,
