@@ -89,7 +89,7 @@ export function AdvertListState({
         <ButtonUnstyled
           component='div'
           onClick={resetErrorBoundary}
-          className='absolute top-2 right-2 p-2 rounded bg-white shadow font-semibold'
+          className='absolute top-4 right-2 z-[1] p-2 rounded bg-white shadow font-semibold'
         >
           <IoReload />
         </ButtonUnstyled>
