@@ -1,11 +1,11 @@
-import { Center, County, Location } from '../location'
+import { Center, County, Location, Town } from '../location'
 import { Service } from '../service'
 import { User } from '../user'
 
 export interface Provider {
   id: number
   user: User
-  county: County
+  location: County | Town
 }
 
 export interface ProviderProduct {

@@ -2,18 +2,11 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import ButtonUnstyled from '@mui/base/ButtonUnstyled'
 import { ReactNode } from 'react'
 import { IoReload } from 'react-icons/io5'
+import { Advert } from '@/api/models/advert'
 import styles from './index.module.scss'
 
 export interface AdvertCardProps {
-  advert?: {
-    title: string
-    description: string
-    provider: {
-      location: string
-      name: string
-      avatar: string
-    }
-  }
+  advert?: Advert
   state?: 'default' | 'loading' | 'error'
 }
 
@@ -21,13 +14,13 @@ export function AdvertCard({ advert, state }: AdvertCardProps) {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const advertUrl: string =
-    advert?.provider.name.split(' ').join('_').toLowerCase() ?? '.'
-
-  const showAdvert = () =>
-    navigate(`${advert ? `advert/${advertUrl}` : '.'}`, {
-      state: { modal: location }
-    })
+  const showAdvert = () => {
+    if (advert) {
+      navigate(`${advert?.provider.user.displayName}`, {
+        state: { modal: location }
+      })
+    }
+  }
 
   return (
     <ButtonUnstyled
@@ -50,7 +43,7 @@ export function AdvertCard({ advert, state }: AdvertCardProps) {
             {advert ? (
               <img
                 className={styles.advert_card_provider_avatar}
-                src={advert?.provider.avatar}
+                src={advert?.provider.user.avatar}
                 alt={"Provider's Avatar"}
               />
             ) : (
@@ -59,9 +52,9 @@ export function AdvertCard({ advert, state }: AdvertCardProps) {
                 data-state={state}
               />
             )}
-            <p>{advert?.provider?.name}</p>
+            <p>{advert?.provider?.user.displayName}</p>
           </div>
-          <p>{advert?.provider?.location}</p>
+          <p>{advert?.provider?.location.name}</p>
         </div>
       </div>
     </ButtonUnstyled>
