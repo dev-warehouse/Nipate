@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 import { IoReload } from 'react-icons/io5'
 import { Advert } from '@/api/models/advert'
 import styles from './index.module.scss'
+import { ErrorBoundaryProps, FallbackProps } from 'react-error-boundary'
 
 export interface AdvertCardProps {
   advert?: Advert
@@ -76,18 +77,18 @@ export function AdvertsContainer({ children }: { children: ReactNode }) {
 
 export function AdvertListState({
   state,
-  reset
+  resetErrorBoundary
 }: {
   state: AdvertCardProps['state']
   // eslint-disable-next-line react/require-default-props
-  reset?: () => void
+  resetErrorBoundary?: FallbackProps['resetErrorBoundary']
 }) {
   return (
     <>
       {state === 'error' && (
         <ButtonUnstyled
           component='div'
-          onClick={reset}
+          onClick={resetErrorBoundary}
           className='absolute top-2 right-2 p-2 rounded bg-white shadow font-semibold'
         >
           <IoReload />
