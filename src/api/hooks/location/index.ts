@@ -1,4 +1,4 @@
-import { County, Town, Location } from '@/api/models/location'
+import { County, Town, Location, Center } from '@/api/models/location'
 import { useAxios } from '@/core/hooks/axios'
 import { useQuery } from '@tanstack/react-query'
 
@@ -25,6 +25,15 @@ export function useTowns() {
 
   return useQuery<Town[]>(['towns'], async () => {
     const { data } = await axios.get<Town[]>(``)
+    return data
+  })
+}
+
+export function useCenters() {
+  const axios = useAxios()
+
+  return useQuery<Center[]>(['centers'], async () => {
+    const { data } = await axios.get<Center[]>(``)
     return data
   })
 }
