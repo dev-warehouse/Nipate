@@ -3,8 +3,8 @@ import ButtonUnstyled from '@mui/base/ButtonUnstyled'
 import { ReactNode } from 'react'
 import { IoReload } from 'react-icons/io5'
 import { Advert } from '@/api/models/advert'
+import { FallbackProps } from 'react-error-boundary'
 import styles from './index.module.scss'
-import { ErrorBoundaryProps, FallbackProps } from 'react-error-boundary'
 
 export interface AdvertCardProps {
   advert?: Advert
