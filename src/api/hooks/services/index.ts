@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 export function useService() {
   const axios = useAxios()
 
-  return useQuery<Service[]>(['service'], async () => {
+  return useQuery<Service[]>(['services'], async () => {
     const { data } = await axios.get<Service[]>(``)
     return data
   })
