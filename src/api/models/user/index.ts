@@ -1,4 +1,4 @@
-import { County } from '@core/models/location'
+import { County } from '../location'
 
 export interface UserDetails extends User {
   location: County

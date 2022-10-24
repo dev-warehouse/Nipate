@@ -1,4 +1,4 @@
-import { County, Town } from '@core/models/location'
+import { County, Town } from '../location'
 import { Service } from '../service'
 import { User } from '../user'
 
