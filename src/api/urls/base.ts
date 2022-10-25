@@ -11,7 +11,7 @@ export const DEV_BASE_API_URL = 'https://nipate-jdwrp.ondigitalocean.app'
 export const PRODUCTION_BASE_API_URL = 'https://api.nipate.me'
 
 const getHostname = (): string => {
-  if (process.browser) {
+  if (typeof window !== 'undefined') {
     return `${window.location.protocol}//${window.location.hostname}`
   }
   return ''
@@ -35,7 +35,7 @@ switch (hostname) {
     BASE_API_URL = PRODUCTION_BASE_API_URL
     break
   default:
-    // BASE_API_URL = `${hostname}:8000`
-    BASE_API_URL = PRODUCTION_BASE_API_URL
+    BASE_API_URL = `${hostname}:8000`
+    // BASE_API_URL = PRODUCTION_BASE_API_URL
     break
 }
