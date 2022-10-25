@@ -1,4 +1,4 @@
-import { MdOutlineMyLocation } from 'react-icons/md'
+import { MdOutlineMyLocation, MdRefresh } from 'react-icons/md'
 import { Button } from '@components/ui/buttons'
 import { Input } from '@components/ui/input'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -44,13 +44,23 @@ function Hero() {
 }
 
 function PopularServices() {
-  const { data } = usePopularAdvert()
+  const { data, refetch } = usePopularAdvert()
   return (
     <>
       {data && data.length > 0 ? (
         data.map(advert => <AdvertCard key={advert.id} advert={advert} />)
       ) : (
-        <AdvertNoData />
+        <AdvertNoData>
+          <p>Unfortunately there is no data currently</p>
+          <Button
+            variant='text'
+            className={styles.btn_reload}
+            onClick={() => refetch()}
+          >
+            Reload
+            <MdRefresh />
+          </Button>
+        </AdvertNoData>
       )}
       <div />
     </>
@@ -58,13 +68,23 @@ function PopularServices() {
 }
 
 function NearYou() {
-  const { data } = useAdverts()
+  const { data, refetch } = useAdverts()
   return (
     <>
       {data && data.length > 0 ? (
         data.map(advert => <AdvertCard key={advert.id} advert={advert} />)
       ) : (
-        <AdvertNoData />
+        <AdvertNoData>
+          <p>Unfortunately there is no data currently</p>
+          <Button
+            variant='text'
+            className={styles.btn_reload}
+            onClick={() => refetch()}
+          >
+            Reload
+            <MdRefresh />
+          </Button>
+        </AdvertNoData>
       )}
       <div />
     </>
