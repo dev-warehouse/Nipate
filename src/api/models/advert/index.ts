@@ -1,4 +1,4 @@
-import { County, Town } from '../location'
+import { County } from '../location'
 import { Provider } from '../provider'
 import { Service } from '../service'
 
@@ -7,7 +7,7 @@ export interface Advert {
   title: string
   provider: Provider
   service: Service
-  location: County | Town
+  location: County
   description: string
   startDate: Date
   expiryDate: Date
