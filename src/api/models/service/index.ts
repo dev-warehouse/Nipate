@@ -1,10 +1,10 @@
 export interface ServiceCategory {
   id: number
-  name: string
+  Name: string
 }
 
 export interface Service {
   id: number
-  name: string
-  categoryID: ServiceCategory['id']
+  Name: string
+  CategoryID: ServiceCategory['id']
 }
