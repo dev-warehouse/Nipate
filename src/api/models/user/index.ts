@@ -15,7 +15,7 @@ export interface User {
   avatar: string
 }
 
-export enum Gender {
-  male,
-  female
+export interface Gender {
+  id: number
+  name: string
 }
