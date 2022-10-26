@@ -1,6 +1,6 @@
+import { Provider } from '@api/models/provider'
 import { userDeserializer, UserResponse } from '../user'
 import { countyDeserializer, CountyResponse } from '../location'
-import { Provider } from '../../models/provider'
 
 export interface ProviderResponse {
   id: number

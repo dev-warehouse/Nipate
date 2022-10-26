@@ -6,7 +6,7 @@ export interface Advert {
   id: number
   title: string
   provider: Provider
-  service: Service
+  service: Service[]
   location: County
   description: string
   startDate: Date
