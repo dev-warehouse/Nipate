@@ -6,6 +6,7 @@ export interface Provider {
   id: number
   user: User
   location: County
+  isProvider?: boolean
 }
 
 export interface ProviderProduct {
