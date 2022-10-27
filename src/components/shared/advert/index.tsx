@@ -18,7 +18,7 @@ export function AdvertCard({ advert, state }: AdvertCardProps) {
 
   const showAdvert = () => {
     if (advert) {
-      navigate(`${advert?.provider.user.displayName}`, {
+      navigate(`advert/${advert?.provider.user.displayName}`, {
         state: { modal: location }
       })
     }

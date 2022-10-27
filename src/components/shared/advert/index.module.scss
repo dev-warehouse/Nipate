@@ -25,6 +25,7 @@
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   @apply text-card-description-sm md:text-card-description;
+  @apply min-h-[7rem];
 
   &[data-state='loading'] {
     @apply h-32 bg-slate-200 rounded animate-pulse;
