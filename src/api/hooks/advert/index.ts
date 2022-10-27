@@ -27,8 +27,8 @@ export function useFilterAdvert(
   searchText:
     | Advert['title']
     | Service['Name']
-    | County['name']
-    | Town['name']
+    | County['Name']
+    | Town['Name']
     | Center['displayName']
     | ServiceCategory['Name']
 ) {
