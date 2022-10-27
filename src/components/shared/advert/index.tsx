@@ -56,7 +56,7 @@ export function AdvertCard({ advert, state }: AdvertCardProps) {
             )}
             <p>{advert?.provider?.user.displayName}</p>
           </div>
-          <p>{advert?.provider?.location.name}</p>
+          <p>{advert?.provider?.county.Name}</p>
         </div>
       </div>
     </ButtonUnstyled>

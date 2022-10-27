@@ -5,7 +5,7 @@ import { User } from '../user'
 export interface Provider {
   id: number
   user: User
-  location: County
+  county: County
   isProvider?: boolean
 }
 
