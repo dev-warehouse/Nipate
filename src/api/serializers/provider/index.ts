@@ -1,25 +1,21 @@
 import { Provider } from '@api/models/provider'
+import { County } from '@/api/models/location'
 import { userDeserializer, UserResponse } from '../user'
-import { countyDeserializer, CountyResponse } from '../location'
 
 export interface ProviderResponse {
   id: number
   User: UserResponse
-  Location: CountyResponse
+  County: County
   Provider?: boolean
 }
 
-export function providerDeserializer({
-  id,
-  User,
-  Location,
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  Provider
-}: ProviderResponse): Provider {
+export function providerDeserializer(
+  providerResponse: ProviderResponse
+): Provider {
   return {
-    id,
-    user: userDeserializer(User),
-    location: countyDeserializer(Location),
-    isProvider: Provider
+    id: providerResponse.id,
+    user: userDeserializer(providerResponse.User),
+    county: providerResponse.County,
+    isProvider: providerResponse.Provider
   }
 }

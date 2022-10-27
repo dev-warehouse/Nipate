@@ -1,5 +1,5 @@
+import { County } from '@/api/models/location'
 import { Gender, User, UserDetails } from '@/api/models/user'
-import { countyDeserializer, CountyResponse } from '../location'
 
 export interface UserResponse {
   id: number
@@ -10,22 +10,15 @@ export interface UserResponse {
   Avatar?: string
 }
 
-export function userDeserializer({
-  id,
-  MobileNumber,
-  FirstName,
-  SurName,
-  IDNumber,
-  Avatar
-}: UserResponse): User {
+export function userDeserializer(userResponse: UserResponse): User {
   return {
-    userId: id,
+    userId: userResponse.id,
     avatar:
-      Avatar ??
-      `https://avatars.dicebear.com/api/adventurer/${id}-${FirstName}.svg`,
-    idNumber: IDNumber,
-    displayName: `${FirstName} ${SurName}`,
-    mobileNumber: MobileNumber
+      userResponse.Avatar ??
+      `https://avatars.dicebear.com/api/adventurer/${userResponse.id}-${userResponse.FirstName}.svg`,
+    idNumber: userResponse.IDNumber,
+    displayName: `${userResponse.FirstName} ${userResponse.SurName}`,
+    mobileNumber: userResponse.MobileNumber
   }
 }
 
@@ -35,33 +28,25 @@ export interface UserDetailsResponse {
   IDNumber: string
   FirstName: string
   SurName: string
-  Location: CountyResponse
+  Location: County
   Avatar?: string
   Gender: Gender
 }
 
-export function userDetailsDeserilizer({
-  id,
-  MobileNumber,
-  IDNumber,
-  FirstName,
-  SurName,
-  Location,
-  Avatar,
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  Gender
-}: UserDetailsResponse): UserDetails {
+export function userDetailsDeserilizer(
+  userDetailsResponse: UserDetailsResponse
+): UserDetails {
   return {
-    userId: id,
-    mobileNumber: MobileNumber,
-    idNumber: IDNumber,
-    firstName: FirstName,
-    displayName: `${FirstName} ${SurName}`,
-    surName: SurName,
-    gender: Gender,
-    location: countyDeserializer(Location),
+    userId: userDetailsResponse.id,
+    mobileNumber: userDetailsResponse.MobileNumber,
+    idNumber: userDetailsResponse.IDNumber,
+    firstName: userDetailsResponse.FirstName,
+    displayName: `${userDetailsResponse.FirstName} ${userDetailsResponse.SurName}`,
+    surName: userDetailsResponse.SurName,
+    gender: userDetailsResponse.Gender,
+    location: userDetailsResponse.Location,
     avatar:
-      Avatar ??
-      `https://avatars.dicebear.com/api/adventurer/${id}-${FirstName}.svg`
+      userDetailsResponse.Avatar ??
+      `https://avatars.dicebear.com/api/adventurer/${userDetailsResponse.id}-${userDetailsResponse.FirstName}.svg`
   }
 }

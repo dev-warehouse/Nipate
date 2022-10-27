@@ -3,15 +3,15 @@ import {
   providerDeserializer,
   ProviderResponse
 } from '@api/serializers/provider'
-import { countyDeserializer, CountyResponse } from '@api/serializers/location'
 import { Advert } from '@api/models/advert'
+import { County } from '@/api/models/location'
 
 export interface AdvertResponse {
   id: number
   ADTitle: string
   Provider: ProviderResponse
   Service: Service[]
-  Location: CountyResponse
+  Location: County
   AdDescription: string
   StartDate: string
   ExpiryDate: string
@@ -23,7 +23,7 @@ export function advertDeserializer(advert: AdvertResponse): Advert {
     id: advert.id,
     title: advert.ADTitle,
     provider: providerDeserializer(advert.Provider),
-    location: countyDeserializer(advert.Location),
+    location: advert.Location,
     service: advert.Service,
     description: advert.AdDescription,
     startDate: new Date(advert.StartDate),
