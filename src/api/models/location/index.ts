@@ -1,6 +1,6 @@
 export interface County {
   id: number
-  Name: string
+  name: string
 }
 
 export interface Center {
@@ -16,7 +16,7 @@ export interface Center {
 
 export interface Town {
   id: string
-  Name: string
+  name: string
 }
 
 export interface Location {
