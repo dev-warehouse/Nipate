@@ -18,7 +18,7 @@ export function useAdvert(id: Advert['id']) {
   const axios = useAxios()
 
   return useQuery<Advert>(['advert', id], async () => {
-    const { data: res } = await axios.get<Advert>(`${ADVERT_LIST_URL}`)
+    const { data: res } = await axios.get<Advert>(`${ADVERT_LIST_URL}/${id}`)
     return res
   })
 }
