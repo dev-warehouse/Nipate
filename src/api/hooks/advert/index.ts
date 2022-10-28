@@ -34,11 +34,11 @@ export function useAdvert(id: Advert['id']) {
 export function useFilterAdvert(
   searchText:
     | Advert['title']
-    | Service['Name']
-    | County['Name']
-    | Town['Name']
+    | Service['name']
+    | County['name']
+    | Town['name']
     | Center['displayName']
-    | ServiceCategory['Name']
+    | ServiceCategory['name']
 ) {
   const axios = useAxios()
 

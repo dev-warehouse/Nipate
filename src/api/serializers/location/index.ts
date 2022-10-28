@@ -16,7 +16,7 @@ export function centerDeserializer(center: CenterResponse): Center {
     id: center.id,
     displayName: center.DisplayName,
     state: center.State,
-    town: { id: center.Town, Name: center.Town },
+    town: { id: center.Town, name: center.Town },
     suburb: center.Suburb,
     road: center.Road,
     landmark: center.Landmark,
