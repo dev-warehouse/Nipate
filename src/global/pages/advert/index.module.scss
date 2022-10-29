@@ -76,14 +76,19 @@
 
 .advert_detail_root {
   @apply flex flex-col gap-16 px-2.5 py-8 lg:px-5 md:py-10;
+  @apply xl:max-w-[65%];
+  flex: 4 1 auto;
 }
 
 .map_container {
   @apply w-full h-60 md:h-80;
+  @apply z-0 xl:h-96;
 }
 
 .provider_root {
   @apply flex flex-col justify-around md:items-end gap-8 lg:gap-16 w-full p-4 md:px-6 md:py-4;
+  @apply xl:h-fit;
+  flex: 1 0 15rem;
 }
 
 .provider_prof_section_root {
