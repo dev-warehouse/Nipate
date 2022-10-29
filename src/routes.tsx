@@ -9,7 +9,7 @@ function Router() {
       <PageRoot>
         <Routes>
           <Route path='/*' element={<GlobalRoutes />} />
-          <Route path='auth' element={<AuthRoutes />} />
+          <Route path='auth/*' element={<AuthRoutes />} />
         </Routes>
       </PageRoot>
     </BrowserRouter>
