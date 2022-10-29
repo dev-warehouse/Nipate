@@ -9,9 +9,9 @@ export interface UserDetails extends User {
 
 export interface User {
   userId: number
-  mobileNumber: string
+  mobileNumber: number
   displayName: string
-  idNumber: string
+  idNumber: number
   avatar: string
 }
 
