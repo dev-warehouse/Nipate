@@ -1,10 +1,10 @@
 import Modal from '@components/shared/modal'
 import { lazy } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
-const LandingPage = lazy(() => import('@pages/landing'))
-const SearchPage = lazy(() => import('@pages/search'))
-const AdvertPage = lazy(() => import('@pages/advert'))
+const LandingPage = lazy(() => import('@global/pages/landing'))
+const SearchPage = lazy(() => import('@global/pages/search'))
+const AdvertPage = lazy(() => import('@global/pages/advert'))
 
 export default function GlobalRoutes() {
   const location = useLocation()
@@ -16,7 +16,7 @@ export default function GlobalRoutes() {
         <Route path='/' element={<LandingPage />} />
         <Route path='search' element={<SearchPage />} />
         <Route path='advert'>
-          <Route path='' element={<AdvertPage />} />
+          <Route path='' element={<Navigate replace to='/search' />} />
           <Route path=':id' element={<AdvertPage />} />
         </Route>
       </Routes>
@@ -25,7 +25,7 @@ export default function GlobalRoutes() {
           <Route path='' element={<Modal />}>
             <Route path='search' element={<SearchPage />} />
             <Route path='advert'>
-              <Route path='' element={<AdvertPage />} />
+              <Route path='' element={<Navigate replace to='/search' />} />
               <Route path=':id' element={<AdvertPage />} />
             </Route>
           </Route>

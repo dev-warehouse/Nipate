@@ -25,6 +25,7 @@
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   @apply text-card-description-sm md:text-card-description;
+  @apply min-h-[7rem];
 
   &[data-state='loading'] {
     @apply h-32 bg-slate-200 rounded animate-pulse;
@@ -72,7 +73,7 @@
 
 .advert_container {
   @apply w-full overflow-x-auto snap-x snap-mandatory;
-  @apply flex flex-row items-center gap-5 p-1;
+  @apply flex flex-row items-center gap-5 p-1 relative;
 
   &::-webkit-scrollbar {
     display: none;

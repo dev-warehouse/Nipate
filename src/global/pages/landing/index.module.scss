@@ -43,3 +43,7 @@
 .services_label {
   @apply text-page-heading-sm md:text-page-heading;
 }
+
+.btn_reload {
+  @apply w-fit gap-2;
+}

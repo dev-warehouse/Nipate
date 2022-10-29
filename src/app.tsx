@@ -1,10 +1,13 @@
-import Router from '@/routes'
-import RootErrorBoundary from '@features/errors'
+import RootErrorBoundary from './core/errors'
+import GlobalProviders from './core/provider'
+import Router from './routes'
 
 function App() {
   return (
     <RootErrorBoundary>
-      <Router />
+      <GlobalProviders>
+        <Router />
+      </GlobalProviders>
     </RootErrorBoundary>
   )
 }

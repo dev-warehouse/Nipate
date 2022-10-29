@@ -36,11 +36,14 @@
             "@layout/*": [
                 "src/layout/*"
             ],
-            "@pages/*": [
-                "src/pages/*"
-            ],
             "@/*": [
                 "src/*"
+            ],
+            "@core/*": [
+                "src/core/*"
+            ],
+            "@api/*": [
+                "src/api/*"
             ]
         }
     },
