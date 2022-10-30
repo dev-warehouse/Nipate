@@ -8,6 +8,11 @@
   object-fit: cover;
 }
 
+.phone_list {
+  @apply w-fit h-fit max-h-[20rem] max-w-[20rem];
+  @apply overflow-hidden overflow-y-auto;
+}
+
 .phone_option {
   @apply flex flex-row gap-2 items-center;
 
