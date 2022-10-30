@@ -1,0 +1,72 @@
+.phone_root {
+  @apply inline-flex flex-row gap-2.5;
+}
+
+.phone_option_img {
+  @apply w-6 h-5 bg-[#E5E5E5] rounded relative;
+  @apply rounded;
+  object-fit: cover;
+}
+
+.phone_option {
+  @apply flex flex-row gap-2 items-center;
+
+  & > p {
+    all: unset;
+    white-space: nowrap;
+    @apply max-w-md overflow-hidden overflow-ellipsis;
+    @apply text-base font-medium text-gray-400;
+  }
+
+  & > span {
+    all: unset;
+  }
+
+  &[data-validity="success"] {
+    :nth-child(1) {
+      @apply bg-green-200;
+    }
+
+    & > p {
+      @apply text-green-500;
+    }
+  }
+
+  &[data-validity="error"] {
+    :nth-child(1) {
+      @apply bg-red-200;
+    }
+
+    & > p {
+      @apply text-red-500;
+    }
+  }
+}
+
+.form_label {
+  @apply text-sm font-semibold;
+
+  &[data-validity="success"] {
+    @apply text-green-600;
+  }
+
+  &[data-validity="error"] {
+    @apply text-red-600;
+  }
+}
+
+.form_message {
+  @apply mt-1 text-xs font-medium;
+
+  &[data-validity="success"] {
+    @apply text-green-700;
+  }
+
+  &[data-validity="error"] {
+    @apply text-red-700;
+  }
+}
+
+.form_root {
+  @apply w-full flex flex-col gap-2;
+}
