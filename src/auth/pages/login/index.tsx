@@ -8,6 +8,8 @@ import { CgSpinner } from 'react-icons/cg'
 import { MdErrorOutline, MdOutlineCheckCircle } from 'react-icons/md'
 import { RiSignalWifiErrorLine } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
+import { yupResolver } from '@hookform/resolvers/yup'
+import Validator from '@auth/services/validator'
 import styles from './index.module.scss'
 
 function LoginPage() {
@@ -19,7 +21,9 @@ function LoginPage() {
     clearErrors,
     reset,
     formState: { errors }
-  } = useForm<LoginFormData>({})
+  } = useForm<LoginFormData>({
+    resolver: yupResolver(Validator.loginDetailsSchema)
+  })
 
   const { mutate, isPaused, isLoading, isError, isSuccess } = useLogin({
     clearErrors,
