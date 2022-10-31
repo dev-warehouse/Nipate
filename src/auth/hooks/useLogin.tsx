@@ -18,9 +18,14 @@ export default function useLogin({
   const axios = useAxios()
 
   return useMutation<any, AxiosError<any>, LoginFormData>(
-    ({ remember, ...data }) => {
+    ({ remember, mobileNumber, ...data }) => {
       console.log(remember)
-      return axios.post(LOGIN_URL, data)
+
+      const payload = {
+        mobileNumber: `${mobileNumber.code}${mobileNumber.phone}`,
+        ...data
+      }
+      return axios.post(LOGIN_URL, payload)
     },
     {
       onSuccess: () => {
