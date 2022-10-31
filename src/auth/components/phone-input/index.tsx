@@ -1,6 +1,6 @@
 import { Input } from '@components/ui/input'
 import { Option, Select } from '@components/ui/selectors'
-import { Control, FieldErrors, useController } from 'react-hook-form'
+import { Control, useController } from 'react-hook-form'
 import { SelectOption } from '@mui/base/SelectUnstyled/useSelect.types'
 import { MobileNumber } from '@/auth/models'
 import { ChangeEvent } from 'react'
@@ -36,7 +36,7 @@ interface PhoneNumberProps {
   /**
    * Feedback message
    */
-  errors: FieldErrors
+  errors: any
 }
 
 function PhoneInput({
@@ -60,8 +60,6 @@ function PhoneInput({
   const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange({ code: value.code, phone: event.target.value })
   }
-
-  console.log(value)
 
   const renderValue = (option: SelectOption<any> | null) => {
     if (option !== null) {
@@ -141,7 +139,13 @@ function PhoneInput({
           className={styles.form_message}
           data-validity={errors[name] ? 'error' : 'initial'}
         >
-          {errors[name]?.message?.toString()}
+          {errors[name].code && errors[name].phone
+            ? 'Please provide phone number'
+            : errors[name].code
+            ? errors[name].code.message
+            : errors[name].phone
+            ? errors[name].phone.message
+            : ''}
         </p>
       )}
     </div>
