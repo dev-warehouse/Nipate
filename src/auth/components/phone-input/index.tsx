@@ -58,7 +58,10 @@ function PhoneInput({
     onChange({ code: data, phone: value.phone })
   }
   const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange({ code: value.code, phone: event.target.value })
+    onChange({
+      code: value.code,
+      phone: event.target.value.toString().split(/^(0)?([71]\d{8,12})$/)[2]
+    })
   }
 
   const renderValue = (option: SelectOption<any> | null) => {
