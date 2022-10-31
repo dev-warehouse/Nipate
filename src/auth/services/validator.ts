@@ -137,7 +137,7 @@ class Validator {
    * Yup schema for login details validation
    */
   static loginDetailsSchema = object().shape({
-    mobile: this.mobileSchema,
+    mobileNumber: this.mobileSchema,
     password: this.passwordSchema
   })
 
@@ -145,7 +145,7 @@ class Validator {
    * Yup schema for create user details validation
    */
   static createUserSchema = object().shape({
-    mobile: this.mobileSchema,
+    mobileNumber: this.mobileSchema,
     idNumber: this.idNumberSchema,
     firstName: this.firstNameSchema,
     lastName: this.lastNameSchema

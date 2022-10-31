@@ -40,7 +40,7 @@ function LoginPage() {
       <p className={styles.login_header}>Login to your Account</p>
       <PhoneInput
         label='Mobile Number'
-        name='mobile'
+        name='mobileNumber'
         placeholder='eg 712345678'
         control={control}
         errors={errors}
