@@ -65,8 +65,8 @@ class Validator {
     phone: string()
       .required('Phone number is required')
       .matches(
-        /^[71]\d{8}$/,
-        'Phone number should start with 7 or 1 not 07 or 01 and should be of length 9'
+        /^\d{9,11}$/,
+        'Phone number should have a minimum length of 9 and max of 12'
       )
   })
 
@@ -84,7 +84,7 @@ class Validator {
    * Yup Schema for id number validation
    */
   static idNumberSchema = string()
-    .matches(/^\d{10}$/, 'Identification has length of 10 numbers')
+    .matches(/^\d+$/, 'Invalid ID number')
     .typeError('Invalid Id number')
     .required('Identification number is required')
 
