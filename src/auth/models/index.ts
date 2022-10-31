@@ -1,7 +1,12 @@
 import { County } from '@api/models/location'
 import { Gender, UserDetails } from '@api/models/user'
 
-export interface LoginFormData extends Pick<UserDetails, 'mobileNumber'> {
+export type MobileNumber = {
+  code: string
+  phone: number
+}
+export interface LoginFormData {
+  mobileNumber: MobileNumber
   password: string
   remember: boolean
 }
