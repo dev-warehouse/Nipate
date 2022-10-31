@@ -68,7 +68,7 @@ function LoginPage() {
           Unable to Login: Check your Network connection Connection
         </p>
       )}
-      <Link to='auth/register'>
+      <Link to='/auth/register'>
         <Button variant='text' className={styles.btn_create}>
           {/* eslint-disable-next-line react/no-unescaped-entities */}
           <span>Don't have an account?</span>
