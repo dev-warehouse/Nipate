@@ -2,6 +2,8 @@ import { Input } from '@components/ui/input'
 import { Option, Select } from '@components/ui/selectors'
 import { Control, FieldErrors, useController } from 'react-hook-form'
 import { SelectOption } from '@mui/base/SelectUnstyled/useSelect.types'
+import { MobileNumber } from '@/auth/models'
+import { ChangeEvent } from 'react'
 import styles from './index.module.scss'
 
 const countries = [
@@ -26,7 +28,7 @@ interface PhoneNumberProps {
   /**
    *Registers updates to react hook form
    */
-  control: Control<any>
+  control: Control<MobileNumber | any>
   /**
    * Placeholder for input
    */
@@ -46,18 +48,33 @@ function PhoneInput({
 }: PhoneNumberProps) {
   const {
     field: { ref, onChange, value }
-  } = useController({ control, name, defaultValue: undefined })
+  } = useController({
+    control,
+    name,
+    defaultValue: { code: '', phone: '' }
+  })
+
+  const handleCodeChange = (data: string) => {
+    onChange({ code: data, phone: value.phone })
+  }
+  const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange({ code: value.code, phone: event.target.value })
+  }
+
+  console.log(value)
 
   const renderValue = (option: SelectOption<any> | null) => {
     if (option !== null) {
       return (
         <div className={styles.phone_option}>
           <img
-            src={`https://flagcdn.com/${option.value.toLowerCase()}.svg`}
+            src={`https://flagcdn.com/${option?.label
+              ?.toString()
+              .toLowerCase()}.svg`}
             className={styles.phone_option_img}
             alt=''
           />
-          <span>+{option.label}</span>
+          <span>+{option.value}</span>
         </div>
       )
     }
@@ -85,9 +102,8 @@ function PhoneInput({
         <div className={styles.phone_root}>
           <Select
             renderValue={renderValue}
-            defaultValue='KE'
-            value={country}
-            // onChange={}
+            onChange={(e, code) => handleCodeChange(code)}
+            value={value.code}
             listStyles={styles.phone_list}
             dataValidity={errors[name] ? 'error' : 'initial'}
           >
@@ -95,8 +111,8 @@ function PhoneInput({
               return (
                 <Option
                   key={country.code}
-                  value={country.code}
-                  label={country.phone}
+                  value={country.phone}
+                  label={country.code}
                 >
                   <div className={styles.phone_option}>
                     <img
@@ -114,7 +130,8 @@ function PhoneInput({
           <Input
             placeholder={placeholder}
             ref={ref}
-            // onChange={e => handleValueChange(e.target.value)}
+            value={value.phone}
+            onChange={handlePhoneChange}
             dataValidity={errors[name] ? 'error' : 'initial'}
           />
         </div>
