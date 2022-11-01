@@ -26,9 +26,38 @@ export interface CreateUserFormData {
   lastName: UserDetails['surName']
 }
 
+export interface CreateUserResponseData {
+  id: number
+  mobileNumber: string
+  idNumber: string
+  firstName: string
+  surName: string
+  avatar: string
+}
+
 export interface RegisterUserFormData {
   gender: Gender
   location: County
   password: string
   confirmPassword: string
+  avatar?: string
+}
+
+export interface RegisterUserPayload {
+  userID: string | number
+  locationID: number
+  genderID: number
+  password: string
+}
+
+export function registerUserSerializer(
+  id: string | number,
+  data: RegisterUserFormData
+): RegisterUserPayload {
+  return {
+    userID: id,
+    locationID: data.location.id,
+    genderID: data.gender.id,
+    password: data.password
+  }
 }
