@@ -68,8 +68,7 @@ export function useCreateUser({
 export function useRegisterUser({
   clearErrors,
   reset,
-  setError,
-  setStage
+  setError
 }: UseRegisterProps) {
   return useMutation<
     AxiosResponse<LoginResponseData>,
@@ -115,9 +114,6 @@ export function useRegisterUser({
         setError('password', {
           message: "User with number doesn't exist, try again"
         })
-        if (setStage) {
-          setStage(0)
-        }
       }
     }
   })
