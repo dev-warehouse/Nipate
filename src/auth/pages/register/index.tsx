@@ -123,7 +123,7 @@ function CreateUserForm({ stage, setStage, setContinueData }: StageProps) {
       />
       <FormInput
         label='Last Name'
-        name='lastName'
+        name='surName'
         className={styles.form_input}
         register={register}
         errors={errors}
