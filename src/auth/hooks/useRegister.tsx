@@ -28,8 +28,12 @@ export function useCreateUser({
     AxiosError<any>,
     CreateUserFormData
   >({
-    mutationFn: data => {
-      return axios.post(REGISTER_URL, data)
+    mutationFn: ({ mobileNumber, ...data }) => {
+      const payload = {
+        mobileNumber: `${mobileNumber.code}${mobileNumber.phone}`,
+        ...data
+      }
+      return axios.post(REGISTER_URL, payload)
     },
     onSuccess: ({ data }) => {
       setContinueData(data)
