@@ -3,7 +3,13 @@ import { UseFormReturn } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { FINALIZE_REGISTER_URL, REGISTER_URL } from '@/api/urls/auth'
-import { CreateUserFormData, RegisterUserFormData } from '../models'
+import {
+  CreateUserFormData,
+  CreateUserResponseData,
+  LoginResponseData,
+  RegisterUserFormData,
+  registerUserSerializer
+} from '../models'
 
 interface UseRegisterProps
   extends Pick<UseFormReturn<any>, 'clearErrors' | 'reset' | 'setError'> {
@@ -18,7 +24,7 @@ export function useCreateUser({
   setContinueData
 }: UseRegisterProps) {
   return useMutation<
-    AxiosResponse<CreateUserFormData>,
+    AxiosResponse<CreateUserResponseData>,
     AxiosError<any>,
     CreateUserFormData
   >({
@@ -62,12 +68,15 @@ export function useRegisterUser({
   setStage
 }: UseRegisterProps) {
   return useMutation<
-    // AxiosResponse<LoginResponseData>,
+    AxiosResponse<LoginResponseData>,
     AxiosError<any>,
     { createdID: number; payload: RegisterUserFormData }
   >({
-    mutationFn: data => {
-      return axios.put(FINALIZE_REGISTER_URL, data)
+    mutationFn: ({ createdID, payload }) => {
+      return axios.put(
+        FINALIZE_REGISTER_URL,
+        registerUserSerializer(createdID, payload)
+      )
     },
     onSuccess: () => {
       reset(undefined)
