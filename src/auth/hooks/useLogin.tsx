@@ -1,8 +1,7 @@
 import { UseFormReturn } from 'react-hook-form'
 import { LoginFormData, LoginResponseData } from '@auth/models'
 import { useMutation } from '@tanstack/react-query'
-import { AxiosError, AxiosResponse } from 'axios'
-import { useAxios } from '@core/hooks/axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import { LOGIN_URL } from '@api/urls/auth'
 
 type UseLoginProps = Pick<
@@ -15,8 +14,6 @@ export default function useLogin({
   reset,
   setError
 }: UseLoginProps) {
-  const axios = useAxios()
-
   return useMutation<
     AxiosResponse<LoginResponseData>,
     AxiosError<any>,
