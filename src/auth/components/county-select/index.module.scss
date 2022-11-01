@@ -21,3 +21,7 @@
     @apply text-red-700;
   }
 }
+
+.form_root {
+  @apply w-full flex flex-col gap-2;
+}
