@@ -49,7 +49,7 @@ export default function useLogin({
           // ])
         }
 
-        if (response?.data?.error[0] === 'Invalid user creditentials') {
+        if (response?.data?.error[0] === 'Invalid user credentials') {
           setError('password', {
             message: `Incorrect password, check your password`
           })
