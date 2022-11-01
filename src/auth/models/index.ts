@@ -5,10 +5,18 @@ export type MobileNumber = {
   code: string
   phone: number
 }
+
 export interface LoginFormData {
   mobileNumber: MobileNumber
   password: string
   remember: boolean
+}
+
+export interface LoginResponseData {
+  mobileNumber: string
+  firstName: string
+  lastName: string
+  auth_token: string
 }
 
 export interface CreateUserFormData {

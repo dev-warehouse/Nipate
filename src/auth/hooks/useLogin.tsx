@@ -1,7 +1,7 @@
 import { UseFormReturn } from 'react-hook-form'
-import { LoginFormData } from '@auth/models'
+import { LoginFormData, LoginResponseData } from '@auth/models'
 import { useMutation } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 import { useAxios } from '@core/hooks/axios'
 import { LOGIN_URL } from '@api/urls/auth'
 
@@ -17,7 +17,11 @@ export default function useLogin({
 }: UseLoginProps) {
   const axios = useAxios()
 
-  return useMutation<any, AxiosError<any>, LoginFormData>(
+  return useMutation<
+    AxiosResponse<LoginResponseData>,
+    AxiosError<any>,
+    LoginFormData
+  >(
     ({ remember, mobileNumber, ...data }) => {
       console.log(remember)
 
