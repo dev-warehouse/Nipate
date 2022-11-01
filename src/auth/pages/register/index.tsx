@@ -48,12 +48,12 @@ function FormSubmit({
       <div className='px-1.5 py-2.5 flex flex-row items-center gap-2.5 justify-center'>
         <div
           className={`w-2.5 h-2.5 rounded-full ${
-            stage === 0 ? 'bg-brand' : 'bg-gray-300'
+            stage === 0 ? 'bg-nipate' : 'bg-gray-300'
           }`}
         />
         <div
           className={`w-2.5 h-2.5 rounded-full ${
-            stage === 1 ? 'bg-brand' : 'bg-gray-300'
+            stage === 1 ? 'bg-nipate' : 'bg-gray-300'
           }`}
         />
       </div>
