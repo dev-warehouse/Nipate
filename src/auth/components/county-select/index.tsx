@@ -54,6 +54,7 @@ function SelectCountyInput({
       return counties
     },
     {
+      suspense: false,
       onSuccess: res => {
         setResults(res)
       }
@@ -134,6 +135,14 @@ function SelectCountyInput({
           </div>
         </ClickAwayListener>
       </Select>
+      {errors[name] && (
+        <p
+          className={styles.form_message}
+          data-validity={errors[name] && 'error'}
+        >
+          {errors[name].message}
+        </p>
+      )}
     </div>
   )
 }
