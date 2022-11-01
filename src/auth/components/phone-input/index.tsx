@@ -131,7 +131,6 @@ function PhoneInput({
           <Input
             placeholder={placeholder}
             ref={ref}
-            value={value.phone}
             onChange={handlePhoneChange}
             dataValidity={errors[name] ? 'error' : 'initial'}
           />
