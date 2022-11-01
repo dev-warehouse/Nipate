@@ -9,7 +9,7 @@ export interface UserDetails extends User {
 
 export interface User {
   userId: number
-  mobileNumber: number
+  mobileNumber: string
   displayName: string
   idNumber: number
   avatar: string

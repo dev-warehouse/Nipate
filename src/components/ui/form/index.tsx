@@ -1,4 +1,4 @@
-import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
+import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import styles from './index.module.scss'
 import { Input, InputProps } from '../input'
 import { CheckBox } from '../selectors'
@@ -20,7 +20,7 @@ interface FormInputProps extends InputProps {
   /**
    * Attaches component to form hook
    */
-  register: UseFormRegister<FieldValues>
+  register: UseFormRegister<any>
   /**
    * Feedback message
    */

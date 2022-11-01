@@ -14,7 +14,7 @@ export function useAdverts() {
   })
 }
 
-export function useAdvert(id: Advert['id']) {
+export function useAdvert(id?: string) {
   const axios = useAxios()
 
   return useQuery<Advert>(['advert', id], async () => {
