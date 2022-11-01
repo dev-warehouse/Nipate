@@ -148,7 +148,7 @@ class Validator {
     mobileNumber: this.mobileSchema,
     idNumber: this.idNumberSchema,
     firstName: this.firstNameSchema,
-    lastName: this.lastNameSchema
+    surName: this.lastNameSchema
   })
 
   /**
