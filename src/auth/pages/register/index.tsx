@@ -1,5 +1,9 @@
-import { useRegisterUser } from '@/auth/hooks/useRegister'
-import { CreateUserFormData, RegisterUserFormData } from '@/auth/models'
+import { useCreateUser, useRegisterUser } from '@/auth/hooks/useRegister'
+import {
+  CreateUserFormData,
+  CreateUserResponseData,
+  RegisterUserFormData
+} from '@/auth/models'
 import SelectCountyInput from '@auth/components/county-select'
 import GenderInput from '@auth/components/gender-input'
 import PhoneInput from '@auth/components/phone-input'
@@ -21,6 +25,7 @@ interface StageProps {
   stage: RegisterStage
   setStage: Dispatch<SetStateAction<RegisterStage>>
   setContinueData: Dispatch<SetStateAction<CreateUserResponseData>>
+  // eslint-disable-next-line react/no-unused-prop-types
   continueData: CreateUserResponseData
 }
 
@@ -142,7 +147,6 @@ function RegisterUserForm({
     register,
     control,
     handleSubmit,
-    trigger,
     setError,
     clearErrors,
     reset,
@@ -212,7 +216,7 @@ function RegisterUserForm({
 
 function RegisterForm() {
   const [stage, setStage] = useState<RegisterStage>(0)
-  const [continueData, setContinueData] = useState<CreateUserFormData>(
+  const [continueData, setContinueData] = useState<CreateUserResponseData>(
     {} as CreateUserResponseData
   )
 
