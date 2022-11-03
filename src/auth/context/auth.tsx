@@ -1,4 +1,4 @@
-import { createContext, ProviderProps, useContext } from 'react'
+import { createContext, ProviderProps, Reducer, useContext } from 'react'
 import { UserDetails } from '@api/models/user'
 import { useQueryClient } from '@tanstack/react-query'
 import { useLocalStorage } from 'usehooks-ts'
@@ -10,10 +10,34 @@ interface AuthContextProps {
   logout: () => void
 }
 
+export type AuthActions = {
+  type: 'setToken'
+  data: AuthContextProps['authToken']
+}
+
+export type AuthReducer = Reducer<string, AuthActions>
+
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
 
 export function useAuth() {
   return useContext(AuthContext)
+}
+
+/**
+ * Reducer for Auth States
+ * @param prevState
+ * @param action
+ */
+function reducerAuth(
+  prevState: AuthContextProps['authToken'],
+  action: AuthActions
+): AuthContextProps['authToken'] {
+  switch (action.type) {
+    case 'setToken':
+      return action.data
+    default:
+      return ''
+  }
 }
 
 export default function AuthProvider({
