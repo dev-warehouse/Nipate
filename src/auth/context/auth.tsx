@@ -1,12 +1,21 @@
-import { createContext, ProviderProps, Reducer, useContext } from 'react'
+import {
+  createContext,
+  ProviderProps,
+  Reducer,
+  useContext,
+  useMemo,
+  useReducer
+} from 'react'
 import { UserDetails } from '@api/models/user'
-import { useQueryClient } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useLocalStorage } from 'usehooks-ts'
+import axios from 'axios'
+import { USER_DETAILS_URL } from '@api/urls/auth'
 import useCrypto from '../../core/hooks/utils/useCrypto'
 
 interface AuthContextProps {
-  userData: UserDetails
-  authToken: string
+  userData?: UserDetails
+  authToken?: string
   setToken: (token: string, remember?: boolean) => void
   logout: () => void
 }
@@ -16,7 +25,7 @@ export type AuthActions = {
   data: AuthContextProps['authToken']
 }
 
-export type AuthReducer = Reducer<string, AuthActions>
+export type AuthReducer = Reducer<string | undefined, AuthActions>
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
 
@@ -41,6 +50,7 @@ function reducerAuth(
   }
 }
 
+// /* eslint-disable */
 export default function AuthProvider({
   children
 }: Pick<ProviderProps<never>, 'children'>) {
@@ -51,16 +61,52 @@ export default function AuthProvider({
     hash('nipate-token'),
     ''
   )
+  const [authToken, dispatch] = useReducer<AuthReducer>(reducerAuth, '')
+
+  const { data: userData } = useQuery<UserDetails>(
+    ['user-details'],
+    async () => {
+      const { data: res } = await axios.get<UserDetails>(
+        `${USER_DETAILS_URL}`,
+        {
+          headers: {
+            Authorizations: authToken
+          }
+        }
+      )
+      return res
+    }
+  )
+
+  useMemo(() => {
+    if (pesistantToken !== '') {
+      dispatch({ type: 'setToken', data: decrypt(pesistantToken) })
+    }
+  }, [pesistantToken])
+
+  useMemo(() => {
+    queryClient.fetchQuery(['user-details'])
+  }, [authToken])
 
   const setToken: AuthContextProps['setToken'] = (token, remember) => {
     if (remember) {
       setPesistantToken(encrypt(token))
+    } else {
+      dispatch({ type: 'setToken', data: token })
     }
   }
-  const logout: AuthContextProps['logout'] = () => {}
+
+  // Clear Everything
+  const logout: AuthContextProps['logout'] = () => {
+    if (pesistantToken !== '') {
+      setPesistantToken('')
+    } else {
+      dispatch({ type: 'setToken', data: undefined })
+    }
+  }
 
   return (
-    <AuthContext.Provider value={{ setToken, logout }}>
+    <AuthContext.Provider value={{ userData, authToken, setToken, logout }}>
       {children}
     </AuthContext.Provider>
   )
