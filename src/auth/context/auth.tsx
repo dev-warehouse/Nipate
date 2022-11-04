@@ -50,18 +50,17 @@ function reducerAuth(
   }
 }
 
-// /* eslint-disable */
+/* eslint-disable */
 export default function AuthProvider({
   children
 }: Pick<ProviderProps<never>, 'children'>) {
   const { encrypt, decrypt, hash } = useCrypto('Nipate-$DJHNMMA77ahkdasYSB-Tsk')
 
   const queryClient = useQueryClient()
-  const [pesistantToken, setPesistantToken] = useLocalStorage<string>(
-    hash('nipate-token'),
-    ''
-  )
-  const [authToken, dispatch] = useReducer<AuthReducer>(reducerAuth, '')
+  const [pesistantToken, setPesistantToken] = useLocalStorage<
+    string | undefined
+  >(hash('nipate-token'), undefined)
+  const [authToken, dispatch] = useReducer<AuthReducer>(reducerAuth, undefined)
 
   const { data: userData } = useQuery<UserDetails>(
     ['user-details'],
@@ -75,17 +74,20 @@ export default function AuthProvider({
         }
       )
       return res
-    }
+    },
+    { suspense: false }
   )
 
   useMemo(() => {
-    if (pesistantToken !== '') {
+    if (pesistantToken) {
       dispatch({ type: 'setToken', data: decrypt(pesistantToken) })
     }
   }, [pesistantToken])
 
   useMemo(() => {
-    queryClient.fetchQuery(['user-details'])
+    if (authToken) {
+      queryClient.fetchQuery(['user-details'])
+    }
   }, [authToken])
 
   const setToken: AuthContextProps['setToken'] = (token, remember) => {
@@ -99,7 +101,7 @@ export default function AuthProvider({
   // Clear Everything
   const logout: AuthContextProps['logout'] = () => {
     if (pesistantToken !== '') {
-      setPesistantToken('')
+      setPesistantToken(undefined)
     } else {
       dispatch({ type: 'setToken', data: undefined })
     }
