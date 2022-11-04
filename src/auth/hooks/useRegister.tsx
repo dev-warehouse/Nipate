@@ -3,6 +3,7 @@ import { UseFormReturn } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { FINALIZE_REGISTER_URL, REGISTER_URL } from '@/api/urls/auth'
+import { useAuth } from '@auth/context/auth'
 import {
   CreateUserFormData,
   CreateUserResponseData,
@@ -70,6 +71,8 @@ export function useRegisterUser({
   reset,
   setError
 }: UseRegisterProps) {
+  const { setToken } = useAuth()
+
   return useMutation<
     AxiosResponse<LoginResponseData>,
     AxiosError<any>,
@@ -81,7 +84,8 @@ export function useRegisterUser({
         registerUserSerializer(createdID, payload)
       )
     },
-    onSuccess: () => {
+    onSuccess: ({ data }) => {
+      setToken(data.auth_token)
       reset(undefined)
       clearErrors()
     },
