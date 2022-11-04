@@ -2,6 +2,7 @@ import { createContext, ProviderProps, Reducer, useContext } from 'react'
 import { UserDetails } from '@api/models/user'
 import { useQueryClient } from '@tanstack/react-query'
 import { useLocalStorage } from 'usehooks-ts'
+import useCrypto from '../../core/hooks/utils/useCrypto'
 
 interface AuthContextProps {
   userData: UserDetails
@@ -43,10 +44,19 @@ function reducerAuth(
 export default function AuthProvider({
   children
 }: Pick<ProviderProps<never>, 'children'>) {
-  const queryClient = useQueryClient()
-  const [token, setPesistantToken] = useLocalStorage<string>('nipate-token', '')
+  const { encrypt, decrypt, hash } = useCrypto('Nipate-$DJHNMMA77ahkdasYSB-Tsk')
 
-  const setToken: AuthContextProps['setToken'] = (token, remember) => {}
+  const queryClient = useQueryClient()
+  const [pesistantToken, setPesistantToken] = useLocalStorage<string>(
+    hash('nipate-token'),
+    ''
+  )
+
+  const setToken: AuthContextProps['setToken'] = (token, remember) => {
+    if (remember) {
+      setPesistantToken(encrypt(token))
+    }
+  }
   const logout: AuthContextProps['logout'] = () => {}
 
   return (
