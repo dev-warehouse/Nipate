@@ -3,6 +3,7 @@ import { LoginFormData, LoginResponseData } from '@auth/models'
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { LOGIN_URL } from '@api/urls/auth'
+import { useAuth } from '@auth/context/auth'
 
 type UseLoginProps = Pick<
   UseFormReturn<LoginFormData>,
@@ -14,22 +15,24 @@ export default function useLogin({
   reset,
   setError
 }: UseLoginProps) {
+  const { setToken } = useAuth()
+  let rememberUser: boolean
+
   return useMutation<
     AxiosResponse<LoginResponseData>,
     AxiosError<any>,
     LoginFormData
   >(
     ({ remember, mobileNumber, ...data }) => {
-      console.log(remember)
-
-      const payload = {
+      rememberUser = remember
+      return axios.post(LOGIN_URL, {
         mobileNumber: `${mobileNumber.code}${mobileNumber.phone}`,
         ...data
-      }
-      return axios.post(LOGIN_URL, payload)
+      })
     },
     {
-      onSuccess: () => {
+      onSuccess: ({ data }) => {
+        setToken(data.auth_token, rememberUser)
         reset(undefined)
         clearErrors()
       },
