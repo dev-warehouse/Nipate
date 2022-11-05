@@ -147,6 +147,8 @@ function PhoneInput({
             ? errors[name].code.message
             : errors[name].phone
             ? errors[name].phone.message
+            : errors[name].message
+            ? errors[name].message
             : ''}
         </p>
       )}

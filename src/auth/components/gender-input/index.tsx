@@ -32,8 +32,8 @@ export default function GenderInput({
     field: { value, onChange, ref }
   } = useController({ control, name })
 
-  const handleMale = () => onChange('male')
-  const handleFemale = () => onChange('female')
+  const handleMale = () => onChange({ id: 1, name: 'male' })
+  const handleFemale = () => onChange({ id: 2, name: 'female' })
 
   return (
     <div className={styles.gender_form_root}>
@@ -54,7 +54,7 @@ export default function GenderInput({
             name={name}
             ref={ref}
             value={value}
-            checked={value === 'male'}
+            checked={value?.id === 1}
             onChange={handleMale}
           />
         </main>
@@ -66,7 +66,7 @@ export default function GenderInput({
             id='female'
             name={name}
             value={value}
-            checked={value === 'female'}
+            checked={value?.id === 2}
             onChange={handleFemale}
           />
         </main>
@@ -76,7 +76,13 @@ export default function GenderInput({
           className={styles.form_message}
           data-validity={errors[name] && 'error'}
         >
-          {errors[name].message}
+          {errors[name].message
+            ? errors[name].message
+            : errors[name].id.message
+            ? errors[name].id.message
+            : errors[name].name.message
+            ? errors[name].name.message
+            : ''}
         </p>
       )}
     </div>

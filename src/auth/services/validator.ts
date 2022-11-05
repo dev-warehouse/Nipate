@@ -91,9 +91,14 @@ class Validator {
   /**
    * Yup Schema for gender validation
    */
-  static genderSchema = string()
-    .oneOf(['male', 'female'], 'Runtime error: Serialization of gender failed')
-    .required('Your gender is required')
+  static genderSchema = object().shape({
+    id: number()
+      .typeError('Runtime Error: Unable to assign id to gender')
+      .required('Your gender is required'),
+    name: string()
+      .typeError('Runtime Error: Unable to assign name to gender')
+      .required('Your gender is required')
+  })
 
   static roleSchema = string()
     .oneOf(['provider', 'user', 'admin'], 'Serialization of role failed')
@@ -148,7 +153,7 @@ class Validator {
     mobileNumber: this.mobileSchema,
     idNumber: this.idNumberSchema,
     firstName: this.firstNameSchema,
-    lastName: this.lastNameSchema
+    surName: this.lastNameSchema
   })
 
   /**

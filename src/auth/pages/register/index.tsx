@@ -21,11 +21,11 @@ import styles from './index.module.scss'
 
 type RegisterStage = 0 | 1
 
+/* eslint-disable react/no-unused-prop-types */
 interface StageProps {
   stage: RegisterStage
   setStage: Dispatch<SetStateAction<RegisterStage>>
   setContinueData: Dispatch<SetStateAction<CreateUserResponseData>>
-  // eslint-disable-next-line react/no-unused-prop-types
   continueData: CreateUserResponseData
 }
 
@@ -123,7 +123,7 @@ function CreateUserForm({ stage, setStage, setContinueData }: StageProps) {
       />
       <FormInput
         label='Last Name'
-        name='lastName'
+        name='surName'
         className={styles.form_input}
         register={register}
         errors={errors}
@@ -139,7 +139,6 @@ function CreateUserForm({ stage, setStage, setContinueData }: StageProps) {
 
 function RegisterUserForm({
   stage,
-  setStage,
   setContinueData,
   continueData
 }: StageProps) {
@@ -159,7 +158,6 @@ function RegisterUserForm({
     clearErrors,
     reset,
     setError,
-    setStage,
     setContinueData
   })
 
@@ -225,14 +223,14 @@ function RegisterForm() {
     <div className={styles.root}>
       {stage === 0 ? (
         <CreateUserForm
-          stage={0}
+          stage={stage}
           setStage={setStage}
           continueData={continueData}
           setContinueData={setContinueData}
         />
       ) : (
         <RegisterUserForm
-          stage={1}
+          stage={stage}
           setStage={setStage}
           continueData={continueData}
           setContinueData={setContinueData}

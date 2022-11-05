@@ -20,10 +20,10 @@ export interface LoginResponseData {
 }
 
 export interface CreateUserFormData {
-  mobile: UserDetails['mobileNumber']
+  mobileNumber: MobileNumber
   idNumber: UserDetails['idNumber']
   firstName: UserDetails['firstName']
-  lastName: UserDetails['surName']
+  surName: UserDetails['surName']
 }
 
 export interface CreateUserResponseData {

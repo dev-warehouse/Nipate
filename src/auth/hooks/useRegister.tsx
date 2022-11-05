@@ -3,6 +3,7 @@ import { UseFormReturn } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { FINALIZE_REGISTER_URL, REGISTER_URL } from '@/api/urls/auth'
+import { useAuth } from '@auth/context/auth'
 import {
   CreateUserFormData,
   CreateUserResponseData,
@@ -14,7 +15,6 @@ import {
 interface UseRegisterProps
   extends Pick<UseFormReturn<any>, 'clearErrors' | 'reset' | 'setError'> {
   setContinueData: Dispatch<SetStateAction<CreateUserResponseData>>
-  setStage?: Dispatch<SetStateAction<0 | 1>>
 }
 
 export function useCreateUser({
@@ -28,8 +28,12 @@ export function useCreateUser({
     AxiosError<any>,
     CreateUserFormData
   >({
-    mutationFn: data => {
-      return axios.post(REGISTER_URL, data)
+    mutationFn: ({ mobileNumber, ...data }) => {
+      const payload = {
+        mobileNumber: `${mobileNumber.code}${mobileNumber.phone}`,
+        ...data
+      }
+      return axios.post(REGISTER_URL, payload)
     },
     onSuccess: ({ data }) => {
       setContinueData(data)
@@ -51,8 +55,8 @@ export function useCreateUser({
         //   }
         // ])
       }
-      if (response?.data?.Error === 'User with number already exist') {
-        setError('mobile.number', {
+      if (response?.data?.error === 'User with number already exist') {
+        setError('mobileNumber', {
           message:
             'User with number already exist, you can log in with the account'
         })
@@ -64,9 +68,10 @@ export function useCreateUser({
 export function useRegisterUser({
   clearErrors,
   reset,
-  setError,
-  setStage
+  setError
 }: UseRegisterProps) {
+  const { setToken } = useAuth()
+
   return useMutation<
     AxiosResponse<LoginResponseData>,
     AxiosError<any>,
@@ -78,7 +83,8 @@ export function useRegisterUser({
         registerUserSerializer(createdID, payload)
       )
     },
-    onSuccess: () => {
+    onSuccess: ({ data }) => {
+      setToken(data.auth_token)
       reset(undefined)
       clearErrors()
     },
@@ -111,9 +117,6 @@ export function useRegisterUser({
         setError('password', {
           message: "User with number doesn't exist, try again"
         })
-        if (setStage) {
-          setStage(0)
-        }
       }
     }
   })
