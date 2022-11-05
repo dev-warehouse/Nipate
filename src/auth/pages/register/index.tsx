@@ -223,14 +223,14 @@ function RegisterForm() {
     <div className={styles.root}>
       {stage === 0 ? (
         <CreateUserForm
-          stage={0}
+          stage={stage}
           setStage={setStage}
           continueData={continueData}
           setContinueData={setContinueData}
         />
       ) : (
         <RegisterUserForm
-          stage={1}
+          stage={stage}
           setStage={setStage}
           continueData={continueData}
           setContinueData={setContinueData}
