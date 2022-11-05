@@ -75,7 +75,7 @@ export default function AuthProvider({
       )
       return res
     },
-    { suspense: false, retry: false }
+    { suspense: false, enabled: !!authToken }
   )
 
   useMemo(() => {
