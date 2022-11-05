@@ -15,7 +15,6 @@ import {
 interface UseRegisterProps
   extends Pick<UseFormReturn<any>, 'clearErrors' | 'reset' | 'setError'> {
   setContinueData: Dispatch<SetStateAction<CreateUserResponseData>>
-  setStage?: Dispatch<SetStateAction<0 | 1>>
 }
 
 export function useCreateUser({

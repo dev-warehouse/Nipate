@@ -21,11 +21,11 @@ import styles from './index.module.scss'
 
 type RegisterStage = 0 | 1
 
+/* eslint-disable react/no-unused-prop-types */
 interface StageProps {
   stage: RegisterStage
   setStage: Dispatch<SetStateAction<RegisterStage>>
   setContinueData: Dispatch<SetStateAction<CreateUserResponseData>>
-  // eslint-disable-next-line react/no-unused-prop-types
   continueData: CreateUserResponseData
 }
 
@@ -139,7 +139,6 @@ function CreateUserForm({ stage, setStage, setContinueData }: StageProps) {
 
 function RegisterUserForm({
   stage,
-  setStage,
   setContinueData,
   continueData
 }: StageProps) {
@@ -159,7 +158,6 @@ function RegisterUserForm({
     clearErrors,
     reset,
     setError,
-    setStage,
     setContinueData
   })
 
