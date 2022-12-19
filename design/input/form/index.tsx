@@ -1,4 +1,3 @@
-import { InputUnstyledProps } from '@mui/base'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import { Input, InputProps } from '..'
 import styles from './index.module.scss'
@@ -14,7 +13,7 @@ type FormFeedback = {
   message: string
 }
 
-type FormInputProps = InputProps & {
+export type FormInputProps = InputProps & {
   /**
    * Form Input Label
    */
@@ -23,6 +22,12 @@ type FormInputProps = InputProps & {
    * Feedback message
    */
   feedback?: FormFeedback
+}
+
+export interface ControlledFormElement<T>
+  extends Pick<FormInputProps, 'label'> {
+  register: UseFormRegister<T | any>
+  errors: FieldErrors
 }
 
 /**
