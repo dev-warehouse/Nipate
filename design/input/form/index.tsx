@@ -8,6 +8,11 @@ import styles from './index.module.scss'
  * adds upon inputLabel for form label
  */
 
+type FormFeedback = {
+    variant: InputProps['dataValidity']
+    message: string
+  }
+
 interface FormInputProps extends InputProps {
   /**
    * Form Input Label
@@ -16,10 +21,7 @@ interface FormInputProps extends InputProps {
   /**
    * Feedback message
    */
-  feedback?: {
-    variant: InputProps['dataValidity']
-    message: string
-  }
+  feedback?: FormFeedback
 }
 
 /**
