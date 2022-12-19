@@ -8,7 +8,7 @@ import styles from './index.module.scss'
 /**
  * Extends `InputHtmlAttributes` and adds upon dataValidity for data feedback
  */
-type InputProps = InputUnstyledProps & {
+export type InputProps = InputUnstyledProps & {
   /**
    * This is used to show the various feedback states of the data
    */
@@ -24,7 +24,7 @@ type InputProps = InputUnstyledProps & {
  */
 
 // eslint-disable-next-line react/display-name
-const Input = forwardRef(
+export const Input = forwardRef(
   (
     { dataValidity, className, ...props }: InputProps,
     ref: ForwardedRef<HTMLInputElement>
@@ -40,6 +40,3 @@ const Input = forwardRef(
     )
   }
 )
-
-export default Input
-export type { InputProps }
