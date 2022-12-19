@@ -25,9 +25,19 @@ export type FormInputProps = InputProps & {
 }
 
 export interface ControlledFormElement<T>
-  extends Pick<FormInputProps, 'label'> {
-  register: UseFormRegister<T | any>
-  errors: FieldErrors
+  extends Pick<FormInputProps, 'label' | 'placeholder'> {
+  /**
+   * Attaches component to form hook
+   */
+  register?: UseFormRegister<T | any>
+  /**
+   *Identifier for input in form hook
+   */
+  name: string
+  /**
+   * Feedback message
+   */
+  errors?: FieldErrors
 }
 
 /**
