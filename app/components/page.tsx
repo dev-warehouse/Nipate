@@ -1,4 +1,4 @@
-import { Input } from '@design/input'
+import { FormInput, Input } from '@design/input'
 
 export default function Components() {
   return (
