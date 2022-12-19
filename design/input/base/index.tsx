@@ -12,7 +12,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   /**
    * This is used to show the various feedback states of the data
    */
-  dataValidity?: 'initial' | 'success' | 'error'
+  dataValidity?: 'initial' | 'success' | 'error' | 'warning'
 }
 
 /**
