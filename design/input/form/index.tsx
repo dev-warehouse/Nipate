@@ -14,17 +14,12 @@ interface FormInputProps extends InputProps {
    */
   label: string
   /**
-   *Identifier for input in form hook
-   */
-  name: string
-  /**
-   * Attaches component to form hook
-   */
-  register: UseFormRegister<any>
-  /**
    * Feedback message
    */
-  errors: FieldErrors
+  feedback?: {
+    variant: InputProps['dataValidity']
+    message: string
+  }
 }
 
 /**
@@ -34,22 +29,25 @@ interface FormInputProps extends InputProps {
  * @param props
  * @constructor
  */
-export default function FormInput({
-  label,
-  name,
-  register,
-  errors,
-  ...props
-}: FormInputProps) {
+export default function FormInput({ label, name, feedback, ...props }: FormInputProps) {
   return (
     <div className={styles.form_root}>
-      <label htmlFor={name} className={styles.form_label}>
+      <label
+        htmlFor={name}
+        className={styles.form_label}
+        data-validity={feedback?.variant}
+      >
         {label}
       </label>
-      <Input id={name} className={styles.form_input} {...props} />
-      {errors[name] && (
-        <p className={styles.form_message}>
-          {errors[name]?.message?.toString()}
+      <Input
+        id={name}
+        className={styles.form_input}
+        dataValidity={feedback?.variant}
+        {...props}
+      />
+      {feedback && (
+        <p className={styles.form_message} data-validity={feedback?.variant}>
+          {feedback?.message}
         </p>
       )}
     </div>
