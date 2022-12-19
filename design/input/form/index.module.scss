@@ -10,6 +10,22 @@
   @apply text-sm font-semibold;
 
   &[data-validity='success'] {
+    @apply text-green-500;
+  }
+
+  &[data-validity='warning'] {
+    @apply text-yellow-500;
+  }
+
+  &[data-validity='error'] {
+    @apply text-red-500;
+  }
+}
+
+.form_message {
+  @apply mt-1 text-xs font-medium;
+
+  &[data-validity='success'] {
     @apply text-green-600;
   }
 
@@ -19,21 +35,5 @@
 
   &[data-validity='error'] {
     @apply text-red-600;
-  }
-}
-
-.form_message {
-  @apply mt-1 text-xs font-medium;
-
-  &[data-validity='success'] {
-    @apply text-green-700;
-  }
-
-  &[data-validity='warning'] {
-    @apply text-yellow-700;
-  }
-
-  &[data-validity='error'] {
-    @apply text-red-700;
   }
 }
