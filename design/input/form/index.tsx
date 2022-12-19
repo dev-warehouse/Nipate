@@ -1,3 +1,4 @@
+import { InputUnstyledProps } from '@mui/base'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import { Input, InputProps } from '..'
 import styles from './index.module.scss'
@@ -9,11 +10,11 @@ import styles from './index.module.scss'
  */
 
 type FormFeedback = {
-    variant: InputProps['dataValidity']
-    message: string
-  }
+  variant: InputProps['dataValidity']
+  message: string
+}
 
-interface FormInputProps extends InputProps {
+type FormInputProps = InputProps & {
   /**
    * Form Input Label
    */
@@ -31,7 +32,13 @@ interface FormInputProps extends InputProps {
  * @param props
  * @constructor
  */
-export default function FormInput({ label, name, feedback, ...props }: FormInputProps) {
+export default function FormInput({
+  label,
+  name,
+  feedback,
+  ref,
+  ...props
+}: FormInputProps) {
   return (
     <div className={styles.form_root}>
       <label

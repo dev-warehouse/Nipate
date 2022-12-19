@@ -8,7 +8,7 @@ import styles from './index.module.scss'
 /**
  * Extends `InputHtmlAttributes` and adds upon dataValidity for data feedback
  */
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+type InputProps = InputUnstyledProps & {
   /**
    * This is used to show the various feedback states of the data
    */
@@ -26,7 +26,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 // eslint-disable-next-line react/display-name
 const Input = forwardRef(
   (
-    { dataValidity, className, ...props }: InputProps & InputUnstyledProps,
+    { dataValidity, className, ...props }: InputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     inputUnstyledClasses.focused = styles.root_focused
