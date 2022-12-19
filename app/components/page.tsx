@@ -1,8 +1,8 @@
-import { FormInput, Input } from '@design/input'
+import { FormInput, Input, PasswordInput } from '@design/input'
 
 export default function Components() {
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 p-5'>
       <p className='text-lg font-bold text-center'>Components</p>
       <Input placeholder='Hello sample Input' />
       <Input placeholder='Success' dataValidity='success' />
@@ -21,6 +21,7 @@ export default function Components() {
         label='Error Form'
         feedback={{ message: 'error', variant: 'error' }}
       />
+      <PasswordInput label='Sample Input' placeholder="Password Placeholder" />
     </div>
   )
 }
