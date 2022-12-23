@@ -1,3 +1,6 @@
 [submodule "nipate_api"]
 	path = nipate_api
 	url = git@github.com:Bespoke-Systems/Nipate_api.git
+[submodule "Nipate-api-beta"]
+	path = Nipate-api-beta
+	url = git@github.com:Bespoke-Systems/Nipate-api-beta.git
