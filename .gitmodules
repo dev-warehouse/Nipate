@@ -1,6 +1,3 @@
 [submodule "nipate_api"]
 	path = nipate_api
 	url = git@github.com:Bespoke-Systems/Nipate_api.git
-[submodule "nipate_client"]
-	path = nipate_client
-	url = git@github.com:Bespoke-Systems/Nipate_client.git
