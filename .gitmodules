@@ -1,0 +1,6 @@
+[submodule "nipate-api"]
+	path = nipate-api
+	url = git@github.com:dev-warehouse/nipate-api.git
+[submodule "nipate-web"]
+	path = nipate-web
+	url = git@github.com:dev-warehouse/nipate-web.git
