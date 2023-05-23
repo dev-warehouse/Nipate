@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.7",
+    "@mui/base": "^5.0.0-alpha.110",
     "@next/font": "13.0.7",
     "next": "13.0.7",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.41.0",
+    "react-icons": "^4.7.1"
   },
   "devDependencies": {
     "@types/node": "18.11.17",
