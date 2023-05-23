@@ -1,15 +1,17 @@
-import type { NextPage } from "next";
-import Head from "next/head";
+import {NextPageWithLayout} from "@pages/_app";
+import {GlobalLayout} from "@components/layouts/page";
+import {Landing} from "@components/pages";
 
-const Home: NextPage = () => {
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Landing</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-    </div>
-  );
+const Home: NextPageWithLayout = () => {
+    return (
+        <Landing/>
+    );
 };
+
+Home.getLayout = (page) => {
+    return <GlobalLayout title="Landing">
+        {page}
+    </GlobalLayout>
+}
 
 export default Home;

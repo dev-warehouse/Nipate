@@ -1,0 +1,26 @@
+.form_root {
+  @apply flex flex-col gap-8 items-center justify-center;
+  @media screen and (max-width: 320px) {
+    @apply max-w-[17rem];
+  }
+}
+
+.form_header {
+  @apply text-lg md:text-xl font-semibold;
+}
+
+.form_input {
+  @apply w-full;
+}
+
+.form_submit {
+  @apply w-full inline-flex items-center justify-between;
+}
+
+.btn_submit {
+  @apply w-fit inline-flex items-center justify-center gap-2;
+}
+
+.root {
+}
+
