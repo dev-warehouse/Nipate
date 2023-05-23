@@ -1,0 +1,73 @@
+.modal_root {
+  @apply fixed top-0 bottom-0 left-0 right-0 z-10;
+  @apply flex items-center justify-center;
+}
+
+.modal_backdrop {
+  @apply fixed top-0 bottom-0 left-0 right-0 -z-10;
+  @apply bg-black/50 w-full h-full;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modal_container {
+  @apply bg-white rounded-lg;
+  @apply w-[96%] min-h-[90%] h-[78vh] p-1;
+  @apply grid grid-rows-[auto_1fr];
+}
+
+.modal_main {
+  @apply w-full h-full overflow-y-auto;
+}
+
+.modal_header {
+  @apply w-full flex flex-row justify-end items-center;
+  @apply gap-5 p-1 text-page-heading-sm md:text-page-heading font-semibold;
+}
+
+.modal_close {
+  @apply p-2 text-[1.5rem] hover:bg-gray-100 active:bg-gray-50 focus:ring focus:ring-nipate-yellow rounded-lg transition;
+
+  &:active {
+    transform: scale(0.94);
+  }
+}
+
+.fade_enter {
+  opacity: 0;
+}
+
+.fade_enter_active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+
+.fade_exit {
+  opacity: 1;
+}
+
+.fade_exit_active {
+  opacity: 0;
+  transition: opacity 250ms ease-in;
+}
+
+.show_enter {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.show_enter_active {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 250ms ease-in;
+}
+
+.show_exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.show_exit_active {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 250ms ease-in;
+}

@@ -1,0 +1,84 @@
+.advert_card_root {
+  @apply px-6 py-10 bg-white shadow rounded-lg transition;
+  @apply h-full gap-5 flex flex-col snap-start;
+}
+
+.advert_card_title {
+  @apply text-card-title transition;
+
+  &[data-state='loading'] {
+    @apply h-8 w-1/2 bg-slate-200 rounded animate-pulse;
+  }
+
+  &[data-state='error'] {
+    @apply h-8 w-1/2 bg-rose-100 rounded animate-pulse;
+  }
+}
+
+.advert_card_details {
+  @apply h-full w-full gap-5 flex flex-col justify-between items-center;
+}
+
+.advert_card_description {
+  @apply w-60 leading-6 text-ellipsis overflow-hidden transition;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  @apply text-card-description-sm md:text-card-description;
+  @apply min-h-[7rem];
+
+  &[data-state='loading'] {
+    @apply h-32 bg-slate-200 rounded animate-pulse;
+  }
+
+  &[data-state='error'] {
+    @apply h-32 bg-rose-100 rounded animate-pulse;
+  }
+}
+
+.advert_card_provider_root {
+  @apply w-full flex flex-row items-center justify-between text-content-sm transition;
+
+  &[data-state='loading'] > p {
+    @apply h-6 w-20 bg-slate-200 animate-pulse;
+  }
+
+  &[data-state='error'] > p {
+    @apply h-6 w-20 bg-rose-100 animate-pulse;
+  }
+}
+
+.advert_card_provider_avatar {
+  @apply w-8 h-8 rounded-full bg-input-background transition;
+
+  &[data-state='loading'] {
+    @apply bg-slate-200 animate-pulse;
+  }
+
+  &[data-state='error'] {
+    @apply bg-rose-100 animate-pulse;
+  }
+}
+
+.advert_card_provider_profile {
+  @apply flex flex-col gap-2 text-content-xs transition;
+  &[data-state='loading'] > p {
+    @apply h-4 w-20 bg-slate-200 animate-pulse;
+  }
+
+  &[data-state='error'] > p {
+    @apply h-4 w-20 bg-rose-100 animate-pulse;
+  }
+}
+
+.advert_container {
+  @apply w-full overflow-x-auto snap-x snap-mandatory;
+  @apply flex flex-row items-center gap-5 p-1 relative;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

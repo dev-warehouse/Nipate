@@ -1,0 +1,44 @@
+.root {
+  // Layout styles
+  @apply bg-input-background rounded-lg p-2.5;
+  @apply text-sm outline-none ring-offset-2;
+  @apply hover:bg-input-background/[0.6];
+  @apply inline-flex flex-row gap-2 transition;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  //  Input Data States
+  input {
+    all: unset;
+    @apply w-full placeholder-input;
+  }
+
+  &[data-validity='success'] {
+    @apply bg-green-50 text-green-700;
+    input {
+      @apply placeholder-green-500;
+    }
+  }
+
+  &[data-validity='error'] {
+    @apply bg-red-50 text-red-700;
+    input {
+      @apply placeholder-red-500;
+    }
+  }
+}
+
+// For focused state
+.root_focused {
+  @apply bg-input-background/[0.7] ring ring-nipate-yellow;
+
+  &[data-validity='success'] {
+    @apply ring-green-500;
+  }
+
+  &[data-validity='error'] {
+    @apply ring-red-500;
+  }
+}

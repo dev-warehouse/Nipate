@@ -1,0 +1,13 @@
+{
+  "extends": "airbnb-typescript-prettier",
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-nested-ternary": "off"
+  }
+}
