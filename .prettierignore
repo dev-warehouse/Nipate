@@ -1,7 +1,9 @@
 # Project development directories and files
 node_modules
-.build/
-.next/
+.DS_Store
+dist
+dist-ssr
+*.local
 node_modules/*
 
 # Actions & Configurations directories
@@ -9,4 +11,9 @@ node_modules/*
 
 # Editor directories and files
 .vscode/*
-.idea/*
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
