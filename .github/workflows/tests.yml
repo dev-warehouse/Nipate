@@ -1,0 +1,27 @@
+name: Nipate Tests Checks 🧪
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkouts repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "yarn"
+
+      - name: Install dependacies
+        run: yarn install --frozen-lockfile
+
+      - name: Testing code
+        run: yarn test
